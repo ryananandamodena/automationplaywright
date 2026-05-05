@@ -1,0 +1,27 @@
+node_modules/
+**/node_modules/
+
+# Playwright output
+test-results/
+**/test-results/
+playwright-report/
+**/playwright-report/
+**/test-results/.last-run.json
+
+# Build output
+build/
+dist/
+
+# Env files
+.env
+.env.local
+
+# Storage state (contains tokens)
+**/storageState.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Screenshots dari MCP testing
+*.png

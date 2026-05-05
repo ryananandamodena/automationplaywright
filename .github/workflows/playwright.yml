@@ -1,0 +1,119 @@
+name: MHC Automation Tests
+
+on:
+  # Jalankan manual dari GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      headless:
+        description: 'Run in headless mode'
+        required: false
+        default: 'true'
+        type: boolean
+      send_email:
+        description: 'Send email report'
+        required: false
+        default: 'true'
+        type: boolean
+
+  # Jadwal otomatis: setiap hari Senin-Jumat jam 08:00 WIB (01:00 UTC)
+  schedule:
+    - cron: '0 1 * * 1-5'
+
+  # Jalankan juga setiap push ke branch main/master (opsional)
+  # push:
+  #   branches: [main, master]
+
+jobs:
+  test:
+    name: MHC E2E Test Suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    defaults:
+      run:
+        working-directory: test-playwright/more1/mhc-full
+
+    steps:
+      # ── Checkout code ────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Setup Node.js ────────────────────────────────────
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: test-playwright/package.json
+
+      # ── Install dependencies ─────────────────────────────
+      - name: Install npm dependencies
+        run: npm install
+        working-directory: test-playwright
+
+      # ── Install Playwright browsers ──────────────────────
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium --with-deps
+
+      # ── Create .env dari GitHub Secrets ─────────────────
+      - name: Create .env for email reporting
+        run: |
+          cat > .env << EOF
+          SMTP_HOST=${{ secrets.SMTP_HOST }}
+          SMTP_PORT=${{ secrets.SMTP_PORT }}
+          SMTP_USER=${{ secrets.SMTP_USER }}
+          SMTP_PASS=${{ secrets.SMTP_PASS }}
+          EMAIL_FROM=${{ secrets.EMAIL_FROM }}
+          EMAIL_TO=ryan.ananda@modena.com
+          EOF
+
+      # ── Run tests ────────────────────────────────────────
+      - name: Run Playwright tests
+        run: |
+          npx playwright test \
+            --config=playwright.config.js \
+            --reporter=line,json,html
+        env:
+          CI: true
+          # Paksa headless di CI
+          PLAYWRIGHT_HEADLESS: true
+        continue-on-error: true
+
+      # ── Send email report ─────────────────────────────────
+      - name: Send email report
+        if: always()
+        run: node run-and-report.mjs --headless --no-run
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ryan.ananda@modena.com
+        continue-on-error: true
+
+      # ── Upload HTML report ────────────────────────────────
+      - name: Upload Playwright HTML report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ github.run_number }}
+          path: test-playwright/more1/mhc-full/playwright-report/
+          retention-days: 30
+
+      # ── Upload test results & screenshots ─────────────────
+      - name: Upload test results & screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-results-${{ github.run_number }}
+          path: test-playwright/test-results/
+          retention-days: 7
+
+      # ── Upload JSON results ────────────────────────────────
+      - name: Upload JSON results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-json-${{ github.run_number }}
+          path: test-playwright/more1/mhc-full/test-results/results.json
+          retention-days: 30
