@@ -1,0 +1,23 @@
+node_modules/
+.env
+.env.*
+
+# Playwright outputs
+playwright-report/
+test-results/
+test-results-prive/
+prive-screenshots/
+screenshots/
+
+# Nested test outputs
+test-playwright/playwright-report/
+test-playwright/test-results/
+test-playwright/test-results-prive/
+test-playwright/prive-screenshots/
+test-playwright/screenshots/
+test-playwright/**/gccs-report/
+
+# Local editor/runtime files
+test-playwright/.vscode/
+test-playwright/**/__pycache__/
+test-playwright/**/*.pyc
