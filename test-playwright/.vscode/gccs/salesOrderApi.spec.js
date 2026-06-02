@@ -1,5 +1,63 @@
 import { test, expect } from '@playwright/test';
 
+function extractSalesOrderId(responseBody) {
+    if (!responseBody || typeof responseBody !== 'object') return null;
+
+    const candidates = [
+        responseBody.id,
+        responseBody.order_id,
+        responseBody.sales_order_id,
+        responseBody.data?.id,
+        responseBody.data?.order_id,
+        responseBody.data?.sales_order_id,
+        responseBody.result?.id,
+        responseBody.result?.order_id,
+        responseBody.result?.sales_order_id,
+    ];
+
+    for (const value of candidates) {
+        if (typeof value === 'string' || typeof value === 'number') {
+            return String(value);
+        }
+    }
+
+    return null;
+}
+
+async function tryCleanupSalesOrder(request, securityCode, responseBody, poNumber) {
+    if (process.env.AUTO_CLEANUP === 'false') return;
+
+    const deleteBaseUrl = process.env.SALES_ORDER_DELETE_URL;
+    if (!deleteBaseUrl) {
+        // Optional cleanup endpoint is not configured.
+        return;
+    }
+
+    const salesOrderId = extractSalesOrderId(responseBody);
+    if (!salesOrderId) {
+        console.log(`🧹 Cleanup API skipped: sales order ID not found for PO ${poNumber}`);
+        return;
+    }
+
+    const cleanupResponse = await request.delete(`${deleteBaseUrl}/${salesOrderId}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Security-Code': securityCode,
+        },
+    }).catch(() => null);
+
+    if (!cleanupResponse) {
+        console.log(`🧹 Cleanup API failed to call for order ${salesOrderId}`);
+        return;
+    }
+
+    if (cleanupResponse.ok()) {
+        console.log(`🧹 Cleanup API success: order ${salesOrderId} deleted`);
+    } else {
+        console.log(`🧹 Cleanup API returned ${cleanupResponse.status()} for order ${salesOrderId}`);
+    }
+}
+
 test.describe('Sales Order API Tests', () => {
     const baseUrl = 'https://dev.modena.com/service_app/api/more/salesorder';
     const securityCode = '2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b';
@@ -347,6 +405,13 @@ test.describe('Sales Order API Tests', () => {
             console.log('Item Code:', testData.payload.carts[0].item_code);
             console.log('Response Status:', response.status());
             console.log('Response Body:', JSON.stringify(responseBody, null, 2));
+
+            await tryCleanupSalesOrder(
+                request,
+                securityCode,
+                responseBody,
+                testData.payload.po_number
+            );
 
             // Assertions
             expect(responseBody).toBeDefined();

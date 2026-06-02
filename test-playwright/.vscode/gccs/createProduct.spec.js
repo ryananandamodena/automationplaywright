@@ -1,5 +1,40 @@
 // Negative test cases for create product
 // import hanya sekali di bagian atas
+import { test, expect } from '@playwright/test';
+
+async function loginAndOpenCallEntry(page) {
+  await page.goto('https://gccs-test.modena.com/');
+  await page.getByRole('textbox', { name: 'Username' }).fill('sysadmin');
+  await page.getByRole('textbox', { name: 'Input Your Password' }).fill('P@ssw0rd12');
+  await page.getByRole('button', { name: 'Login' }).click();
+  await page.getByText('Call Center').click();
+  await page.getByRole('link', { name: 'Call Entry' }).click();
+}
+
+async function cleanupGccsProductBySerial(page, serialNumber) {
+  if (!serialNumber) return false;
+
+  await page.getByRole('textbox', { name: 'Input Phone Number' }).fill('087770666214');
+  await page.getByRole('textbox', { name: 'Input Phone Number' }).press('Enter');
+  await page.waitForTimeout(1500);
+
+  const row = page.locator(`tr:has-text("${serialNumber}")`).first();
+  if (!(await row.isVisible({ timeout: 3000 }).catch(() => false))) {
+    console.log(`🧹 Cleanup GCCS: serial ${serialNumber} tidak ditemukan`);
+    return false;
+  }
+
+  const deleteClicked = await row.locator('button[title*="Delete" i], button[title*="Hapus" i], .pi-trash').first().click().then(() => true).catch(() => false);
+  if (!deleteClicked) {
+    console.log(`🧹 Cleanup GCCS: tombol delete tidak ditemukan untuk ${serialNumber}`);
+    return false;
+  }
+
+  await page.locator('button:has-text("Yes"), button:has-text("Ya"), button:has-text("Confirm"), button.swal2-confirm').first().click().catch(() => null);
+  await page.waitForTimeout(1500);
+  console.log(`🧹 Cleanup GCCS: serial ${serialNumber} dihapus (best effort)`);
+  return true;
+}
 
 test('create product - nomor telepon kosong', async ({ page }) => {
   await page.goto('https://gccs-test.modena.com/');
@@ -167,18 +202,11 @@ test('create product - warranty tidak dipilih', async ({ page }) => {
   await expect(page.locator('text=Warranty is required')).toBeVisible();
 });
 
-import { test, expect } from '@playwright/test';
-
 test('create product', async ({ page }) => {
-  await page.goto('https://gccs-test.modena.com/');
-  // Login
-  await page.getByRole('textbox', { name: 'Username' }).fill('sysadmin');
-  await page.getByRole('textbox', { name: 'Input Your Password' }).fill('P@ssw0rd12');
-  await page.getByRole('button', { name: 'Login' }).click();
+  const serialNumber = `SNWF${Date.now().toString().slice(-8)}`;
 
-  // Navigasi ke Call Entry
-  await page.getByText('Call Center').click();
-  await page.getByRole('link', { name: 'Call Entry' }).click();
+  try {
+    await loginAndOpenCallEntry(page);
 
   // Input nomor telepon
   await page.getByRole('textbox', { name: 'Input Phone Number' }).fill('087770666214');
@@ -194,7 +222,7 @@ test('create product', async ({ page }) => {
   await page.waitForSelector('text=WF0670ZZAB');
 
   // Input serial number
-  await page.getByRole('textbox', { name: 'Input Serial Number' }).fill('2342434533333r4');
+    await page.getByRole('textbox', { name: 'Input Serial Number' }).fill(serialNumber);
 
   // Pilih dealer
   await page.getByRole('textbox', { name: 'Select Dealer' }).click();
@@ -211,19 +239,18 @@ test('create product', async ({ page }) => {
 
   // Simpan
   // Klik tombol Save menggunakan XPath
-  await page.locator('xpath=//*[@id="root"]/div/main/div[2]/div[1]/div[1]/div[2]/form/div/div[10]/button[1]').click();
+    await page.locator('xpath=//*[@id="root"]/div/main/div[2]/div[1]/div[1]/div[2]/form/div/div[10]/button[1]').click();
+    await page.waitForTimeout(2000);
+  } finally {
+    await cleanupGccsProductBySerial(page, serialNumber).catch(() => null);
+  }
 });
 
 test('create product BH 0325', async ({ page }) => {
-  await page.goto('https://gccs-test.modena.com/');
-  // Login
-  await page.getByRole('textbox', { name: 'Username' }).fill('sysadmin');
-  await page.getByRole('textbox', { name: 'Input Your Password' }).fill('P@ssw0rd12');
-  await page.getByRole('button', { name: 'Login' }).click();
+  const serialNumber = `SNBH${Date.now().toString().slice(-8)}`;
 
-  // Navigasi ke Call Entry
-  await page.getByText('Call Center').click();
-  await page.getByRole('link', { name: 'Call Entry' }).click();
+  try {
+    await loginAndOpenCallEntry(page);
 
   // Input nomor telepon
   await page.getByRole('textbox', { name: 'Input Phone Number' }).fill('087770666214');
@@ -239,7 +266,7 @@ test('create product BH 0325', async ({ page }) => {
   await page.waitForSelector('text=BH 0325');
 
   // Input serial number
-  await page.getByRole('textbox', { name: 'Input Serial Number' }).fill('2342434533333r4');
+    await page.getByRole('textbox', { name: 'Input Serial Number' }).fill(serialNumber);
 
   // Pilih dealer
   await page.getByRole('textbox', { name: 'Select Dealer' }).click();
@@ -256,5 +283,9 @@ test('create product BH 0325', async ({ page }) => {
 
   // Simpan
   // Klik tombol Save menggunakan XPath
-  await page.locator('xpath=//*[@id="root"]/div/main/div[2]/div[1]/div[1]/div[2]/form/div/div[10]/button[1]').click();
+    await page.locator('xpath=//*[@id="root"]/div/main/div[2]/div[1]/div[1]/div[2]/form/div/div[10]/button[1]').click();
+    await page.waitForTimeout(2000);
+  } finally {
+    await cleanupGccsProductBySerial(page, serialNumber).catch(() => null);
+  }
 });

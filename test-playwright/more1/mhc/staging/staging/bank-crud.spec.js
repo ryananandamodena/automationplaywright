@@ -5,15 +5,18 @@
  */
 
 import { test, expect } from '@playwright/test';
+import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../../../utils/data-cleanup.mjs';
 
 const BASE_URL = process.env.MHC_BASE_URL || 'https://mhc-dev.modena.com';
 const USER = {
   email: process.env.MHC_EMAIL || 'muhzaenal5@gmail.com',
   password: process.env.MHC_PASSWORD || 'P@ssw0rd',
 };
+const LIST_URL = `${BASE_URL}/sync-sap/bank/list`;
 
 test.describe('MHC - Bank CRUD Tests', () => {
   let page;
+  let createdSnapshot = null;
 
   test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
@@ -26,11 +29,21 @@ test.describe('MHC - Bank CRUD Tests', () => {
     await page.waitForTimeout(5000);
     
     // Navigate to Bank page
-    await page.goto(`${BASE_URL}/sync-sap/bank/list`);
+    await page.goto(LIST_URL);
     await page.waitForTimeout(3000);
   });
 
   test.afterAll(async () => {
+    if (createdSnapshot && isAutoCleanupEnabled()) {
+      console.log('\n🧹 AUTO CLEANUP Bank (best effort)');
+      await cleanupTableRecordBySnapshot(page, {
+        listUrl: LIST_URL,
+        rowSnapshot: createdSnapshot,
+        label: 'bank',
+        rowLocator: 'tbody tr',
+      });
+    }
+
     await page.close();
   });
 
@@ -76,6 +89,9 @@ test.describe('MHC - Bank CRUD Tests', () => {
         // Verify
         const finalCount = await page.locator('tbody tr').count();
         console.log(`Final records: ${finalCount}`);
+        if (finalCount > initialCount) {
+          createdSnapshot = await page.locator('tbody tr').first().textContent().catch(() => null);
+        }
         
         console.log('✅ CREATE: Success');
       } else {
@@ -159,6 +175,9 @@ test.describe('MHC - Bank CRUD Tests', () => {
         
         const finalCount = await page.locator('tbody tr').count();
         console.log(`After delete: ${finalCount} records`);
+        if (finalCount < initialCount) {
+          createdSnapshot = null;
+        }
         
         console.log('✅ DELETE: Success');
       } else {

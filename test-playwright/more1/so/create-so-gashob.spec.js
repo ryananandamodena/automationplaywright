@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://mhc-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
@@ -9,6 +10,11 @@ test.describe('MHC - Create Sales Order with Specific Product', () => {
   test.setTimeout(180000);
 
   test('Create SO with MODENA GAS HOB - BH 8725 HABK', async ({ page }) => {
+    let createdSnapshot = null;
+    let listUrl = `${BASE_URL}/sales-order`;
+    let initialCount = 0;
+
+    try {
     console.log('\n' + '='.repeat(70));
     console.log('MHC SALES ORDER CREATION - E2E TEST');
     console.log('Product: MODENA GAS HOB - BH 8725 HABK');
@@ -32,6 +38,8 @@ test.describe('MHC - Create Sales Order with Specific Product', () => {
     await page.locator('text="Sales Order"').first().click();
     await page.waitForTimeout(2000);
     console.log('      ✅ Sales Order page opened\n');
+    listUrl = page.url();
+    initialCount = await page.locator('table tbody tr').count().catch(() => 0);
 
     // ============ STEP 3: CREATE NEW ============
     console.log('[3/8] ➕ Create new Sales Order...');
@@ -207,7 +215,25 @@ test.describe('MHC - Create Sales Order with Specific Product', () => {
     console.log('   - final-result-gashot.png');
     console.log('='.repeat(70) + '\n');
 
+    await page.locator('text="Sales Order"').first().click().catch(() => null);
+    await page.waitForTimeout(2000);
+    const finalCount = await page.locator('table tbody tr').count().catch(() => 0);
+    if (finalCount > initialCount) {
+      createdSnapshot = await page.locator('table tbody tr').first().textContent().catch(() => null);
+    }
+
     // Assert that at least we got to review page
     expect(productAdded).toBe(true);
+    } finally {
+      if (createdSnapshot && isAutoCleanupEnabled()) {
+        console.log('\n🧹 AUTO CLEANUP SO (best effort)');
+        await cleanupTableRecordBySnapshot(page, {
+          listUrl,
+          rowSnapshot: createdSnapshot,
+          label: 'sales order',
+          rowLocator: 'table tbody tr',
+        });
+      }
+    }
   });
 });

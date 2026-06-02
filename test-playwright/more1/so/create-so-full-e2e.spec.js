@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://mhc-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
@@ -8,10 +9,15 @@ test.describe('MHC - Sales Order Creation - FULL E2E', () => {
   test.setTimeout(180000);
 
   test('Create Complete Sales Order', async ({ page }) => {
-    // Step 1: Login
-    console.log('Step 1: Login to MHC...');
-    await page.goto(BASE_URL);
-    await page.waitForTimeout(2000);
+    let createdSnapshot = null;
+    let listUrl = `${BASE_URL}/sales-order`;
+    let initialCount = 0;
+
+    try {
+      // Step 1: Login
+      console.log('Step 1: Login to MHC...');
+      await page.goto(BASE_URL);
+      await page.waitForTimeout(2000);
 
     await page.locator('input[type="email"]').fill(LOGIN_EMAIL);
     await page.locator('input[type="password"]').fill(LOGIN_PASSWORD);
@@ -21,11 +27,13 @@ test.describe('MHC - Sales Order Creation - FULL E2E', () => {
     await page.locator('text=/Welcome|Dashboard/i').first().waitFor();
     console.log('✓ Login successful\n');
 
-    // Step 2: Navigate to Sales Order
-    console.log('Step 2: Navigate to Sales Order...');
-    await page.locator('text="Sales Order"').first().click();
-    await page.waitForTimeout(2000);
-    console.log('✓ Sales Order page opened\n');
+      // Step 2: Navigate to Sales Order
+      console.log('Step 2: Navigate to Sales Order...');
+      await page.locator('text="Sales Order"').first().click();
+      await page.waitForTimeout(2000);
+      console.log('✓ Sales Order page opened\n');
+      listUrl = page.url();
+      initialCount = await page.locator('table tbody tr').count().catch(() => 0);
 
     // Step 3: Click Create New
     console.log('Step 3: Create new Sales Order...');
@@ -239,16 +247,34 @@ test.describe('MHC - Sales Order Creation - FULL E2E', () => {
 
     await page.screenshot({ path: 'test-results/final-result.png', fullPage: true });
 
-    console.log('\n' + '='.repeat(60));
-    console.log('TEST COMPLETED');
-    console.log('='.repeat(60));
-    console.log(`Products added: ${productsAdded}`);
-    console.log(`Submit clicked: ${submitClicked}`);
-    console.log(`Success detected: ${successFound}`);
-    console.log('\nScreenshots saved:');
-    console.log('  - test-results/products-added.png');
-    console.log('  - test-results/review-page-full.png');
-    console.log('  - test-results/final-result.png');
-    console.log('='.repeat(60));
+      await page.locator('text="Sales Order"').first().click().catch(() => null);
+      await page.waitForTimeout(2000);
+      const finalCount = await page.locator('table tbody tr').count().catch(() => 0);
+      if (finalCount > initialCount) {
+        createdSnapshot = await page.locator('table tbody tr').first().textContent().catch(() => null);
+      }
+
+      console.log('\n' + '='.repeat(60));
+      console.log('TEST COMPLETED');
+      console.log('='.repeat(60));
+      console.log(`Products added: ${productsAdded}`);
+      console.log(`Submit clicked: ${submitClicked}`);
+      console.log(`Success detected: ${successFound}`);
+      console.log('\nScreenshots saved:');
+      console.log('  - test-results/products-added.png');
+      console.log('  - test-results/review-page-full.png');
+      console.log('  - test-results/final-result.png');
+      console.log('='.repeat(60));
+    } finally {
+      if (createdSnapshot && isAutoCleanupEnabled()) {
+        console.log('\n🧹 AUTO CLEANUP SO (best effort)');
+        await cleanupTableRecordBySnapshot(page, {
+          listUrl,
+          rowSnapshot: createdSnapshot,
+          label: 'sales order',
+          rowLocator: 'table tbody tr',
+        });
+      }
+    }
   });
 });

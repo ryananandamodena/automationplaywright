@@ -6,6 +6,7 @@
  */
 
 import { chromium } from 'playwright';
+import { cleanupContractBySnapshot, isAutoCleanupEnabled } from './utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://portal-dev.modena.com';
 const USER = {
@@ -141,13 +142,14 @@ async function createSingleContract(page, contractData, index) {
     await page.goto(`${BASE_URL}/fms/vehicle/contract`, { waitUntil: 'load' });
     await page.waitForTimeout(2000);
     
+    const rowSnapshot = await page.locator('tbody tr').first().textContent().catch(() => null);
     console.log('✅ Contract created');
-    return true;
+    return { success: true, rowSnapshot };
     
   } catch (error) {
     console.error(`❌ Error: ${error.message}`);
     await page.screenshot({ path: `contract-batch-${index + 1}-error.png`, fullPage: true });
-    return false;
+    return { success: false, rowSnapshot: null };
   }
 }
 
@@ -164,6 +166,7 @@ async function main() {
   
   const context = await browser.newContext({ viewport: null });
   const page = await context.newPage();
+  const createdSnapshots = [];
   
   try {
     // Login
@@ -199,8 +202,13 @@ async function main() {
     // Create contracts
     let successCount = 0;
     for (let i = 0; i < contracts.length; i++) {
-      const success = await createSingleContract(page, contracts[i], i);
-      if (success) successCount++;
+      const createResult = await createSingleContract(page, contracts[i], i);
+      if (createResult.success) {
+        successCount++;
+      }
+      if (createResult.rowSnapshot) {
+        createdSnapshots.push(createResult.rowSnapshot);
+      }
       
       // Small delay between contracts
       if (i < contracts.length - 1) {
@@ -234,6 +242,17 @@ async function main() {
     console.error('\n❌ FATAL ERROR:', error.message);
     await page.screenshot({ path: 'contract-batch-fatal-error.png', fullPage: true });
   } finally {
+    if (isAutoCleanupEnabled() && createdSnapshots.length > 0) {
+      console.log(`\n🧹 AUTO CLEANUP (best effort): ${createdSnapshots.length} contract(s)`);
+
+      for (const rowSnapshot of createdSnapshots.reverse()) {
+        await cleanupContractBySnapshot(page, {
+          baseUrl: BASE_URL,
+          rowSnapshot,
+        });
+      }
+    }
+
     console.log('\n⏳ Closing in 10 seconds...');
     await page.waitForTimeout(10000);
     await browser.close();

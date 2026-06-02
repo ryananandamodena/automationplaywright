@@ -1,4 +1,7 @@
 import { test, expect } from '@playwright/test';
+import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../../../utils/data-cleanup.mjs';
+
+const LIST_URL = 'https://portal-dev.modena.com/fms/vehicle/contract';
 
 // ============================================================
 // HELPER: Login & Navigate to Contract Page
@@ -87,6 +90,7 @@ test.describe('FMS - Vehicle Contract CRUD', () => {
     console.log('TC-02: Starting create contract test');
 
     await loginAndGoToContract(page);
+    const initialRows = await page.locator('tbody tr').count().catch(() => 0);
 
     // Click Add Contract button
     const addButton = page.getByRole('button', { name: /add|create|new|contract/i });
@@ -151,10 +155,27 @@ test.describe('FMS - Vehicle Contract CRUD', () => {
       console.log('TC-02: Contract created successfully (success message found)');
     } else {
       // Navigate back to contract list
-      await page.goto('https://portal-dev.modena.com/fms/vehicle/contract');
+      await page.goto(LIST_URL);
       await page.waitForLoadState('networkidle');
       await page.waitForTimeout(2000);
       console.log('TC-02: Navigated back to contract list');
+    }
+
+    await page.goto(LIST_URL);
+    await page.waitForTimeout(1500);
+    const finalRows = await page.locator('tbody tr').count().catch(() => 0);
+    const createdSnapshot = finalRows > initialRows
+      ? await page.locator('tbody tr').first().textContent().catch(() => null)
+      : null;
+    console.log(`TC-02: Rows before ${initialRows}, after ${finalRows}`);
+
+    if (createdSnapshot && isAutoCleanupEnabled()) {
+      await cleanupTableRecordBySnapshot(page, {
+        listUrl: LIST_URL,
+        rowSnapshot: createdSnapshot,
+        label: 'contract',
+        rowLocator: 'tbody tr',
+      });
     }
 
     console.log('TC-02: Create contract test completed');

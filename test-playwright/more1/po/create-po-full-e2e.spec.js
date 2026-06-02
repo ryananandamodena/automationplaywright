@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://mhc-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
@@ -8,10 +9,15 @@ test.describe('MHC - Purchase Order Creation - FULL E2E', () => {
   test.setTimeout(180000);
 
   test('Create Complete Purchase Order', async ({ page }) => {
-    // Step 1: Login
-    console.log('Step 1: Login to MHC...');
-    await page.goto(BASE_URL);
-    await page.waitForTimeout(2000);
+    let createdSnapshot = null;
+    let listUrl = `${BASE_URL}/purchase-order`;
+    let initialCount = 0;
+
+    try {
+      // Step 1: Login
+      console.log('Step 1: Login to MHC...');
+      await page.goto(BASE_URL);
+      await page.waitForTimeout(2000);
 
     await page.locator('input[type="email"]').fill(LOGIN_EMAIL);
     await page.locator('input[type="password"]').fill(LOGIN_PASSWORD);
@@ -21,12 +27,14 @@ test.describe('MHC - Purchase Order Creation - FULL E2E', () => {
     await page.locator('text=/Welcome|Dashboard/i').first().waitFor({ timeout: 10000 });
     console.log('✓ Login successful\n');
 
-    // Step 2: Navigate to Purchase Order
+      // Step 2: Navigate to Purchase Order
     console.log('Step 2: Navigate to Purchase Order...');
-    await page.locator('text="Purchase Order"').first().click();
+      await page.locator('text="Purchase Order"').first().click();
     await page.waitForTimeout(2000);
     console.log('✓ Purchase Order page opened');
     console.log('  URL:', page.url());
+      listUrl = page.url();
+      initialCount = await page.locator('table tbody tr').count().catch(() => 0);
     await page.screenshot({ path: 'test-results/po-e2e-01-list.png', fullPage: true });
 
     // Step 3: Click Create New
@@ -240,20 +248,38 @@ test.describe('MHC - Purchase Order Creation - FULL E2E', () => {
 
     await page.screenshot({ path: 'test-results/po-e2e-07-final.png', fullPage: true });
 
-    console.log('\n' + '='.repeat(60));
-    console.log('PURCHASE ORDER E2E TEST COMPLETED');
-    console.log('='.repeat(60));
-    console.log(`Products added: ${productsAdded}`);
-    console.log(`Submit clicked: ${submitClicked}`);
-    console.log(`Success detected: ${successFound}`);
-    console.log('\nScreenshots saved:');
-    console.log('  - test-results/po-e2e-01-list.png');
-    console.log('  - test-results/po-e2e-02-create-form.png');
-    console.log('  - test-results/po-e2e-03-supplier-selected.png');
-    console.log('  - test-results/po-e2e-04-products.png');
-    console.log('  - test-results/po-e2e-05-products-added.png');
-    console.log('  - test-results/po-e2e-06-review.png');
-    console.log('  - test-results/po-e2e-07-final.png');
-    console.log('='.repeat(60));
+      await page.locator('text="Purchase Order"').first().click().catch(() => null);
+      await page.waitForTimeout(2000);
+      const finalCount = await page.locator('table tbody tr').count().catch(() => 0);
+      if (finalCount > initialCount) {
+        createdSnapshot = await page.locator('table tbody tr').first().textContent().catch(() => null);
+      }
+
+      console.log('\n' + '='.repeat(60));
+      console.log('PURCHASE ORDER E2E TEST COMPLETED');
+      console.log('='.repeat(60));
+      console.log(`Products added: ${productsAdded}`);
+      console.log(`Submit clicked: ${submitClicked}`);
+      console.log(`Success detected: ${successFound}`);
+      console.log('\nScreenshots saved:');
+      console.log('  - test-results/po-e2e-01-list.png');
+      console.log('  - test-results/po-e2e-02-create-form.png');
+      console.log('  - test-results/po-e2e-03-supplier-selected.png');
+      console.log('  - test-results/po-e2e-04-products.png');
+      console.log('  - test-results/po-e2e-05-products-added.png');
+      console.log('  - test-results/po-e2e-06-review.png');
+      console.log('  - test-results/po-e2e-07-final.png');
+      console.log('='.repeat(60));
+    } finally {
+      if (createdSnapshot && isAutoCleanupEnabled()) {
+        console.log('\n🧹 AUTO CLEANUP PO (best effort)');
+        await cleanupTableRecordBySnapshot(page, {
+          listUrl,
+          rowSnapshot: createdSnapshot,
+          label: 'purchase order',
+          rowLocator: 'table tbody tr',
+        });
+      }
+    }
   });
 });

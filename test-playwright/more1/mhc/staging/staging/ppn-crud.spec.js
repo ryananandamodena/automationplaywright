@@ -11,9 +11,32 @@ const USER = {
   email: process.env.MHC_EMAIL || 'muhzaenal5@gmail.com',
   password: process.env.MHC_PASSWORD || 'P@ssw0rd',
 };
+const LIST_URL = `${BASE_URL}/sync-sap/ppn/list`;
+
+async function fallbackCleanup(page, snapshot) {
+  if (!snapshot || process.env.AUTO_CLEANUP === 'false') return;
+
+  await page.goto(LIST_URL);
+  await page.waitForTimeout(1200);
+
+  const row = page.locator(`tbody tr:has-text("${snapshot}")`).first();
+  if (!(await row.isVisible({ timeout: 3000 }).catch(() => false))) return;
+
+  const deleteBtn = row.locator('button:has-text("Delete"), button:has-text("Hapus"), button:has-text("Remove")').first();
+  if (await deleteBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+    await deleteBtn.click();
+    await page.waitForTimeout(700);
+    const confirm = page.locator('button:has-text("Yes"), button:has-text("Confirm"), button:has-text("Ya"), button:has-text("OK")').first();
+    if (await confirm.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await confirm.click();
+      await page.waitForTimeout(1200);
+    }
+  }
+}
 
 test.describe('MHC - PPN CRUD Tests', () => {
   let page;
+  let createdSnapshot = null;
 
   test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
@@ -26,11 +49,12 @@ test.describe('MHC - PPN CRUD Tests', () => {
     await page.waitForTimeout(5000);
     
     // Navigate to PPN page
-    await page.goto(`${BASE_URL}/sync-sap/ppn/list`);
+    await page.goto(LIST_URL);
     await page.waitForTimeout(3000);
   });
 
   test.afterAll(async () => {
+    await fallbackCleanup(page, createdSnapshot);
     await page.close();
   });
 
@@ -74,6 +98,9 @@ test.describe('MHC - PPN CRUD Tests', () => {
       // Verify
       const finalCount = await page.locator('tbody tr').count();
       console.log(`Final records: ${finalCount}`);
+      if (finalCount > initialCount) {
+        createdSnapshot = await page.locator('tbody tr').first().textContent().catch(() => null);
+      }
       
       console.log('✅ CREATE: Success');
     } else {
@@ -143,6 +170,9 @@ test.describe('MHC - PPN CRUD Tests', () => {
       
       const finalCount = await page.locator('tbody tr').count();
       console.log(`Before: ${initialCount}, After: ${finalCount}`);
+      if (finalCount < initialCount) {
+        createdSnapshot = null;
+      }
       
       console.log('✅ DELETE: Success');
     } else {

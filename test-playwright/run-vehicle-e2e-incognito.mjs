@@ -1,4 +1,5 @@
 import { chromium } from 'playwright';
+import { cleanupVehicleByPlate, isAutoCleanupEnabled } from './utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://portal-dev.modena.com';
 
@@ -144,6 +145,7 @@ async function runVehicleE2E() {
     headless: false,
     args: ['--incognito', '--start-maximized']
   });
+  let vehicleCreated = false;
   
   try {
     // ============================================
@@ -266,6 +268,7 @@ async function runVehicleE2E() {
     await page1.screenshot({ path: 'vehicle-e2e-step1-after-submit.png', fullPage: true });
     
     console.log(`\n✅ STEP 1 COMPLETED - Vehicle request created by ${users.admin.name}`);
+    vehicleCreated = true;
     
     await context1.close();
     
@@ -434,6 +437,25 @@ async function runVehicleE2E() {
     console.error('\n❌ ERROR:', error.message);
     console.error(error.stack);
   } finally {
+    if (isAutoCleanupEnabled() && vehicleCreated) {
+      console.log('\n🧹 AUTO CLEANUP VEHICLE (best effort)');
+      const cleanupContext = await browser.newContext({ viewport: null });
+      const cleanupPage = await cleanupContext.newPage();
+
+      try {
+        await loginAs(cleanupPage, users.admin);
+        await navigateToFMS(cleanupPage);
+        await cleanupVehicleByPlate(cleanupPage, {
+          baseUrl: BASE_URL,
+          licensePlate: vehicleData.licensePlate,
+        });
+      } catch (cleanupError) {
+        console.log(`⚠️ Cleanup error: ${cleanupError.message}`);
+      } finally {
+        await cleanupContext.close();
+      }
+    }
+
     await browser.close();
   }
   

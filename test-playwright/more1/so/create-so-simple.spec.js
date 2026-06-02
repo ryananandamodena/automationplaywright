@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://mhc-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
@@ -8,9 +9,14 @@ test.describe('MHC - Sales Order Creation (Simple)', () => {
   test.setTimeout(120000);
 
   test('Create Sales Order - Full Flow', async ({ page }) => {
-    // 1. Login
-    await page.goto(BASE_URL);
-    await page.waitForTimeout(2000);
+    let createdSnapshot = null;
+    let listUrl = `${BASE_URL}/sales-order`;
+    let initialCount = 0;
+
+    try {
+      // 1. Login
+      await page.goto(BASE_URL);
+      await page.waitForTimeout(2000);
 
     console.log('1. Logging in...');
     await page.locator('input[type="email"]').fill(LOGIN_EMAIL);
@@ -19,18 +25,20 @@ test.describe('MHC - Sales Order Creation (Simple)', () => {
     await page.waitForTimeout(4000);
     console.log('✓ Login successful');
 
-    // 2. Go to Sales Order
-    console.log('2. Opening Sales Order...');
-    await page.locator('text="Sales Order"').first().click();
-    await page.waitForTimeout(2000);
-    console.log('✓ Sales Order page opened');
+      // 2. Go to Sales Order
+      console.log('2. Opening Sales Order...');
+      await page.locator('text="Sales Order"').first().click();
+      await page.waitForTimeout(2000);
+      console.log('✓ Sales Order page opened');
+      listUrl = page.url();
+      initialCount = await page.locator('table tbody tr').count().catch(() => 0);
 
-    // 3. Click Create New
-    console.log('3. Clicking Create New...');
-    await page.locator("button:has-text('Create New')").click();
-    await page.waitForTimeout(2000);
-    await page.screenshot({ path: 'test-results/step1-customer.png', fullPage: true });
-    console.log('✓ Create wizard opened');
+      // 3. Click Create New
+      console.log('3. Clicking Create New...');
+      await page.locator("button:has-text('Create New')").click();
+      await page.waitForTimeout(2000);
+      await page.screenshot({ path: 'test-results/step1-customer.png', fullPage: true });
+      console.log('✓ Create wizard opened');
 
     // 4. Select Customer
     console.log('4. Selecting customer...');
@@ -101,7 +109,7 @@ test.describe('MHC - Sales Order Creation (Simple)', () => {
     await page.screenshot({ path: 'test-results/step3-review.png', fullPage: true });
     console.log('✓ Review page loaded');
 
-      // 8. Submit
+        // 8. Submit
     console.log('8. Looking for submit button...');
     const allButtons = await page.locator('button').all();
     for (const btn of allButtons) {
@@ -117,15 +125,33 @@ test.describe('MHC - Sales Order Creation (Simple)', () => {
       page.locator("button:has-text('Create Order')")
     ).first();
 
-    if (await submitBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
+      if (await submitBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
       await submitBtn.click();
       await page.waitForTimeout(3000);
       console.log('✓ Order submitted!');
       await page.screenshot({ path: 'test-results/order-result.png', fullPage: true });
-    } else {
+      } else {
       console.log('⚠ Submit button not found - check screenshot');
-    }
+      }
 
-    console.log('\n✅ Test completed! Check test-results/ for screenshots.');
+      await page.locator('text="Sales Order"').first().click().catch(() => null);
+      await page.waitForTimeout(2000);
+      const finalCount = await page.locator('table tbody tr').count().catch(() => 0);
+      if (finalCount > initialCount) {
+        createdSnapshot = await page.locator('table tbody tr').first().textContent().catch(() => null);
+      }
+
+      console.log('\n✅ Test completed! Check test-results/ for screenshots.');
+    } finally {
+      if (createdSnapshot && isAutoCleanupEnabled()) {
+        console.log('\n🧹 AUTO CLEANUP SO (best effort)');
+        await cleanupTableRecordBySnapshot(page, {
+          listUrl,
+          rowSnapshot: createdSnapshot,
+          label: 'sales order',
+          rowLocator: 'table tbody tr',
+        });
+      }
+    }
   });
 });

@@ -24,6 +24,8 @@ const MENU_CONFIG = {
   searchInputSelector: 'input[placeholder*="Search"]',
 };
 
+const LIST_URL = `${BASE_URL}${MENU_CONFIG.menuPath}`;
+
 // Test Data - CUSTOMIZE THIS
 const TEST_DATA = {
   create: {
@@ -42,6 +44,7 @@ const TEST_DATA = {
 test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
   let page;
   let createdItemId;
+  let createdSnapshot;
 
   // Setup: Login before all tests
   test.beforeAll(async ({ browser }) => {
@@ -55,11 +58,37 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
     await page.waitForTimeout(3000);
     
     // Navigate to menu
-    await page.goto(`${BASE_URL}${MENU_CONFIG.menuPath}`);
+    await page.goto(LIST_URL);
     await page.waitForTimeout(2000);
   });
 
   test.afterAll(async () => {
+    if (createdSnapshot && process.env.AUTO_CLEANUP !== 'false') {
+      // Fallback cleanup: run even if dedicated DELETE test did not remove the created item.
+      await page.goto(LIST_URL);
+      await page.waitForTimeout(1500);
+
+      const searchInput = page.locator(MENU_CONFIG.searchInputSelector).first();
+      if (await searchInput.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await searchInput.fill(createdSnapshot);
+        await page.waitForTimeout(1200);
+      }
+
+      const targetRow = page.locator(`tbody tr:has-text("${createdSnapshot}")`).first();
+      if (await targetRow.isVisible({ timeout: 3000 }).catch(() => false)) {
+        const deleteBtn = targetRow.locator(MENU_CONFIG.deleteButtonSelector).first();
+        if (await deleteBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+          await deleteBtn.click();
+          await page.waitForTimeout(700);
+          const confirmButton = page.locator('button:has-text("Yes"), button:has-text("Confirm"), button:has-text("Ya"), button:has-text("OK"), button:has-text("Delete")');
+          if (await confirmButton.count() > 0) {
+            await confirmButton.first().click();
+            await page.waitForTimeout(1400);
+          }
+        }
+      }
+    }
+
     await page.close();
   });
 
@@ -89,6 +118,10 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
     // Verify success
     const finalCount = await page.locator('tbody tr').count();
     console.log(`Final items: ${finalCount}`);
+
+    if (finalCount > initialCount) {
+      createdSnapshot = await page.locator('tbody tr').first().textContent().catch(() => null);
+    }
     
     expect(finalCount).toBeGreaterThan(initialCount);
     console.log('✅ CREATE: Success');
@@ -185,6 +218,10 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
     // Verify deletion
     const finalCount = await page.locator('tbody tr').count();
     console.log(`After delete: ${finalCount} items`);
+
+    if (finalCount < initialCount) {
+      createdSnapshot = null;
+    }
     
     expect(finalCount).toBeLessThan(initialCount);
     

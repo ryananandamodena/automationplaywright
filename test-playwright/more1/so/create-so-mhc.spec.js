@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://mhc-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
@@ -16,6 +17,11 @@ test.describe('MHC - Sales Order Creation', () => {
   test.setTimeout(150000);
 
   test('Create Sales Order - Full Flow', async ({ page }) => {
+    let createdSnapshot = null;
+    let listUrl = `${BASE_URL}/sales-order`;
+    let initialCount = 0;
+
+    try {
 
     // 1. Login
     console.log('1. Logging in...');
@@ -32,6 +38,8 @@ test.describe('MHC - Sales Order Creation', () => {
     await page.locator('text="Sales Order"').first().click();
     await page.waitForTimeout(2000);
     console.log('✓ Sales Order page opened');
+    listUrl = page.url();
+    initialCount = await page.locator('table tbody tr').count().catch(() => 0);
 
     // 3. Click Create New
     console.log('3. Clicking Create New...');
@@ -385,6 +393,24 @@ test.describe('MHC - Sales Order Creation', () => {
       console.log('⚠ Submit button not found');
     }
 
+    await page.locator('text="Sales Order"').first().click().catch(() => null);
+    await page.waitForTimeout(2000);
+    const finalCount = await page.locator('table tbody tr').count().catch(() => 0);
+    if (finalCount > initialCount) {
+      createdSnapshot = await page.locator('table tbody tr').first().textContent().catch(() => null);
+    }
+
     console.log('\n✅ Test completed!');
+    } finally {
+      if (createdSnapshot && isAutoCleanupEnabled()) {
+        console.log('\n🧹 AUTO CLEANUP SO (best effort)');
+        await cleanupTableRecordBySnapshot(page, {
+          listUrl,
+          rowSnapshot: createdSnapshot,
+          label: 'sales order',
+          rowLocator: 'table tbody tr',
+        });
+      }
+    }
   });
 });
