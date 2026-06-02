@@ -19,7 +19,8 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         headless: false,
         ignoreHTTPSErrors: true,
-        storageState: path.join(__dirname, 'storageState.json')
+        storageState: path.join(__dirname, 'storageState.json'),
+        screenshot: 'on',
       },
     },
   ],

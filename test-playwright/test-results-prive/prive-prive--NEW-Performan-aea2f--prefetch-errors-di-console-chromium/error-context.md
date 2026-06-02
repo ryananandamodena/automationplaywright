@@ -1,0 +1,241 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - img "Prive Living" [ref=e5]
+    - generic [ref=e6]:
+      - button "Close newsletter popup" [ref=e7] [cursor=pointer]:
+        - img [ref=e8]
+      - heading "SEND ME NEWSLETTER" [level=2] [ref=e11]
+      - paragraph [ref=e12]: Sign up to receive all the latest news and updates
+      - generic [ref=e13]:
+        - textbox "Type your E-mail" [ref=e15]
+        - button "SUBMIT" [ref=e16] [cursor=pointer]
+  - banner [ref=e17]:
+    - generic [ref=e19]:
+      - link "Prive Living Logo" [ref=e20] [cursor=pointer]:
+        - /url: /
+        - img "Prive Living Logo" [ref=e21]
+      - navigation [ref=e22]:
+        - link "Living" [ref=e23] [cursor=pointer]:
+          - /url: /product-category/living
+        - link "Dining" [ref=e24] [cursor=pointer]:
+          - /url: /product-category/dining
+        - link "Bed" [ref=e25] [cursor=pointer]:
+          - /url: /product-category/collection-bed
+        - button "Cabinetry" [ref=e27] [cursor=pointer]
+        - link "Contact Us" [ref=e28] [cursor=pointer]:
+          - /url: /contact-us#contactUs
+      - button "Search" [ref=e31] [cursor=pointer]:
+        - img [ref=e32]
+  - main [ref=e34]:
+    - generic [ref=e35]:
+      - heading "Modern Kitchen" [level=1] [ref=e53]
+      - generic [ref=e54]:
+        - button "Go to slide 1" [ref=e55] [cursor=pointer]
+        - button "Go to slide 2" [ref=e56] [cursor=pointer]
+        - button "Go to slide 3" [ref=e57] [cursor=pointer]
+        - button "Go to slide 4" [ref=e58] [cursor=pointer]
+        - button "Go to slide 5" [ref=e59] [cursor=pointer]
+      - button "Previous slide" [ref=e60] [cursor=pointer]:
+        - img [ref=e62]
+        - img [ref=e65]
+      - button "Next slide" [ref=e67] [cursor=pointer]:
+        - img [ref=e69]
+        - img [ref=e72]
+    - generic [ref=e75]:
+      - generic [ref=e76]:
+        - paragraph [ref=e77]:
+          - generic [ref=e79]: Luxury Redefined
+        - heading "CRAFTING A LIFESTYLE" [level=2] [ref=e80]
+        - paragraph [ref=e81]: At PRIVE, we craft more than furniture; we design a lifestyle. Our commitment to celebrating the essence of home shines through each meticulously curated piece, blending style with functionality. Using the finest materials, we create modern designs with a nod to Italian finesse.
+      - img "Modern living room furniture" [ref=e83]
+      - img "Elegant dining setup" [ref=e85]
+    - generic [ref=e87]:
+      - generic [ref=e88]:
+        - heading "Elegant and modern" [level=2] [ref=e89]
+        - paragraph [ref=e90]:
+          - generic [ref=e92]: Collection
+      - generic [ref=e93]:
+        - generic [ref=e94]:
+          - link "Living" [ref=e95] [cursor=pointer]:
+            - /url: /product-category/living
+            - img "Living" [ref=e97]
+          - link "Living" [ref=e98] [cursor=pointer]:
+            - /url: /product-category/living
+            - heading "Living" [level=3] [ref=e99]
+        - generic [ref=e100]:
+          - link "Dining" [ref=e101] [cursor=pointer]:
+            - /url: /product-category/dining
+            - img "Dining" [ref=e103]
+          - link "Dining" [ref=e104] [cursor=pointer]:
+            - /url: /product-category/dining
+            - heading "Dining" [level=3] [ref=e105]
+        - generic [ref=e106]:
+          - link "Bed" [ref=e107] [cursor=pointer]:
+            - /url: /product-category/collection-bed
+            - img "Bed" [ref=e109]
+          - link "Bed" [ref=e110] [cursor=pointer]:
+            - /url: /product-category/collection-bed
+            - heading "Bed" [level=3] [ref=e111]
+    - generic [ref=e113]:
+      - generic [ref=e114]:
+        - paragraph [ref=e115]:
+          - generic [ref=e117]: Our
+        - paragraph [ref=e118]: ”
+      - heading "Customers Say" [level=2]
+      - generic [ref=e119]:
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - blockquote [ref=e123]: Prive Living transformed our project completely. The quality of their furniture is unmatched, and the design aesthetic fits perfectly into modern luxury homes. Highly recommend their living room collection.
+            - paragraph [ref=e124]: Sarah Anderson
+          - generic [ref=e125]:
+            - blockquote [ref=e126]: We furnished our entire home with Prive Living pieces. Two years later, everything still looks and feels brand new. The craftsmanship is exceptional and their customer service is outstanding.
+            - paragraph [ref=e127]: Michael Chen
+          - generic [ref=e128]:
+            - blockquote [ref=e129]: As an architect, I am very particular about furniture that complements my designs. Prive Living consistently delivers pieces that elevate any space. Their dining collection is simply stunning.
+            - paragraph [ref=e130]: Emily Roberts
+          - generic [ref=e131]:
+            - blockquote [ref=e132]: The sofa we purchased is the most comfortable piece of furniture we have ever owned. It is also incredibly stylish. Our guests always ask where we got it. Worth every penny.
+            - paragraph [ref=e133]: David Park
+        - generic [ref=e134]:
+          - button "Next review" [ref=e135] [cursor=pointer]:
+            - img [ref=e137]
+            - img [ref=e140]
+          - button "Previous review" [ref=e142] [cursor=pointer]:
+            - img [ref=e144]
+            - img [ref=e147]
+    - generic [ref=e150]:
+      - generic [ref=e151]:
+        - paragraph [ref=e152]:
+          - generic [ref=e154]: Our
+        - heading "Latest Articles" [level=2] [ref=e155]
+      - generic [ref=e156]:
+        - link "How to Choose the Perfect Sofa for Your Living Room" [ref=e157] [cursor=pointer]:
+          - /url: /how-to-choose-the-perfect-sofa
+          - img "How to Choose the Perfect Sofa for Your Living Room" [ref=e158]
+        - generic [ref=e159]:
+          - heading "How to Choose the Perfect Sofa for Your Living Room" [level=3] [ref=e160]
+          - paragraph [ref=e161]: A comprehensive guide to selecting a sofa that complements your living space.
+          - link "Read More" [ref=e162] [cursor=pointer]:
+            - /url: /how-to-choose-the-perfect-sofa
+      - generic [ref=e163]:
+        - article [ref=e164]:
+          - link "Top 5 Dining Tables for 2026" [ref=e165] [cursor=pointer]:
+            - /url: /top-5-dining-tables-2026
+            - img "Top 5 Dining Tables for 2026" [ref=e167]
+          - heading "Top 5 Dining Tables for 2026" [level=3] [ref=e168]
+          - paragraph [ref=e169]: Discover the most stylish and functional dining tables this year.
+          - link "Read More" [ref=e170] [cursor=pointer]:
+            - /url: /top-5-dining-tables-2026
+        - article [ref=e171]:
+          - link "Creating a Cozy Bedroom Retreat" [ref=e172] [cursor=pointer]:
+            - /url: /creating-a-cozy-bedroom-retreat
+            - img "Creating a Cozy Bedroom Retreat" [ref=e174]
+          - heading "Creating a Cozy Bedroom Retreat" [level=3] [ref=e175]
+          - paragraph [ref=e176]: Transform your bedroom into the ultimate relaxation sanctuary.
+          - link "Read More" [ref=e177] [cursor=pointer]:
+            - /url: /creating-a-cozy-bedroom-retreat
+        - article [ref=e178]:
+          - link "Making Sustainable Furniture Choices" [ref=e179] [cursor=pointer]:
+            - /url: /sustainable-furniture-choices
+            - img "Making Sustainable Furniture Choices" [ref=e181]
+          - heading "Making Sustainable Furniture Choices" [level=3] [ref=e182]
+          - paragraph [ref=e183]: How to furnish your home with eco-friendly and sustainable options.
+          - link "Read More" [ref=e184] [cursor=pointer]:
+            - /url: /sustainable-furniture-choices
+    - generic [ref=e185]:
+      - img "Contact our team" [ref=e187]
+      - generic [ref=e188]:
+        - heading "Our dedicated team is here to assist you" [level=2] [ref=e189]
+        - link "Contact Us" [ref=e190] [cursor=pointer]:
+          - /url: /contact-us#contactUs
+    - generic [ref=e192]:
+      - generic [ref=e193]:
+        - generic [ref=e196]: Showroom
+        - heading "STORE LOCATION" [level=5] [ref=e197]
+      - generic [ref=e198]:
+        - generic [ref=e199]:
+          - generic [ref=e200]:
+            - heading "SENOPATI" [level=3] [ref=e201]
+            - paragraph [ref=e202]: Jl. Senopati No.70, Kebayoran Baru, Kota Jakarta Selatan, DKI Jakarta 12110
+            - paragraph [ref=e203]: "+62217255637"
+          - generic [ref=e205]:
+            - paragraph [ref=e206]: Opening Hours
+            - paragraph [ref=e207]: "Monday - Friday : 10 AM - 7 PM Saturday : 10 AM – 5 PM Sunday : Closed"
+          - link "Direction" [ref=e209] [cursor=pointer]:
+            - /url: https://www.google.com/maps/place/PRIVE+at+Ambiente/@-6.2316028,106.8093622,15z/data=!4m6!3m5!1s0x2e69f15bfa9be43f:0x127169de39ffb6b0!8m2!3d-6.2316028!4d106.8093622!16s%2Fg%2F11rxdlc5j?entry=ttu&g_ep=EgoyMDI2MDQxMi4wIKXMDSoASAFQAw%3D%3D
+        - generic [ref=e210]:
+          - generic [ref=e211]:
+            - heading "KEMANG" [level=3] [ref=e212]
+            - paragraph [ref=e213]: Jl. Kemang Selatan Raya No.150, Pasar Minggu, Kota Jakarta Selatan, DKI Jakarta 12560
+            - paragraph [ref=e214]: "+622122789885"
+          - generic [ref=e216]:
+            - paragraph [ref=e217]: Opening Hours
+            - paragraph [ref=e218]: "Monday - Friday : 10 AM - 7 PM Saturday : 10 AM – 5 PM Sunday : Closed"
+          - link "Direction" [ref=e220] [cursor=pointer]:
+            - /url: https://www.google.com/maps/place/PRIVE/@-6.2742169,106.8197491,17z/data=!4m6!3m5!1s0x2e69f358a3214a91:0x4dd097d0e2a44784!8m2!3d-6.2742169!4d106.8197491!16s%2Fg%2F11lsp2fynd?hl=en&entry=ttu&g_ep=EgoyMDI2MDQxMi4wIKXMDSoASAFQAw%3D%3D
+        - generic [ref=e221]:
+          - generic [ref=e222]:
+            - heading "SURABAYA" [level=3] [ref=e223]
+            - paragraph [ref=e224]: Jl. Mayjen Sungkono No.113, Dukuhpakis, Surabaya, Jawa Timur 60225
+            - paragraph [ref=e225]: "+623199548107"
+          - generic [ref=e227]:
+            - paragraph [ref=e228]: Opening Hours
+            - paragraph [ref=e229]: "Monday - Friday : 10 AM - 7 PM Saturday : 10 AM – 5 PM Sunday : Closed"
+          - link "Direction" [ref=e231] [cursor=pointer]:
+            - /url: https://www.google.com/maps/place/Jl.+Mayjen+Sungkono+No.113,+Dukuh+Pakis,+Kec.+Dukuhpakis,+Surabaya,+Jawa+Timur+60225/@-7.2906391,112.7142927,20z/data=!4m5!3m4!1s0x2dd7fc7579e4bc27:0xead92c8da5a09a61!8m2!3d-7.2907062!4d112.7142382?entry=ttu%20
+  - contentinfo [ref=e232]:
+    - generic [ref=e233]:
+      - generic [ref=e234]:
+        - generic [ref=e235]:
+          - link "Prive Living Logo":
+            - /url: /
+            - img "Prive Living Logo"
+          - paragraph [ref=e236]: We craft modern furniture using premium materials to ensure your home reflects the authentic essence of Italian style, creating spaces filled with joy and contentment.
+          - link "Instagram" [ref=e238] [cursor=pointer]:
+            - /url: https://www.instagram.com/privefurniture/
+            - img [ref=e239]
+        - generic [ref=e241]:
+          - heading "Collection" [level=3] [ref=e242]
+          - list [ref=e243]:
+            - listitem [ref=e244]:
+              - link "Living" [ref=e245] [cursor=pointer]:
+                - /url: /product-category/living
+            - listitem [ref=e246]:
+              - link "Dining" [ref=e247] [cursor=pointer]:
+                - /url: /product-category/dining
+            - listitem [ref=e248]:
+              - link "Bed" [ref=e249] [cursor=pointer]:
+                - /url: /product-category/collection-bed
+        - generic [ref=e250]:
+          - heading "Corporate" [level=3] [ref=e251]
+          - list [ref=e252]:
+            - listitem [ref=e253]:
+              - link "Blog" [ref=e254] [cursor=pointer]:
+                - /url: /news
+            - listitem [ref=e255]:
+              - link "About Us" [ref=e256] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=e257]:
+              - link "Contact Us" [ref=e258] [cursor=pointer]:
+                - /url: /contact-us#contactUs
+            - listitem [ref=e259]:
+              - link "Privacy Policy" [ref=e260] [cursor=pointer]:
+                - /url: /privacy-policy
+        - generic [ref=e261]:
+          - heading "Get Our Newsletter" [level=3] [ref=e262]
+          - generic [ref=e263]:
+            - textbox "Your email address" [ref=e264]
+            - button "Submit" [ref=e265] [cursor=pointer]
+      - paragraph [ref=e267]: © 2026 Prive Living. All rights reserved.
+  - generic [ref=e268]:
+    - generic [ref=e269]:
+      - generic [ref=e270]: Need Help? Chat with us
+      - button "Open WhatsApp chat" [ref=e271] [cursor=pointer]:
+        - img [ref=e272]
+    - button "Scroll to top":
+      - img
+  - alert [ref=e274]
+```

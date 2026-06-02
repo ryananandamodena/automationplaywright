@@ -1,5 +1,42 @@
 import { test, expect } from '@playwright/test';
 
+async function cleanupGccsProductBySerial(page, serialNumber) {
+  if (!serialNumber) return false;
+
+  await page.getByRole('list').locator('div').filter({ hasText: 'Call Center' }).click().catch(() => null);
+  await page.getByRole('link', { name: 'Call Entry' }).click().catch(() => null);
+  await page.getByRole('textbox', { name: 'Input Phone Number' }).fill('087770666214').catch(() => null);
+  await page.getByRole('textbox', { name: 'Input Phone Number' }).press('Enter').catch(() => null);
+  await page.waitForTimeout(1500);
+
+  const row = page.locator(`tr:has-text("${serialNumber}")`).first();
+  if (!(await row.isVisible({ timeout: 3000 }).catch(() => false))) {
+    console.log(`🧹 Cleanup GCCS: serial ${serialNumber} tidak ditemukan`);
+    return false;
+  }
+
+  const deleteClicked = await row
+    .locator('button[title*="Delete" i], button[title*="Hapus" i], .pi-trash')
+    .first()
+    .click()
+    .then(() => true)
+    .catch(() => false);
+
+  if (!deleteClicked) {
+    console.log(`🧹 Cleanup GCCS: tombol delete tidak ditemukan untuk ${serialNumber}`);
+    return false;
+  }
+
+  await page
+    .locator('button:has-text("Yes"), button:has-text("Ya"), button:has-text("Confirm"), button.swal2-confirm')
+    .first()
+    .click()
+    .catch(() => null);
+  await page.waitForTimeout(1200);
+  console.log(`🧹 Cleanup GCCS: serial ${serialNumber} dihapus (best effort)`);
+  return true;
+}
+
 test.describe('Create Product and Work Order - BH Series', () => {
   const products = [
     { name: 'BH 0325 ACBK', code: 'BH0325ACBK' },
@@ -27,6 +64,8 @@ test.describe('Create Product and Work Order - BH Series', () => {
 
   products.forEach((product, index) => {
     test(`Create Product and WO - ${product.name}`, async ({ page }) => {
+      let serialNumber = null;
+
       // Login
       await page.goto('https://gccs-test.modena.com/');
       await page.getByRole('textbox', { name: 'Username' }).click();
@@ -54,7 +93,7 @@ test.describe('Create Product and Work Order - BH Series', () => {
       await productSelector.first().click();
 
       // Input Serial Number - unique per produk
-      const serialNumber = `SN${product.code}${Date.now().toString().slice(-6)}`;
+      serialNumber = `SN${product.code}${Date.now().toString().slice(-6)}`;
       await page.getByRole('textbox', { name: 'Input Serial Number' }).click();
       await page.getByRole('textbox', { name: 'Input Serial Number' }).fill(serialNumber);
 
@@ -107,6 +146,8 @@ test.describe('Create Product and Work Order - BH Series', () => {
       await page.waitForTimeout(2000);
 
       console.log(`✓ Completed: ${product.name} - SN: ${serialNumber}`);
+
+      await cleanupGccsProductBySerial(page, serialNumber).catch(() => null);
     });
   });
 });

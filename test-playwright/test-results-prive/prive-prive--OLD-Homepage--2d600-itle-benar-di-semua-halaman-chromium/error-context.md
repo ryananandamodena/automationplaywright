@@ -1,0 +1,325 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to the content" [ref=e2] [cursor=pointer]:
+    - /url: "#qodef-page-content"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e6]:
+        - link "PRIVE logo dark logo light" [ref=e8] [cursor=pointer]:
+          - /url: https://prive-living.com/
+          - img "PRIVE" [ref=e9]
+          - img "logo dark" [ref=e10]
+          - img "logo light" [ref=e11]
+        - navigation "Top Menu" [ref=e12]:
+          - list [ref=e13]:
+            - listitem [ref=e14]:
+              - link "Living" [ref=e15] [cursor=pointer]:
+                - /url: /product-category/living/
+                - generic [ref=e16]: Living
+            - listitem [ref=e17]:
+              - link "Dining" [ref=e18] [cursor=pointer]:
+                - /url: /product-category/dining
+                - generic [ref=e19]: Dining
+            - listitem [ref=e20]:
+              - link "Bed" [ref=e21] [cursor=pointer]:
+                - /url: /product-category/collection-bed/
+                - generic [ref=e22]: Bed
+            - listitem [ref=e23]:
+              - link "CABINETRY" [ref=e24] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=e25]: CABINETRY
+              - list [ref=e26]:
+                - listitem [ref=e27]:
+                  - link "Kitchen" [ref=e28] [cursor=pointer]:
+                    - /url: https://prive-living.com/kitchen/
+                    - generic [ref=e29]: Kitchen
+                - listitem [ref=e30]:
+                  - link "Wardrobe" [ref=e31] [cursor=pointer]:
+                    - /url: https://prive-living.com/wardrobe/
+                    - generic [ref=e32]: Wardrobe
+            - listitem [ref=e33]:
+              - link "Contact Us" [ref=e34] [cursor=pointer]:
+                - /url: /contact-us/#contactUs
+                - generic [ref=e35]: Contact Us
+        - link "" [ref=e38] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic [ref=e40]: 
+      - generic [ref=e42] [cursor=pointer]: 
+    - text:  
+    - generic [ref=e43]:
+      - generic [ref=e47]:
+        - link "Home" [ref=e48] [cursor=pointer]:
+          - /url: https://prive-living.com/
+        - generic [ref=e49]: "-"
+        - link "Living" [ref=e50] [cursor=pointer]:
+          - /url: https://prive-living.com/product-category/living/
+        - generic [ref=e51]: "-"
+        - link "Sofa" [ref=e52] [cursor=pointer]:
+          - /url: https://prive-living.com/product-category/living/sofa/
+        - generic [ref=e53]: "-"
+        - text: ALANNA
+      - main [ref=e55]:
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - generic [ref=e62]:
+              - link "Sofa_Alma" [ref=e64] [cursor=pointer]:
+                - /url: https://prive-living.com/wp-content/uploads/Sofa_Alma.jpg
+                - img "Sofa_Alma" [ref=e65]
+              - generic [ref=e66]:
+                - button "Previous" [ref=e67] [cursor=pointer]
+                - generic [ref=e69]:
+                  - generic [ref=e70]:
+                    - link [ref=e73] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-1-scaled.jpg
+                      - img [ref=e74]
+                    - link [ref=e77] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-3-scaled.jpg
+                      - img [ref=e78]
+                  - generic [ref=e79]:
+                    - link [ref=e82] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-4-scaled.jpg
+                      - img [ref=e83]
+                    - link [ref=e86] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-2-scaled.jpg
+                      - img [ref=e87]
+                  - generic [ref=e88]:
+                    - link "Alanna(4x5)-Ambiente" [ref=e91] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna4x5-Ambiente-scaled.jpg
+                      - img "Alanna(4x5)-Ambiente" [ref=e92]
+                    - link "Alanna-Ambiente (2)" [ref=e95] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-Ambiente-2-scaled.jpg
+                      - img "Alanna-Ambiente (2)" [ref=e96]
+                  - generic [ref=e97]:
+                    - link "Alanna-Ambiente (3)" [ref=e100] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-Ambiente-3-scaled.jpg
+                      - img "Alanna-Ambiente (3)" [ref=e101]
+                    - link "Alanna-Ambiente (5)" [ref=e104] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-Ambiente-5-scaled.jpg
+                      - img "Alanna-Ambiente (5)" [ref=e105]
+                  - generic [ref=e106]:
+                    - link [ref=e109] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/AlanaGinervaEbano-AMB-2-1-scaled.jpg
+                      - img [ref=e110]
+                    - link [ref=e113] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/AlanaGinervaEbano-AMB-5-1-scaled.jpg
+                      - img [ref=e114]
+                  - generic [ref=e115]:
+                    - link [ref=e118] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/AlanaGinervaEbano-AMB-6-1-scaled.jpg
+                      - img [ref=e119]
+                    - link [ref=e122] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/AlanaGinervaEbanoDetail-AMB-1-scaled.jpg
+                      - img [ref=e123]
+                  - generic [ref=e124]:
+                    - link [ref=e127] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-1-scaled.jpg
+                      - img [ref=e128]
+                    - link [ref=e131] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-3-scaled.jpg
+                      - img [ref=e132]
+                  - generic [ref=e133]:
+                    - link [ref=e136] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-4-scaled.jpg
+                      - img [ref=e137]
+                    - link [ref=e140] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-2-scaled.jpg
+                      - img [ref=e141]
+                  - generic [ref=e142]:
+                    - link [ref=e145] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna4x5-Ambiente-scaled.jpg
+                      - img [ref=e146]
+                    - link [ref=e149] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-Ambiente-2-scaled.jpg
+                      - img [ref=e150]
+                  - generic [ref=e151]:
+                    - link [ref=e154] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-Ambiente-3-scaled.jpg
+                      - img [ref=e155]
+                    - link [ref=e158] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-Ambiente-5-scaled.jpg
+                      - img [ref=e159]
+                  - generic [ref=e160]:
+                    - link [ref=e163] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/AlanaGinervaEbano-AMB-2-1-scaled.jpg
+                      - img [ref=e164]
+                    - link [ref=e167] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/AlanaGinervaEbano-AMB-5-1-scaled.jpg
+                      - img [ref=e168]
+                  - generic [ref=e169]:
+                    - link [ref=e172] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/AlanaGinervaEbano-AMB-6-1-scaled.jpg
+                      - img [ref=e173]
+                    - link [ref=e176] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/AlanaGinervaEbanoDetail-AMB-1-scaled.jpg
+                      - img [ref=e177]
+                  - generic [ref=e178]:
+                    - link [ref=e181] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-1-scaled.jpg
+                      - img [ref=e182]
+                    - link [ref=e185] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-3-scaled.jpg
+                      - img [ref=e186]
+                  - generic [ref=e187]:
+                    - link [ref=e190] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-4-scaled.jpg
+                      - img [ref=e191]
+                    - link [ref=e194] [cursor=pointer]:
+                      - /url: https://prive-living.com/wp-content/uploads/Alanna-KEM-2-scaled.jpg
+                      - img [ref=e195]
+                - button "Next" [ref=e196] [cursor=pointer]
+            - generic [ref=e197]:
+              - heading "ALANNA" [level=4] [ref=e198]
+              - paragraph
+              - generic [ref=e199]:
+                - paragraph [ref=e200]: Absolute comfort implement in a bold design. The refined and contemporary lines crafted beautifully with a combination of feather filling and leather finish. A masterpiece that blends harmoniously with any atmosphere available in both fabric and leather finishing.
+                - paragraph [ref=e201]
+                - paragraph [ref=e202]:
+                  - strong [ref=e203]: DIMENSIONS
+                - paragraph [ref=e204]: W 2240 x D 930 x H 670 MM
+                - paragraph [ref=e205]
+                - paragraph [ref=e206]:
+                  - strong [ref=e207]: HOW TO BUY
+                - link " Call Us" [ref=e208] [cursor=pointer]:
+                  - /url: tel:6221227.89885
+                  - generic [ref=e209]:
+                    - generic [ref=e210]: 
+                    - text: Call Us
+                - link " Mail Us" [ref=e211] [cursor=pointer]:
+                  - /url: mailto:info@prive.co.id
+                  - generic [ref=e212]:
+                    - generic [ref=e213]: 
+                    - text: Mail Us
+                - link " Map" [ref=e214] [cursor=pointer]:
+                  - /url: https://www.google.com/maps/place/PRIVE+Furniture/@-6.2742169,106.8175604,17z/data=!3m1!4b1!4m5!3m4!1s0x2e69f358a3214a91:0x4dd097d0e2a44784!8m2!3d-6.2742281!4d106.8197474?hl=en
+                  - generic [ref=e215]:
+                    - generic [ref=e216]: 
+                    - text: Map
+                - paragraph [ref=e217]
+              - generic [ref=e219]:
+                - generic [ref=e220]: "Category:"
+                - link "Sofa" [ref=e222] [cursor=pointer]:
+                  - /url: https://prive-living.com/product-category/living/sofa/
+              - generic [ref=e223]:
+                - generic [ref=e224]: "Share:"
+                - list
+          - generic [ref=e225]:
+            - heading "Related products" [level=2] [ref=e226]
+            - list [ref=e228]:
+              - listitem [ref=e229]:
+                - generic [ref=e230]:
+                  - generic [ref=e231]:
+                    - link "Read more about “ALESSANDRO”" [ref=e233] [cursor=pointer]:
+                      - /url: https://prive-living.com/product/alessandro/
+                      - text: Read more
+                    - link [ref=e234] [cursor=pointer]:
+                      - /url: https://prive-living.com/product/alessandro/
+                  - generic [ref=e235]:
+                    - heading "ALESSANDRO" [level=5] [ref=e237]:
+                      - link "ALESSANDRO" [ref=e238] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alessandro/
+                    - generic [ref=e240]:
+                      - link "Sofa" [ref=e241] [cursor=pointer]:
+                        - /url: https://prive-living.com/product-category/living/sofa/
+                      - text: "-"
+              - listitem [ref=e242]:
+                - generic [ref=e243]:
+                  - generic [ref=e244]:
+                    - link "Read more about “DARIO”" [ref=e246] [cursor=pointer]:
+                      - /url: https://prive-living.com/product/dario/
+                      - text: Read more
+                    - link [ref=e247] [cursor=pointer]:
+                      - /url: https://prive-living.com/product/dario/
+                  - generic [ref=e248]:
+                    - heading "DARIO" [level=5] [ref=e250]:
+                      - link "DARIO" [ref=e251] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/dario/
+                    - generic [ref=e253]:
+                      - link "Sofa" [ref=e254] [cursor=pointer]:
+                        - /url: https://prive-living.com/product-category/living/sofa/
+                      - text: "-"
+              - listitem [ref=e255]:
+                - generic [ref=e256]:
+                  - generic [ref=e257]:
+                    - link "Read more about “CALISTA”" [ref=e259] [cursor=pointer]:
+                      - /url: https://prive-living.com/product/calista/
+                      - text: Read more
+                    - link [ref=e260] [cursor=pointer]:
+                      - /url: https://prive-living.com/product/calista/
+                  - generic [ref=e261]:
+                    - heading "CALISTA" [level=5] [ref=e263]:
+                      - link "CALISTA" [ref=e264] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/calista/
+                    - generic [ref=e266]:
+                      - link "Sofa" [ref=e267] [cursor=pointer]:
+                        - /url: https://prive-living.com/product-category/living/sofa/
+                      - text: "-"
+              - listitem [ref=e268]:
+                - generic [ref=e269]:
+                  - generic [ref=e270]:
+                    - link "Read more about “SANTIS”" [ref=e272] [cursor=pointer]:
+                      - /url: https://prive-living.com/product/santis/
+                      - text: Read more
+                    - link [ref=e273] [cursor=pointer]:
+                      - /url: https://prive-living.com/product/santis/
+                  - generic [ref=e274]:
+                    - heading "SANTIS" [level=5] [ref=e276]:
+                      - link "SANTIS" [ref=e277] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/santis/
+                    - generic [ref=e279]:
+                      - link "Sofa" [ref=e280] [cursor=pointer]:
+                        - /url: https://prive-living.com/product-category/living/sofa/
+                      - text: "-"
+    - contentinfo [ref=e281]:
+      - generic [ref=e285]:
+        - generic [ref=e286]:
+          - figure [ref=e288]:
+            - figure [ref=e290]
+          - paragraph [ref=e292]: We craft modern furniture using premium materials to ensure your home reflects the authentic essence of Italian style, creating spaces filled with joy and contentment.
+          - list [ref=e294]:
+            - listitem [ref=e295]:
+              - link "Instagram" [ref=e296] [cursor=pointer]:
+                - /url: https://www.instagram.com/privefurniture/
+                - img [ref=e297]
+                - generic [ref=e299]: Instagram
+        - generic [ref=e301]:
+          - heading "Collection" [level=5] [ref=e302]
+          - list [ref=e304]:
+            - listitem [ref=e305]:
+              - link "Living" [ref=e306] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/living/
+            - listitem [ref=e307]:
+              - link "Dining" [ref=e308] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/dining/
+            - listitem [ref=e309]:
+              - link "Bed" [ref=e310] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/collection-bed/bed/
+        - generic [ref=e312]:
+          - heading "Corporate" [level=5] [ref=e313]
+          - list [ref=e315]:
+            - listitem [ref=e316]:
+              - link "Blog" [ref=e317] [cursor=pointer]:
+                - /url: /news/
+            - listitem [ref=e318]:
+              - link "About Us" [ref=e319] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=e320]:
+              - link "Contact Us" [ref=e321] [cursor=pointer]:
+                - /url: /contact-us/#contactUs
+            - listitem [ref=e322]:
+              - link "Privacy Policy" [ref=e323] [cursor=pointer]:
+                - /url: https://prive-living.com/privacy-policy/
+        - generic [ref=e324]:
+          - paragraph [ref=e326]:
+            - strong [ref=e327]: Get our newsletter
+          - generic [ref=e330]:
+            - generic [ref=e331]:
+              - status
+              - list
+            - form "Contact form" [ref=e332]:
+              - generic [ref=e333]:
+                - textbox "Type your E-mail" [ref=e335] [cursor=pointer]
+                - button "Submit" [ref=e336] [cursor=pointer]:
+                  - generic [ref=e337]: Submit
+```

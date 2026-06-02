@@ -9,6 +9,7 @@
  */
 
 import { chromium } from 'playwright';
+import { cleanupContractBySnapshot, isAutoCleanupEnabled } from './utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://portal-dev.modena.com';
 
@@ -487,7 +488,8 @@ async function runApprovalE2E() {
     approveNovyan: false,
     approveDaniel: false,
     verifyStatus: false,
-    contractId: null
+    contractId: null,
+    cleanupContract: false,
   };
   
   try {
@@ -539,6 +541,25 @@ async function runApprovalE2E() {
     console.error('\n❌ ERROR:', error.message);
     console.error(error.stack);
   } finally {
+    if (isAutoCleanupEnabled() && results.contractId) {
+      console.log('\n🧹 AUTO CLEANUP CONTRACT (best effort)');
+      const cleanupContext = await browser.newContext({ viewport: null });
+      const cleanupPage = await cleanupContext.newPage();
+
+      try {
+        await login(cleanupPage, USERS.admin);
+        results.cleanupContract = await cleanupContractBySnapshot(cleanupPage, {
+          baseUrl: BASE_URL,
+          rowSnapshot: results.contractId,
+        });
+      } catch (cleanupError) {
+        console.log(`⚠️ Cleanup error: ${cleanupError.message}`);
+      } finally {
+        await logout(cleanupPage);
+        await cleanupContext.close();
+      }
+    }
+
     // Summary
     console.log('\n' + '█'.repeat(60));
     console.log('APPROVAL E2E SUMMARY');
@@ -549,6 +570,7 @@ async function runApprovalE2E() {
       { name: 'Approve Level 1 (Novyan)', status: results.approveNovyan },
       { name: 'Approve Level 2 (Daniel)', status: results.approveDaniel },
       { name: 'Final Status Verified', status: results.verifyStatus },
+      { name: 'Cleanup Contract', status: results.cleanupContract || !results.contractId },
     ];
     
     steps.forEach(step => {

@@ -1,0 +1,154 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Prive Living Logo" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Prive Living Logo" [ref=e6]
+      - navigation [ref=e7]:
+        - link "Living" [ref=e8] [cursor=pointer]:
+          - /url: /product-category/living
+        - link "Dining" [ref=e9] [cursor=pointer]:
+          - /url: /product-category/dining
+        - link "Bed" [ref=e10] [cursor=pointer]:
+          - /url: /product-category/collection-bed
+        - button "Cabinetry" [ref=e12] [cursor=pointer]
+        - link "Contact Us" [ref=e13] [cursor=pointer]:
+          - /url: /contact-us#contactUs
+      - button "Search" [ref=e16] [cursor=pointer]:
+        - img [ref=e17]
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - navigation [ref=e21]:
+        - link "Home" [ref=e22] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e23]: "-"
+        - link "Living" [ref=e24] [cursor=pointer]:
+          - /url: /product-category/living
+        - generic [ref=e25]: "-"
+        - link "Armchairs" [ref=e26] [cursor=pointer]:
+          - /url: /product-category/living/armchairs
+        - generic [ref=e27]: "-"
+        - generic [ref=e28]: DORIS
+      - generic [ref=e29]:
+        - img "DORIS — image 1" [ref=e31] [cursor=pointer]
+        - generic [ref=e32]:
+          - img "DORIS — image 2" [ref=e34] [cursor=pointer]
+          - img "DORIS — image 3" [ref=e36] [cursor=pointer]
+      - heading "DORIS" [level=1] [ref=e37]
+      - generic [ref=e39]:
+        - paragraph [ref=e40]: Doris is a luxurious chair that will instantly transform your room into a regal and opulent space with its golden legs and plush seating. Its classic and timeless design will add a touch of class and sophistication to any space, making it look like it costs a million bucks.
+        - paragraph [ref=e41]
+      - generic [ref=e42]:
+        - heading "Dimensions" [level=3] [ref=e43]
+        - paragraph [ref=e44]: W 820 x D 730 x H 710 MM
+      - generic [ref=e45]:
+        - heading "How to Buy" [level=3] [ref=e46]
+        - generic [ref=e47]:
+          - link "Call Us" [ref=e48] [cursor=pointer]:
+            - /url: tel:6221227.89885
+            - img [ref=e49]
+            - text: Call Us
+          - link "Mail Us" [ref=e51] [cursor=pointer]:
+            - /url: mailto:info@prive.co.id
+            - img [ref=e52]
+            - text: Mail Us
+          - link "Map" [ref=e55] [cursor=pointer]:
+            - /url: https://www.google.com/maps/place/PRIVE+Furniture/@-6.2742169,106.8175604,17z/data=!3m1!4b1!4m5!3m4!1s0x2e69f358a3214a91:0x4dd097d0e2a44784!8m2!3d-6.2742281!4d106.8197474?hl=en
+            - img [ref=e56]
+            - text: Map
+      - generic [ref=e60]:
+        - paragraph [ref=e61]: "SKU: WP-DORIS-9932"
+        - paragraph [ref=e62]:
+          - text: "Category:"
+          - link "Living" [ref=e63] [cursor=pointer]:
+            - /url: /product-category/living
+        - generic [ref=e64]:
+          - generic [ref=e65]: "Share:"
+          - link "Share on Facebook" [ref=e66] [cursor=pointer]:
+            - /url: https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fprive-dev.modena.com%2Fproduct%2Fdoris
+            - img [ref=e67]
+          - link "Share on X" [ref=e69] [cursor=pointer]:
+            - /url: https://twitter.com/intent/tweet?url=https%3A%2F%2Fprive-dev.modena.com%2Fproduct%2Fdoris&text=DORIS
+            - img [ref=e70]
+          - link "Share on WhatsApp" [ref=e72] [cursor=pointer]:
+            - /url: https://wa.me/?text=DORIS%20https%3A%2F%2Fprive-dev.modena.com%2Fproduct%2Fdoris
+            - img [ref=e73]
+      - generic [ref=e75]:
+        - heading "Related Products" [level=2] [ref=e76]
+        - generic [ref=e77]:
+          - link "ARDO ARDO Sofa" [ref=e78] [cursor=pointer]:
+            - /url: /product/ardo
+            - img "ARDO" [ref=e80]
+            - heading "ARDO" [level=3] [ref=e81]
+            - paragraph [ref=e82]: Sofa
+          - link "ALESSANDRO ALESSANDRO Sofa" [ref=e83] [cursor=pointer]:
+            - /url: /product/alessandro
+            - img "ALESSANDRO" [ref=e85]
+            - heading "ALESSANDRO" [level=3] [ref=e86]
+            - paragraph [ref=e87]: Sofa
+          - link "DARIO DARIO Sofa" [ref=e88] [cursor=pointer]:
+            - /url: /product/dario
+            - img "DARIO" [ref=e90]
+            - heading "DARIO" [level=3] [ref=e91]
+            - paragraph [ref=e92]: Sofa
+          - link "FILLIPO FILLIPO Sofa" [ref=e93] [cursor=pointer]:
+            - /url: /product/fillipo-two-designs
+            - img "FILLIPO" [ref=e95]
+            - heading "FILLIPO" [level=3] [ref=e96]
+            - paragraph [ref=e97]: Sofa
+  - contentinfo [ref=e98]:
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - generic [ref=e101]:
+          - link "Prive Living Logo" [ref=e102] [cursor=pointer]:
+            - /url: /
+            - img "Prive Living Logo" [ref=e103]
+          - paragraph [ref=e104]: We craft modern furniture using premium materials to ensure your home reflects the authentic essence of Italian style, creating spaces filled with joy and contentment.
+          - link "Instagram" [ref=e106] [cursor=pointer]:
+            - /url: https://www.instagram.com/privefurniture/
+            - img [ref=e107]
+        - generic [ref=e109]:
+          - heading "Collection" [level=3] [ref=e110]
+          - list [ref=e111]:
+            - listitem [ref=e112]:
+              - link "Living" [ref=e113] [cursor=pointer]:
+                - /url: /product-category/living
+            - listitem [ref=e114]:
+              - link "Dining" [ref=e115] [cursor=pointer]:
+                - /url: /product-category/dining
+            - listitem [ref=e116]:
+              - link "Bed" [ref=e117] [cursor=pointer]:
+                - /url: /product-category/collection-bed
+        - generic [ref=e118]:
+          - heading "Corporate" [level=3] [ref=e119]
+          - list [ref=e120]:
+            - listitem [ref=e121]:
+              - link "Blog" [ref=e122] [cursor=pointer]:
+                - /url: /news
+            - listitem [ref=e123]:
+              - link "About Us" [ref=e124] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=e125]:
+              - link "Contact Us" [ref=e126] [cursor=pointer]:
+                - /url: /contact-us#contactUs
+            - listitem [ref=e127]:
+              - link "Privacy Policy" [ref=e128] [cursor=pointer]:
+                - /url: /privacy-policy
+        - generic [ref=e129]:
+          - heading "Get Our Newsletter" [level=3] [ref=e130]
+          - generic [ref=e131]:
+            - textbox "Your email address" [ref=e132]
+            - button "Submit" [ref=e133] [cursor=pointer]
+      - paragraph [ref=e135]: © 2026 Prive Living. All rights reserved.
+  - generic [ref=e136]:
+    - generic [ref=e137]:
+      - generic [ref=e138]: Need Help? Chat with us
+      - button "Open WhatsApp chat" [ref=e139] [cursor=pointer]:
+        - img [ref=e140]
+    - button "Scroll to top":
+      - img
+  - alert [ref=e142]
+```

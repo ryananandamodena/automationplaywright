@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../../../utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://mhc-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
@@ -64,6 +65,7 @@ test.describe('MHC - User Management CRUD', () => {
     console.log('Step 1: Navigate to Users page...');
     await page.goto(USERS_URL);
     await page.waitForTimeout(2000);
+    const rowsBefore = await page.locator('table tbody tr').count().catch(() => 0);
     console.log('✓ Users page loaded');
 
     // Click Create/Add button
@@ -140,6 +142,23 @@ test.describe('MHC - User Management CRUD', () => {
     const successMsg = page.locator('text=/success|created|berhasil/i');
     if (await successMsg.isVisible({ timeout: 5000 }).catch(() => false)) {
       console.log('✓ Success message displayed');
+    }
+
+    await page.goto(USERS_URL);
+    await page.waitForTimeout(1500);
+    const rowsAfter = await page.locator('table tbody tr').count().catch(() => 0);
+    const createdSnapshot = rowsAfter > rowsBefore
+      ? await page.locator('table tbody tr').first().textContent().catch(() => null)
+      : null;
+    console.log(`  Users count before create: ${rowsBefore}, after create: ${rowsAfter}`);
+
+    if (createdSnapshot && isAutoCleanupEnabled()) {
+      await cleanupTableRecordBySnapshot(page, {
+        listUrl: USERS_URL,
+        rowSnapshot: createdSnapshot,
+        label: 'user',
+        rowLocator: 'table tbody tr',
+      });
     }
 
     await page.screenshot({ path: 'test-results/user-created.png', fullPage: true });

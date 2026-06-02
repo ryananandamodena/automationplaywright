@@ -5,6 +5,7 @@
  */
 
 import { chromium } from 'playwright';
+import { cleanupContractBySnapshot, isAutoCleanupEnabled } from './utils/data-cleanup.mjs';
 
 // Load environment variables
 const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
@@ -30,6 +31,7 @@ async function createContract() {
   
   const context = await browser.newContext({ viewport: null });
   const page = await context.newPage();
+  let createdContractSnapshot = null;
   
   try {
     // Login
@@ -197,6 +199,7 @@ async function createContract() {
     
     if (finalCount > initialCount) {
       console.log(`✅ SUCCESS! (${initialCount} → ${finalCount})`);
+      createdContractSnapshot = await page.locator('tbody tr').first().textContent().catch(() => null);
     } else {
       console.log(`⚠️ No new contract`);
     }
@@ -207,6 +210,14 @@ async function createContract() {
     console.error('\n❌ ERROR:', error.message);
     await page.screenshot({ path: 'contract-simple-error.png', fullPage: true });
   } finally {
+    if (createdContractSnapshot && isAutoCleanupEnabled()) {
+      console.log('\n🧹 AUTO CLEANUP (best effort)');
+      await cleanupContractBySnapshot(page, {
+        baseUrl: BASE_URL,
+        rowSnapshot: createdContractSnapshot,
+      });
+    }
+
     console.log('\n⏳ Waiting 10 seconds...');
     await page.waitForTimeout(10000);
     await browser.close();

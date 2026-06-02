@@ -1,0 +1,237 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Prive Living Logo" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Prive Living Logo" [ref=e6]
+      - navigation [ref=e7]:
+        - link "Living" [ref=e8] [cursor=pointer]:
+          - /url: /product-category/living
+        - link "Dining" [ref=e9] [cursor=pointer]:
+          - /url: /product-category/dining
+        - link "Bed" [ref=e10] [cursor=pointer]:
+          - /url: /product-category/collection-bed
+        - button "Cabinetry" [ref=e12] [cursor=pointer]
+        - link "Contact Us" [ref=e13] [cursor=pointer]:
+          - /url: /contact-us#contactUs
+      - button "Search" [ref=e16] [cursor=pointer]:
+        - img [ref=e17]
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - img "Living" [ref=e21]
+      - heading "Living" [level=1] [ref=e24]
+    - generic [ref=e27]:
+      - link "All Categories" [ref=e28] [cursor=pointer]:
+        - /url: /product-category/living
+      - link "Sideboard & Cabinet" [ref=e29] [cursor=pointer]:
+        - /url: /product-category/living/sideboard-and-cabinet
+      - link "Coffee Tables & Side Tables" [ref=e30] [cursor=pointer]:
+        - /url: /product-category/living/coffee-tables-side-tables
+      - link "Sofa" [ref=e31] [cursor=pointer]:
+        - /url: /product-category/living/sofa
+      - link "Bookcases & Shelves" [ref=e32] [cursor=pointer]:
+        - /url: /product-category/living/bookcases-shelves
+      - link "Consoles" [ref=e33] [cursor=pointer]:
+        - /url: /product-category/living/consoles
+      - link "Armchairs" [ref=e34] [cursor=pointer]:
+        - /url: /product-category/living/armchairs
+      - link "Desks" [ref=e35] [cursor=pointer]:
+        - /url: /product-category/living/desks
+      - link "Ottoman & Bench" [ref=e36] [cursor=pointer]:
+        - /url: /product-category/living/ottoman-bench
+      - link "Cabinets" [ref=e37] [cursor=pointer]:
+        - /url: /product-category/living/cabinets
+    - generic [ref=e39]:
+      - generic [ref=e40]:
+        - paragraph [ref=e41]: Showing 1–16 of 282 results
+        - generic [ref=e42]:
+          - button "Default sorting" [ref=e44] [cursor=pointer]:
+            - text: Default sorting
+            - img [ref=e45]
+          - generic [ref=e47]:
+            - textbox "Search products..." [ref=e48]
+            - img [ref=e50]
+      - generic [ref=e53]:
+        - link "ARDO ARDO Sofa" [ref=e54] [cursor=pointer]:
+          - /url: /product/ardo
+          - img "ARDO" [ref=e56]
+          - heading "ARDO" [level=3] [ref=e57]
+          - paragraph [ref=e58]: Sofa
+        - link "FILLIPO FILLIPO Sofa" [ref=e59] [cursor=pointer]:
+          - /url: /product/fillipo-two-designs
+          - img "FILLIPO" [ref=e61]
+          - heading "FILLIPO" [level=3] [ref=e62]
+          - paragraph [ref=e63]: Sofa
+        - link "DARIO DARIO Sofa" [ref=e64] [cursor=pointer]:
+          - /url: /product/dario
+          - img "DARIO" [ref=e66]
+          - heading "DARIO" [level=3] [ref=e67]
+          - paragraph [ref=e68]: Sofa
+        - link "ALESSANDRO ALESSANDRO Sofa" [ref=e69] [cursor=pointer]:
+          - /url: /product/alessandro
+          - img "ALESSANDRO" [ref=e71]
+          - heading "ALESSANDRO" [level=3] [ref=e72]
+          - paragraph [ref=e73]: Sofa
+        - link "FREDDO FREDDO Sofa" [ref=e74] [cursor=pointer]:
+          - /url: /product/freddo
+          - img "FREDDO" [ref=e76]
+          - heading "FREDDO" [level=3] [ref=e77]
+          - paragraph [ref=e78]: Sofa
+        - link "NOEMI NOEMI Sofa" [ref=e79] [cursor=pointer]:
+          - /url: /product/noemi
+          - img "NOEMI" [ref=e81]
+          - heading "NOEMI" [level=3] [ref=e82]
+          - paragraph [ref=e83]: Sofa
+        - link "NICOLA NICOLA Sofa" [ref=e84] [cursor=pointer]:
+          - /url: /product/nicola
+          - img "NICOLA" [ref=e86]
+          - heading "NICOLA" [level=3] [ref=e87]
+          - paragraph [ref=e88]: Sofa
+        - link "MIA MIA Sofa" [ref=e89] [cursor=pointer]:
+          - /url: /product/mia
+          - img "MIA" [ref=e91]
+          - heading "MIA" [level=3] [ref=e92]
+          - paragraph [ref=e93]: Sofa
+        - link "KINN KINN Sofa" [ref=e94] [cursor=pointer]:
+          - /url: /product/kinn
+          - img "KINN" [ref=e96]
+          - heading "KINN" [level=3] [ref=e97]
+          - paragraph [ref=e98]: Sofa
+        - link "JACOPO JACOPO Sofa" [ref=e99] [cursor=pointer]:
+          - /url: /product/jacopo-several-seaters
+          - img "JACOPO" [ref=e101]
+          - heading "JACOPO" [level=3] [ref=e102]
+          - paragraph [ref=e103]: Sofa
+        - link "IRENE IRENE Sofa" [ref=e104] [cursor=pointer]:
+          - /url: /product/irene
+          - img "IRENE" [ref=e106]
+          - heading "IRENE" [level=3] [ref=e107]
+          - paragraph [ref=e108]: Sofa
+        - link "GIADA GIADA Sofa" [ref=e109] [cursor=pointer]:
+          - /url: /product/giada
+          - img "GIADA" [ref=e111]
+          - heading "GIADA" [level=3] [ref=e112]
+          - paragraph [ref=e113]: Sofa
+        - link "GRETA GRETA Armchairs" [ref=e114] [cursor=pointer]:
+          - /url: /product/greta
+          - img "GRETA" [ref=e116]
+          - heading "GRETA" [level=3] [ref=e117]
+          - paragraph [ref=e118]: Armchairs
+        - link "FRANCESCA FRANCESCA Armchairs" [ref=e119] [cursor=pointer]:
+          - /url: /product/francesca
+          - img "FRANCESCA" [ref=e121]
+          - heading "FRANCESCA" [level=3] [ref=e122]
+          - paragraph [ref=e123]: Armchairs
+        - link "FIORE FIORE Armchairs" [ref=e124] [cursor=pointer]:
+          - /url: /product/fiero
+          - img "FIORE" [ref=e126]
+          - heading "FIORE" [level=3] [ref=e127]
+          - paragraph [ref=e128]: Armchairs
+        - link "BATTEO BATTEO Armchairs" [ref=e129] [cursor=pointer]:
+          - /url: /product/batteo
+          - img "BATTEO" [ref=e131]
+          - heading "BATTEO" [level=3] [ref=e132]
+          - paragraph [ref=e133]: Armchairs
+      - generic [ref=e134]:
+        - generic [ref=e135]:
+          - button "Page 1" [ref=e136] [cursor=pointer]: "1"
+          - button "Page 2" [ref=e137] [cursor=pointer]: "2"
+          - generic [ref=e138]: ...
+          - button "Page 18" [ref=e139] [cursor=pointer]: "18"
+        - button "Next page" [ref=e140] [cursor=pointer]:
+          - img [ref=e142]
+          - img [ref=e145]
+    - generic [ref=e148]:
+      - generic [ref=e149]:
+        - paragraph [ref=e150]: Our
+        - heading "Catalogue" [level=2]
+      - generic [ref=e151]:
+        - generic [ref=e152]:
+          - img "Catalogue Prive" [ref=e154]
+          - paragraph [ref=e155]: CATALOGUE PRIVE
+        - generic [ref=e156]:
+          - img "Catalogue Prive" [ref=e158]
+          - paragraph [ref=e159]: CATALOGUE PRIVE 2023
+    - generic [ref=e161]:
+      - generic [ref=e162]:
+        - heading "Elegant and modern" [level=2] [ref=e163]
+        - paragraph [ref=e164]:
+          - generic [ref=e166]: Collection
+      - generic [ref=e167]:
+        - generic [ref=e168]:
+          - link "Living" [ref=e169] [cursor=pointer]:
+            - /url: /product-category/living
+            - img "Living" [ref=e171]
+          - link "Living" [ref=e172] [cursor=pointer]:
+            - /url: /product-category/living
+            - heading "Living" [level=3] [ref=e173]
+        - generic [ref=e174]:
+          - link "Dining" [ref=e175] [cursor=pointer]:
+            - /url: /product-category/dining
+            - img "Dining" [ref=e177]
+          - link "Dining" [ref=e178] [cursor=pointer]:
+            - /url: /product-category/dining
+            - heading "Dining" [level=3] [ref=e179]
+        - generic [ref=e180]:
+          - link "Bed" [ref=e181] [cursor=pointer]:
+            - /url: /product-category/collection-bed
+            - img "Bed" [ref=e183]
+          - link "Bed" [ref=e184] [cursor=pointer]:
+            - /url: /product-category/collection-bed
+            - heading "Bed" [level=3] [ref=e185]
+  - contentinfo [ref=e186]:
+    - generic [ref=e187]:
+      - generic [ref=e188]:
+        - generic [ref=e189]:
+          - link "Prive Living Logo":
+            - /url: /
+            - img "Prive Living Logo"
+          - paragraph [ref=e190]: We craft modern furniture using premium materials to ensure your home reflects the authentic essence of Italian style, creating spaces filled with joy and contentment.
+          - link "Instagram" [ref=e192] [cursor=pointer]:
+            - /url: https://www.instagram.com/privefurniture/
+            - img [ref=e193]
+        - generic [ref=e195]:
+          - heading "Collection" [level=3] [ref=e196]
+          - list [ref=e197]:
+            - listitem [ref=e198]:
+              - link "Living" [ref=e199] [cursor=pointer]:
+                - /url: /product-category/living
+            - listitem [ref=e200]:
+              - link "Dining" [ref=e201] [cursor=pointer]:
+                - /url: /product-category/dining
+            - listitem [ref=e202]:
+              - link "Bed" [ref=e203] [cursor=pointer]:
+                - /url: /product-category/collection-bed
+        - generic [ref=e204]:
+          - heading "Corporate" [level=3] [ref=e205]
+          - list [ref=e206]:
+            - listitem [ref=e207]:
+              - link "Blog" [ref=e208] [cursor=pointer]:
+                - /url: /news
+            - listitem [ref=e209]:
+              - link "About Us" [ref=e210] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=e211]:
+              - link "Contact Us" [ref=e212] [cursor=pointer]:
+                - /url: /contact-us#contactUs
+            - listitem [ref=e213]:
+              - link "Privacy Policy" [ref=e214] [cursor=pointer]:
+                - /url: /privacy-policy
+        - generic [ref=e215]:
+          - heading "Get Our Newsletter" [level=3] [ref=e216]
+          - generic [ref=e217]:
+            - textbox "Your email address" [ref=e218]
+            - button "Submit" [ref=e219] [cursor=pointer]
+      - paragraph [ref=e221]: © 2026 Prive Living. All rights reserved.
+  - generic [ref=e222]:
+    - generic [ref=e223]:
+      - generic [ref=e224]: Need Help? Chat with us
+      - button "Open WhatsApp chat" [ref=e225] [cursor=pointer]:
+        - img [ref=e226]
+    - button "Scroll to top":
+      - img
+  - alert [ref=e228]
+```

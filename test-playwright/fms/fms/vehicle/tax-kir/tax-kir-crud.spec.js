@@ -1,4 +1,7 @@
 import { test, expect } from '@playwright/test';
+import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../../../utils/data-cleanup.mjs';
+
+const LIST_URL = 'https://portal-dev.modena.com/fms/vehicle/tax-kir';
 
 // ============================================================
 // HELPER: Login & Navigate to Tax KIR Page
@@ -107,6 +110,7 @@ test.describe('FMS - Vehicle Tax KIR CRUD', () => {
     console.log('TC-02: Starting add Tax KIR test');
 
     await loginAndGoToTaxKir(page);
+    const initialRows = await page.locator('tbody tr').count().catch(() => 0);
 
     // Click Add button
     const addButton = page.getByRole('button', { name: /add|create|new|tambah/i });
@@ -163,8 +167,25 @@ test.describe('FMS - Vehicle Tax KIR CRUD', () => {
 
       // Navigate back to list if needed
       if (!page.url().includes('tax-kir') || page.url().includes('/add') || page.url().includes('/create')) {
-        await page.goto('https://portal-dev.modena.com/fms/vehicle/tax-kir', { waitUntil: 'load', timeout: 60000 });
+        await page.goto(LIST_URL, { waitUntil: 'load', timeout: 60000 });
         await page.waitForTimeout(2000);
+      }
+
+      await page.goto(LIST_URL, { waitUntil: 'load', timeout: 60000 });
+      await page.waitForTimeout(1500);
+      const finalRows = await page.locator('tbody tr').count().catch(() => 0);
+      const createdSnapshot = finalRows > initialRows
+        ? await page.locator('tbody tr').first().textContent().catch(() => null)
+        : null;
+      console.log(`TC-02: Rows before ${initialRows}, after ${finalRows}`);
+
+      if (createdSnapshot && isAutoCleanupEnabled()) {
+        await cleanupTableRecordBySnapshot(page, {
+          listUrl: LIST_URL,
+          rowSnapshot: createdSnapshot,
+          label: 'tax kir',
+          rowLocator: 'tbody tr',
+        });
       }
 
       console.log('TC-02: Tax KIR data added successfully');

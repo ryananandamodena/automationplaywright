@@ -1,0 +1,175 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Prive Living Logo" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Prive Living Logo" [ref=e6]
+      - navigation [ref=e7]:
+        - link "Living" [ref=e8] [cursor=pointer]:
+          - /url: /product-category/living
+        - link "Dining" [ref=e9] [cursor=pointer]:
+          - /url: /product-category/dining
+        - link "Bed" [ref=e10] [cursor=pointer]:
+          - /url: /product-category/collection-bed
+        - button "Cabinetry" [ref=e12] [cursor=pointer]
+        - link "Contact Us" [ref=e13] [cursor=pointer]:
+          - /url: /contact-us#contactUs
+      - button "Search" [ref=e16] [cursor=pointer]:
+        - img [ref=e17]
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - img "Modern kitchen cabinetry interior" [ref=e21]
+      - generic [ref=e23]:
+        - heading "CULINARY SPACE" [level=1] [ref=e24]
+        - paragraph [ref=e25]: Where kitchen elegance seamlessly fuses with unrivaled functionality.
+        - paragraph [ref=e26]: CONSULTATION
+    - generic [ref=e28]:
+      - article [ref=e29]:
+        - generic [ref=e30]:
+          - img "Modern kitchen concept" [ref=e31]
+          - heading "MODERN" [level=2] [ref=e33]
+      - article [ref=e34]:
+        - generic [ref=e35]:
+          - img "Classic warm-toned kitchen concept" [ref=e36]
+          - heading "CLASSIC" [level=2] [ref=e38]
+      - article [ref=e39]:
+        - generic [ref=e40]:
+          - img "Gourmet kitchen and dining concept" [ref=e41]
+          - heading "GOURMET" [level=2] [ref=e43]
+    - generic [ref=e45]:
+      - generic [ref=e46]:
+        - paragraph [ref=e47]: PRIVE Kitchen
+        - heading "Elevating Style and Efficiency" [level=2] [ref=e48]
+        - paragraph [ref=e49]: Where style meets functionality for a refined and efficient cooking experience.
+      - img "Luxury kitchen cabinetry detail" [ref=e51]
+      - img "Open kitchen and island setup" [ref=e53]
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - heading "Kitchen Collection" [level=2] [ref=e57]
+        - paragraph [ref=e58]: Explore curated kitchen configurations designed to balance aesthetics, ergonomic flow, and daily performance for modern homes.
+      - generic [ref=e59]:
+        - article [ref=e60]:
+          - img "Graphite island kitchen" [ref=e62]
+          - heading "Graphite Island" [level=3] [ref=e63]
+          - paragraph [ref=e64]: Matte graphite fronts with quartz island
+        - article [ref=e65]:
+          - img "Oak kitchen cabinetry" [ref=e67]
+          - heading "Oak Harmony" [level=3] [ref=e68]
+          - paragraph [ref=e69]: Natural oak cabinet lines with warm ambiance
+        - article [ref=e70]:
+          - img "Chef inspired kitchen setup" [ref=e72]
+          - heading "Chef Studio" [level=3] [ref=e73]
+          - paragraph [ref=e74]: Professional-grade layout for culinary workflow
+        - article [ref=e75]:
+          - img "Minimal stone kitchen concept" [ref=e77]
+          - heading "Stone Minimal" [level=3] [ref=e78]
+          - paragraph [ref=e79]: Minimal silhouettes paired with stone textures
+        - article [ref=e80]:
+          - img "Compact kitchen cabinet panel system" [ref=e82]
+          - heading "Urban Panel" [level=3] [ref=e83]
+          - paragraph [ref=e84]: Compact panel system optimized for city living
+        - article [ref=e85]:
+          - img "Dark gourmet kitchen" [ref=e87]
+          - heading "Noir Gourmet" [level=3] [ref=e88]
+          - paragraph [ref=e89]: Dark contemporary aesthetic with statement accents
+    - generic [ref=e92]:
+      - button "Previous store" [ref=e93] [cursor=pointer]:
+        - img [ref=e95]
+        - img [ref=e98]
+      - button "Next store" [ref=e100] [cursor=pointer]:
+        - img [ref=e102]
+        - img [ref=e105]
+      - generic [ref=e107]:
+        - article [ref=e108]:
+          - img "Prive Living Jakarta showroom" [ref=e110]
+          - generic [ref=e111]:
+            - heading "Visit Our Store" [level=2] [ref=e113]
+            - heading "Senopati" [level=3] [ref=e114]
+            - paragraph [ref=e115]: "Monday - Friday: 10 AM - 7 PM Saturday: 10 AM - 5 PM Sunday: Closed"
+            - paragraph [ref=e116]: Jl. Senopati No.70, Kebayoran Baru, Kota Jakarta Selatan, DKI Jakarta 12110
+            - paragraph [ref=e117]: "+62217255637"
+            - link "Show In Maps" [ref=e118] [cursor=pointer]:
+              - /url: https://www.google.com/maps/place/PRIVE+at+Ambiente/@-6.2316028,106.8093622,15z/data=!4m6!3m5!1s0x2e69f15bfa9be43f:0x127169de39ffb6b0!8m2!3d-6.2316028!4d106.8093622!16s%2Fg%2F11rxdlc5j?entry=ttu%20
+        - article [ref=e119]:
+          - img "Prive Living Kemang showroom" [ref=e121]
+          - generic [ref=e122]:
+            - heading "Visit Our Store" [level=2] [ref=e124]
+            - heading "Kemang" [level=3] [ref=e125]
+            - paragraph [ref=e126]: "Monday - Friday: 10 AM - 7 PM Saturday: 10 AM - 5 PM Sunday: Closed"
+            - paragraph [ref=e127]: Jl. Kemang Selatan Raya No. 150, Pasar Minggu, Kota Jakarta Selatan, DKI Jakarta 12560
+            - paragraph [ref=e128]: "+622122789885"
+            - link "Show In Maps" [ref=e129] [cursor=pointer]:
+              - /url: https://www.google.com/maps/place/PRIVE+Furniture/@-6.2742169,106.8175604,17z/data=!3m1!4b1!4m5!3m4!1s0x2e69f358a3214a91:0x4dd097d0e2a44784!8m2!3d-6.2742281!4d106.8197474?hl=en
+        - article [ref=e130]:
+          - img "Prive Living Surabaya showroom" [ref=e132]
+          - generic [ref=e133]:
+            - heading "Visit Our Store" [level=2] [ref=e135]
+            - heading "Surabaya" [level=3] [ref=e136]
+            - paragraph [ref=e137]: "Monday - Friday: 10 AM - 7 PM Saturday: 10 AM - 5 PM Sunday: Closed"
+            - paragraph [ref=e138]: Jl. Mayjen Sungkono No. 113, Dukuhpakis, Surabaya, Jawa Timur 60225
+            - paragraph [ref=e139]: "+623199548107"
+            - link "Show In Maps" [ref=e140] [cursor=pointer]:
+              - /url: https://www.google.com/maps/place/Jl.+Mayjen+Sungkono+No.113,+Dukuh+Pakis,+Kec.+Dukuhpakis,+Surabaya,+Jawa+Timur+60225/@-7.2906391,112.7142927,20z/data=!4m5!3m4!1s0x2dd7fc7579e4bc27:0xead92c8da5a09a61!8m2!3d-7.2907065!4d112.7142391?entry=ttu
+    - generic [ref=e141]:
+      - img "Contact us showroom" [ref=e143]
+      - generic [ref=e144]:
+        - heading "Contact Us" [level=2] [ref=e145]
+        - paragraph [ref=e146]: Our dedicated team is here to assist you
+        - link "Contact Us" [ref=e147] [cursor=pointer]:
+          - /url: /contact-us#contactUs
+  - contentinfo [ref=e148]:
+    - generic [ref=e149]:
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - link "Prive Living Logo" [ref=e152] [cursor=pointer]:
+            - /url: /
+            - img "Prive Living Logo" [ref=e153]
+          - paragraph [ref=e154]: We craft modern furniture using premium materials to ensure your home reflects the authentic essence of Italian style, creating spaces filled with joy and contentment.
+          - link "Instagram" [ref=e156] [cursor=pointer]:
+            - /url: https://www.instagram.com/privefurniture/
+            - img [ref=e157]
+        - generic [ref=e159]:
+          - heading "Collection" [level=3] [ref=e160]
+          - list [ref=e161]:
+            - listitem [ref=e162]:
+              - link "Living" [ref=e163] [cursor=pointer]:
+                - /url: /product-category/living
+            - listitem [ref=e164]:
+              - link "Dining" [ref=e165] [cursor=pointer]:
+                - /url: /product-category/dining
+            - listitem [ref=e166]:
+              - link "Bed" [ref=e167] [cursor=pointer]:
+                - /url: /product-category/collection-bed
+        - generic [ref=e168]:
+          - heading "Corporate" [level=3] [ref=e169]
+          - list [ref=e170]:
+            - listitem [ref=e171]:
+              - link "Blog" [ref=e172] [cursor=pointer]:
+                - /url: /news
+            - listitem [ref=e173]:
+              - link "About Us" [ref=e174] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=e175]:
+              - link "Contact Us" [ref=e176] [cursor=pointer]:
+                - /url: /contact-us#contactUs
+            - listitem [ref=e177]:
+              - link "Privacy Policy" [ref=e178] [cursor=pointer]:
+                - /url: /privacy-policy
+        - generic [ref=e179]:
+          - heading "Get Our Newsletter" [level=3] [ref=e180]
+          - generic [ref=e181]:
+            - textbox "Your email address" [ref=e182]
+            - button "Submit" [ref=e183] [cursor=pointer]
+      - paragraph [ref=e185]: © 2026 Prive Living. All rights reserved.
+  - generic [ref=e186]:
+    - generic [ref=e187]:
+      - generic [ref=e188]: Need Help? Chat with us
+      - button "Open WhatsApp chat" [ref=e189] [cursor=pointer]:
+        - img [ref=e190]
+    - button "Scroll to top" [ref=e192] [cursor=pointer]:
+      - img [ref=e193]
+  - alert [ref=e195]
+```

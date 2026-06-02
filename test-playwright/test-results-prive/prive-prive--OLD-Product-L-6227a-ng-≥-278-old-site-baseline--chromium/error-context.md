@@ -1,0 +1,460 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to the content" [ref=e2] [cursor=pointer]:
+    - /url: "#qodef-page-content"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e6]:
+        - link "PRIVE logo dark logo light" [ref=e8] [cursor=pointer]:
+          - /url: https://prive-living.com/
+          - img "PRIVE" [ref=e9]
+          - img "logo dark" [ref=e10]
+          - img "logo light" [ref=e11]
+        - navigation "Top Menu" [ref=e12]:
+          - list [ref=e13]:
+            - listitem [ref=e14]:
+              - link "Living" [ref=e15] [cursor=pointer]:
+                - /url: /product-category/living/
+                - generic [ref=e16]: Living
+            - listitem [ref=e17]:
+              - link "Dining" [ref=e18] [cursor=pointer]:
+                - /url: /product-category/dining
+                - generic [ref=e19]: Dining
+            - listitem [ref=e20]:
+              - link "Bed" [ref=e21] [cursor=pointer]:
+                - /url: /product-category/collection-bed/
+                - generic [ref=e22]: Bed
+            - listitem [ref=e23]:
+              - link "CABINETRY" [ref=e24] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=e25]: CABINETRY
+              - list [ref=e26]:
+                - listitem [ref=e27]:
+                  - link "Kitchen" [ref=e28] [cursor=pointer]:
+                    - /url: https://prive-living.com/kitchen/
+                    - generic [ref=e29]: Kitchen
+                - listitem [ref=e30]:
+                  - link "Wardrobe" [ref=e31] [cursor=pointer]:
+                    - /url: https://prive-living.com/wardrobe/
+                    - generic [ref=e32]: Wardrobe
+            - listitem [ref=e33]:
+              - link "Contact Us" [ref=e34] [cursor=pointer]:
+                - /url: /contact-us/#contactUs
+                - generic [ref=e35]: Contact Us
+        - link "" [ref=e38] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic [ref=e40]: 
+      - generic [ref=e42] [cursor=pointer]: 
+    - text:  
+    - generic [ref=e43]:
+      - generic [ref=e47]: "- Living"
+      - generic [ref=e48]:
+        - list [ref=e50]:
+          - listitem [ref=e51]:
+            - link "All Categories" [ref=e52] [cursor=pointer]:
+              - /url: /product-category/living/
+          - listitem [ref=e53]:
+            - link "Armchairs" [ref=e54] [cursor=pointer]:
+              - /url: /product-category/living/armchair/
+          - listitem [ref=e55]:
+            - link "Bookcases & shelves" [ref=e56] [cursor=pointer]:
+              - /url: /product-category/living/bookcase-shelves/
+          - listitem [ref=e57]:
+            - link "Sofa" [ref=e58] [cursor=pointer]:
+              - /url: /product-category/living/sofa/
+          - listitem [ref=e59]:
+            - link "Ottoman & Bench" [ref=e60] [cursor=pointer]:
+              - /url: /product-category/living/ottoman-bench/
+          - listitem [ref=e61]:
+            - link "Coffee tables & Side tables" [ref=e62] [cursor=pointer]:
+              - /url: /product-category/living/coffee-table-side-table/
+          - listitem [ref=e63]:
+            - link "Consoles" [ref=e64] [cursor=pointer]:
+              - /url: /product-category/living/consoles/
+          - listitem [ref=e65]:
+            - link "Cabinets" [ref=e66] [cursor=pointer]:
+              - /url: /product-category/living/cabinet/
+          - listitem [ref=e67]:
+            - link "Desks" [ref=e68] [cursor=pointer]:
+              - /url: /product-category/living/desk/
+        - main [ref=e69]:
+          - generic [ref=e70]:
+            - generic [ref=e71]:
+              - generic [ref=e72]:
+                - paragraph [ref=e73]: Showing 1–16 of 279 results
+                - combobox "Default sorting" [ref=e77] [cursor=pointer]:
+                  - generic "Default sorting" [ref=e78]
+              - list [ref=e80]:
+                - listitem [ref=e81]:
+                  - generic [ref=e82]:
+                    - generic [ref=e83]:
+                      - link "Read more about “ABETONE”" [ref=e85] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/abetone/
+                        - text: Read more
+                      - link [ref=e86] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/abetone/
+                    - generic [ref=e87]:
+                      - heading "ABETONE" [level=5] [ref=e89]:
+                        - link "ABETONE" [ref=e90] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/abetone/
+                      - generic [ref=e92]:
+                        - link "Sideboard and Cabinet" [ref=e93] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/sideboard-and-cabinet/
+                        - text: "-"
+                - listitem [ref=e94]:
+                  - generic [ref=e95]:
+                    - generic [ref=e96]:
+                      - link "Read more about “AIDYN”" [ref=e98] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/aidyn/
+                        - text: Read more
+                      - link [ref=e99] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/aidyn/
+                    - generic [ref=e100]:
+                      - heading "AIDYN" [level=5] [ref=e102]:
+                        - link "AIDYN" [ref=e103] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/aidyn/
+                      - generic [ref=e105]:
+                        - link "Coffee tables & Side tables" [ref=e106] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/coffee-table-side-table/
+                        - text: "-"
+                - listitem [ref=e107]:
+                  - generic [ref=e108]:
+                    - generic [ref=e109]:
+                      - link "Read more about “AKEMI”" [ref=e111] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/akemi/
+                        - text: Read more
+                      - link [ref=e112] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/akemi/
+                    - generic [ref=e113]:
+                      - heading "AKEMI" [level=5] [ref=e115]:
+                        - link "AKEMI" [ref=e116] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/akemi/
+                      - generic [ref=e118]:
+                        - link "Coffee tables & Side tables" [ref=e119] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/coffee-table-side-table/
+                        - text: "-"
+                - listitem [ref=e120]:
+                  - generic [ref=e121]:
+                    - generic [ref=e122]:
+                      - link "Read more about “ALANNA”" [ref=e124] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alanna/
+                        - text: Read more
+                      - link [ref=e125] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alanna/
+                    - generic [ref=e126]:
+                      - heading "ALANNA" [level=5] [ref=e128]:
+                        - link "ALANNA" [ref=e129] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/alanna/
+                      - generic [ref=e131]:
+                        - link "Sofa" [ref=e132] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/sofa/
+                        - text: "-"
+                - listitem [ref=e133]:
+                  - generic [ref=e134]:
+                    - generic [ref=e135]:
+                      - link "Read more about “ALBA”" [ref=e137] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alba/
+                        - text: Read more
+                      - link [ref=e138] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alba/
+                    - generic [ref=e139]:
+                      - heading "ALBA" [level=5] [ref=e141]:
+                        - link "ALBA" [ref=e142] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/alba/
+                      - generic [ref=e144]:
+                        - link "Sofa" [ref=e145] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/sofa/
+                        - text: "-"
+                - listitem [ref=e146]:
+                  - generic [ref=e147]:
+                    - generic [ref=e148]:
+                      - link "Read more about “ALBERTO”" [ref=e150] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alberto/
+                        - text: Read more
+                      - link [ref=e151] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alberto/
+                    - generic [ref=e152]:
+                      - heading "ALBERTO" [level=5] [ref=e154]:
+                        - link "ALBERTO" [ref=e155] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/alberto/
+                      - generic [ref=e157]:
+                        - link "Coffee tables & Side tables" [ref=e158] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/coffee-table-side-table/
+                        - text: "-"
+                - listitem [ref=e159]:
+                  - generic [ref=e160]:
+                    - generic [ref=e161]:
+                      - link "Read more about “ALE”" [ref=e163] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/ale/
+                        - text: Read more
+                      - link [ref=e164] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/ale/
+                    - generic [ref=e165]:
+                      - heading "ALE" [level=5] [ref=e167]:
+                        - link "ALE" [ref=e168] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/ale/
+                      - generic [ref=e170]:
+                        - link "Ottoman & Bench" [ref=e171] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/ottoman-bench/
+                        - text: "-"
+                - listitem [ref=e172]:
+                  - generic [ref=e173]:
+                    - generic [ref=e174]:
+                      - link "Read more about “ALESSANDRO”" [ref=e176] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alessandro/
+                        - text: Read more
+                      - link [ref=e177] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alessandro/
+                    - generic [ref=e178]:
+                      - heading "ALESSANDRO" [level=5] [ref=e180]:
+                        - link "ALESSANDRO" [ref=e181] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/alessandro/
+                      - generic [ref=e183]:
+                        - link "Sofa" [ref=e184] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/sofa/
+                        - text: "-"
+                - listitem [ref=e185]:
+                  - generic [ref=e186]:
+                    - generic [ref=e187]:
+                      - link "Read more about “ALESSANDRO”" [ref=e189] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alessandro-2/
+                        - text: Read more
+                      - link [ref=e190] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alessandro-2/
+                    - generic [ref=e191]:
+                      - heading "ALESSANDRO" [level=5] [ref=e193]:
+                        - link "ALESSANDRO" [ref=e194] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/alessandro-2/
+                      - generic [ref=e196]:
+                        - link "Armchairs" [ref=e197] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/armchair/
+                        - text: "-"
+                - listitem [ref=e198]:
+                  - generic [ref=e199]:
+                    - generic [ref=e200]:
+                      - link "Read more about “ALESSIA”" [ref=e202] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alessia/
+                        - text: Read more
+                      - link [ref=e203] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alessia/
+                    - generic [ref=e204]:
+                      - heading "ALESSIA" [level=5] [ref=e206]:
+                        - link "ALESSIA" [ref=e207] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/alessia/
+                      - generic [ref=e209]:
+                        - link "Consoles" [ref=e210] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/consoles/
+                        - text: "-"
+                - listitem [ref=e211]:
+                  - generic [ref=e212]:
+                    - generic [ref=e213]:
+                      - link "Read more about “ALICE”" [ref=e215] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/allice/
+                        - text: Read more
+                      - link [ref=e216] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/allice/
+                    - generic [ref=e217]:
+                      - heading "ALICE" [level=5] [ref=e219]:
+                        - link "ALICE" [ref=e220] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/allice/
+                      - generic [ref=e222]:
+                        - link "Coffee tables & Side tables" [ref=e223] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/coffee-table-side-table/
+                        - text: "-"
+                - listitem [ref=e224]:
+                  - generic [ref=e225]:
+                    - generic [ref=e226]:
+                      - link "Read more about “ALICE”" [ref=e228] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alice/
+                        - text: Read more
+                      - link [ref=e229] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alice/
+                    - generic [ref=e230]:
+                      - heading "ALICE" [level=5] [ref=e232]:
+                        - link "ALICE" [ref=e233] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/alice/
+                      - generic [ref=e235]:
+                        - link "Coffee tables & Side tables" [ref=e236] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/coffee-table-side-table/
+                        - text: "-"
+                - listitem [ref=e237]:
+                  - generic [ref=e238]:
+                    - generic [ref=e239]:
+                      - link "Read more about “ALLEGRO”" [ref=e241] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/allegro/
+                        - text: Read more
+                      - link [ref=e242] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/allegro/
+                    - generic [ref=e243]:
+                      - heading "ALLEGRO" [level=5] [ref=e245]:
+                        - link "ALLEGRO" [ref=e246] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/allegro/
+                      - generic [ref=e248]:
+                        - link "Cabinets" [ref=e249] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/cabinet/
+                        - text: "-"
+                - listitem [ref=e250]:
+                  - generic [ref=e251]:
+                    - generic [ref=e252]:
+                      - link "Read more about “ALSERIO”" [ref=e254] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alserio/
+                        - text: Read more
+                      - link [ref=e255] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/alserio/
+                    - generic [ref=e256]:
+                      - heading "ALSERIO" [level=5] [ref=e258]:
+                        - link "ALSERIO" [ref=e259] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/alserio/
+                      - generic [ref=e261]:
+                        - link "Armchairs" [ref=e262] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/armchair/
+                        - text: "-"
+                - listitem [ref=e263]:
+                  - generic [ref=e264]:
+                    - generic [ref=e265]:
+                      - link "Read more about “AMADEO”" [ref=e267] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/amadeo/
+                        - text: Read more
+                      - link [ref=e268] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/amadeo/
+                    - generic [ref=e269]:
+                      - heading "AMADEO" [level=5] [ref=e271]:
+                        - link "AMADEO" [ref=e272] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/amadeo/
+                      - generic [ref=e274]:
+                        - link "Cabinets" [ref=e275] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/cabinet/
+                        - text: "-"
+                - listitem [ref=e276]:
+                  - generic [ref=e277]:
+                    - generic [ref=e278]:
+                      - link "Read more about “AMARO”" [ref=e280] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/amaro/
+                        - text: Read more
+                      - link [ref=e281] [cursor=pointer]:
+                        - /url: https://prive-living.com/product/amaro/
+                    - generic [ref=e282]:
+                      - heading "AMARO" [level=5] [ref=e284]:
+                        - link "AMARO" [ref=e285] [cursor=pointer]:
+                          - /url: https://prive-living.com/product/amaro/
+                      - generic [ref=e287]:
+                        - link "Ottoman & Bench" [ref=e288] [cursor=pointer]:
+                          - /url: https://prive-living.com/product-category/living/ottoman-bench/
+                        - text: "-"
+              - navigation [ref=e289]:
+                - generic [ref=e290]: "1"
+                - link "2" [ref=e291] [cursor=pointer]:
+                  - /url: https://prive-living.com/product-category/living/page/2/
+                - link "3" [ref=e292] [cursor=pointer]:
+                  - /url: https://prive-living.com/product-category/living/page/3/
+                - link "4" [ref=e293] [cursor=pointer]:
+                  - /url: https://prive-living.com/product-category/living/page/4/
+                - generic [ref=e294]: …
+                - link "16" [ref=e295] [cursor=pointer]:
+                  - /url: https://prive-living.com/product-category/living/page/16/
+                - link "17" [ref=e296] [cursor=pointer]:
+                  - /url: https://prive-living.com/product-category/living/page/17/
+                - link "18" [ref=e297] [cursor=pointer]:
+                  - /url: https://prive-living.com/product-category/living/page/18/
+                - link [ref=e298] [cursor=pointer]:
+                  - /url: https://prive-living.com/product-category/living/page/2/
+                  - img [ref=e299]
+            - complementary [ref=e302]:
+              - search [ref=e304]:
+                - generic [ref=e305]:
+                  - searchbox "Search" [ref=e306] [cursor=pointer]
+                  - button "Search" [ref=e307] [cursor=pointer]
+        - generic [ref=e308]:
+          - generic [ref=e315]:
+            - paragraph [ref=e316]: Our
+            - heading "Catalogue" [level=3] [ref=e317]
+          - generic [ref=e319]:
+            - generic [ref=e321]:
+              - link "MicrosoftTeams-image" [ref=e324] [cursor=pointer]:
+                - /url: /wp-content/uploads/E-catalogue-Prive-2021-2.pdf
+                - img "MicrosoftTeams-image" [ref=e325]
+              - heading "CATALOGUE PRIVE" [level=5] [ref=e328]
+            - generic [ref=e330]:
+              - link "Catalog Prive for Contract" [ref=e333] [cursor=pointer]:
+                - /url: /wp-content/uploads/Catalogue-Prive-for-Contract-2023-Digital.pdf
+                - img "Catalog Prive for Contract" [ref=e334]
+              - heading "CATALOGUE PRIVE 2023" [level=5] [ref=e337]
+        - generic [ref=e344]:
+          - heading "Elegant and modern" [level=2] [ref=e345]
+          - paragraph [ref=e346]: Collection
+        - generic [ref=e348]:
+          - generic [ref=e353]:
+            - figure [ref=e354]:
+              - link [ref=e355] [cursor=pointer]:
+                - /url: /product-category/living/
+            - heading "Living" [level=3] [ref=e357]:
+              - link "Living" [ref=e358] [cursor=pointer]:
+                - /url: /product-category/living/
+          - generic [ref=e363]:
+            - figure [ref=e364]:
+              - link [ref=e365] [cursor=pointer]:
+                - /url: /product-category/dining/
+            - heading "Dining" [level=3] [ref=e367]:
+              - link "Dining" [ref=e368] [cursor=pointer]:
+                - /url: /product-category/dining/
+          - generic [ref=e373]:
+            - figure [ref=e374]:
+              - link [ref=e375] [cursor=pointer]:
+                - /url: /product-category/collection-bed/
+            - heading "bed" [level=3] [ref=e377]:
+              - link "bed" [ref=e378] [cursor=pointer]:
+                - /url: /product-category/collection-bed/
+    - contentinfo [ref=e379]:
+      - generic [ref=e383]:
+        - generic [ref=e384]:
+          - figure [ref=e386]:
+            - figure [ref=e388]
+          - paragraph [ref=e390]: We craft modern furniture using premium materials to ensure your home reflects the authentic essence of Italian style, creating spaces filled with joy and contentment.
+          - list [ref=e392]:
+            - listitem [ref=e393]:
+              - link "Instagram" [ref=e394] [cursor=pointer]:
+                - /url: https://www.instagram.com/privefurniture/
+                - img [ref=e395]
+                - generic [ref=e397]: Instagram
+        - generic [ref=e399]:
+          - heading "Collection" [level=5] [ref=e400]
+          - list [ref=e402]:
+            - listitem [ref=e403]:
+              - link "Living" [ref=e404] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/living/
+            - listitem [ref=e405]:
+              - link "Dining" [ref=e406] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/dining/
+            - listitem [ref=e407]:
+              - link "Bed" [ref=e408] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/collection-bed/bed/
+        - generic [ref=e410]:
+          - heading "Corporate" [level=5] [ref=e411]
+          - list [ref=e413]:
+            - listitem [ref=e414]:
+              - link "Blog" [ref=e415] [cursor=pointer]:
+                - /url: /news/
+            - listitem [ref=e416]:
+              - link "About Us" [ref=e417] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=e418]:
+              - link "Contact Us" [ref=e419] [cursor=pointer]:
+                - /url: /contact-us/#contactUs
+            - listitem [ref=e420]:
+              - link "Privacy Policy" [ref=e421] [cursor=pointer]:
+                - /url: https://prive-living.com/privacy-policy/
+        - generic [ref=e422]:
+          - paragraph [ref=e424]:
+            - strong [ref=e425]: Get our newsletter
+          - generic [ref=e428]:
+            - generic [ref=e429]:
+              - status
+              - list
+            - form "Contact form" [ref=e430]:
+              - generic [ref=e431]:
+                - textbox "Type your E-mail" [ref=e433] [cursor=pointer]
+                - button "Submit" [ref=e434] [cursor=pointer]:
+                  - generic [ref=e435]: Submit
+```

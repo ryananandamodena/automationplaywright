@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://mhc-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
@@ -15,9 +16,14 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
   test.setTimeout(120000);
 
   test('Create Purchase Order - Simple Flow', async ({ page }) => {
-    // 1. Login
-    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(2000);
+    let createdSnapshot = null;
+    let listUrl = `${BASE_URL}/purchase-order`;
+    let initialCount = 0;
+
+    try {
+      // 1. Login
+      await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(2000);
 
     console.log('1. Logging in...');
     await page.locator('input[type="email"]').fill(LOGIN_EMAIL);
@@ -26,11 +32,13 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
     await page.waitForTimeout(4000);
     console.log('✓ Login successful');
 
-    // 2. Go to Purchase Order
+      // 2. Go to Purchase Order
     console.log('2. Opening Purchase Order...');
-    await page.locator('text="Purchase Order"').first().click();
+      await page.locator('text="Purchase Order"').first().click();
     await page.waitForTimeout(2000);
     console.log('✓ Purchase Order page opened');
+      listUrl = page.url();
+      initialCount = await page.locator('table tbody tr').count().catch(() => 0);
 
     // 3. Click Create New
     console.log('3. Clicking Create New...');
@@ -469,7 +477,7 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
 
     // Assert: gagalkan test jika ada error kalkulasi
     expect(calculationErrors.length, `Calculation errors found:\n${calculationErrors.join('\n')}`).toBe(0);
-    // 8. Submit
+      // 8. Submit
     console.log('\n8. Looking for submit button...');
     const allButtons = await page.locator('button').all();
     for (const btn of allButtons) {
@@ -485,15 +493,33 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
       page.locator("button:has-text('Create Order')")
     ).first();
 
-    if (await submitBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
+      if (await submitBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
       await submitBtn.click({ force: true });
       await page.waitForTimeout(3000);
       console.log('✓ Order submitted!');
       await page.screenshot({ path: 'test-results/po-order-result.png', fullPage: true });
-    } else {
+      } else {
       console.log('⚠ Submit button not found - check screenshot');
-    }
+      }
 
-    console.log('\n✅ Test completed! Check test-results/ for screenshots.');
+      await page.locator('text="Purchase Order"').first().click().catch(() => null);
+      await page.waitForTimeout(2000);
+      const finalCount = await page.locator('table tbody tr').count().catch(() => 0);
+      if (finalCount > initialCount) {
+        createdSnapshot = await page.locator('table tbody tr').first().textContent().catch(() => null);
+      }
+
+      console.log('\n✅ Test completed! Check test-results/ for screenshots.');
+    } finally {
+      if (createdSnapshot && isAutoCleanupEnabled()) {
+        console.log('\n🧹 AUTO CLEANUP PO (best effort)');
+        await cleanupTableRecordBySnapshot(page, {
+          listUrl,
+          rowSnapshot: createdSnapshot,
+          label: 'purchase order',
+          rowLocator: 'table tbody tr',
+        });
+      }
+    }
   });
 });

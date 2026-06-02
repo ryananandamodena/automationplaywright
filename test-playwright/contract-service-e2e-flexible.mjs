@@ -8,12 +8,22 @@
  */
 
 import { chromium } from 'playwright';
+import {
+  cleanupContractBySnapshot,
+  cleanupServiceBySnapshot,
+  isAutoCleanupEnabled,
+} from './utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://portal-dev.modena.com';
 const USER = {
   email: 'ryan.ananda@modena.com',
   password: 'P@ssw0rd_ryan.ananda',
   name: 'Ryan Ananda'
+};
+
+const createdSnapshots = {
+  contract: null,
+  service: null,
 };
 
 // Helper: Fill react-select dengan data fleksibel
@@ -201,6 +211,7 @@ async function createContract(page) {
     
     // Get the newly created contract details
     const firstRow = await page.locator('tbody tr').first().textContent();
+    createdSnapshots.contract = firstRow;
     console.log(`New contract: ${firstRow.substring(0, 100)}...`);
     
     await page.screenshot({ path: 'e2e-05-contract-list.png', fullPage: true });
@@ -402,6 +413,8 @@ async function createService(page) {
       
       if (finalCount > initialCount) {
         console.log(`✅ Service created successfully! (${initialCount} → ${finalCount})`);
+        const firstRow = await page.locator('tbody tr').first().textContent().catch(() => null);
+        createdSnapshots.service = firstRow;
         await page.screenshot({ path: 'e2e-10-service-list.png', fullPage: true });
         return true;
       } else {
@@ -541,6 +554,24 @@ async function runE2E() {
     console.error(error.stack);
     await page.screenshot({ path: 'e2e-error.png', fullPage: true });
   } finally {
+    if (isAutoCleanupEnabled()) {
+      console.log('\n🧹 AUTO CLEANUP (best effort)');
+
+      if (createdSnapshots.service) {
+        await cleanupServiceBySnapshot(page, {
+          baseUrl: BASE_URL,
+          rowSnapshot: createdSnapshots.service,
+        });
+      }
+
+      if (createdSnapshots.contract) {
+        await cleanupContractBySnapshot(page, {
+          baseUrl: BASE_URL,
+          rowSnapshot: createdSnapshots.contract,
+        });
+      }
+    }
+
     // Summary
     console.log('\n' + '█'.repeat(60));
     console.log('E2E TEST SUMMARY');

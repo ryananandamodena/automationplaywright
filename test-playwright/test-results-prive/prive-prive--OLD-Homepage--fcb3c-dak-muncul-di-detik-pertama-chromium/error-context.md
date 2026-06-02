@@ -1,0 +1,319 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to the content" [ref=e2] [cursor=pointer]:
+    - /url: "#qodef-page-content"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e6]:
+        - link "PRIVE logo dark logo light" [ref=e8] [cursor=pointer]:
+          - /url: https://prive-living.com/
+          - img "PRIVE" [ref=e9]
+          - img "logo dark" [ref=e10]
+          - img "logo light" [ref=e11]
+        - navigation "Top Menu" [ref=e12]:
+          - list [ref=e13]:
+            - listitem [ref=e14]:
+              - link "Living" [ref=e15] [cursor=pointer]:
+                - /url: /product-category/living/
+                - generic [ref=e16]: Living
+            - listitem [ref=e17]:
+              - link "Dining" [ref=e18] [cursor=pointer]:
+                - /url: /product-category/dining
+                - generic [ref=e19]: Dining
+            - listitem [ref=e20]:
+              - link "Bed" [ref=e21] [cursor=pointer]:
+                - /url: /product-category/collection-bed/
+                - generic [ref=e22]: Bed
+            - listitem [ref=e23]:
+              - link "CABINETRY" [ref=e24] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=e25]: CABINETRY
+              - list [ref=e26]:
+                - listitem [ref=e27]:
+                  - link "Kitchen" [ref=e28] [cursor=pointer]:
+                    - /url: https://prive-living.com/kitchen/
+                    - generic [ref=e29]: Kitchen
+                - listitem [ref=e30]:
+                  - link "Wardrobe" [ref=e31] [cursor=pointer]:
+                    - /url: https://prive-living.com/wardrobe/
+                    - generic [ref=e32]: Wardrobe
+            - listitem [ref=e33]:
+              - link "Contact Us" [ref=e34] [cursor=pointer]:
+                - /url: /contact-us/#contactUs
+                - generic [ref=e35]: Contact Us
+        - link "" [ref=e38] [cursor=pointer]:
+          - /url: javascript:void(0)
+          - generic [ref=e40]: 
+      - generic [ref=e42] [cursor=pointer]: 
+    - text:  
+    - main [ref=e45]:
+      - generic [ref=e48]:
+        - generic [ref=e58]:
+          - generic [ref=e59] [cursor=pointer]:
+            - img [ref=e60]
+            - img [ref=e62]
+          - generic [ref=e64] [cursor=pointer]:
+            - img [ref=e65]
+            - img [ref=e67]
+          - generic [ref=e78]:
+            - text: COMFORT
+            - text: LOUNGE
+        - generic [ref=e91]:
+          - paragraph [ref=e92]: Luxury Redefined
+          - heading "CRAFTING A LIFESTYLE" [level=3] [ref=e93]
+          - paragraph [ref=e94]: At PRIVE, we craft more than furniture; we design a lifestyle. Our commitment to celebrating the essence of home shines through each meticulously curated piece, blending style with functionality. Using the finest materials, we create modern designs with a nod to Italian finesse.
+        - generic [ref=e106]:
+          - heading "Elegant and modern" [level=2] [ref=e107]
+          - paragraph [ref=e108]: Collection
+        - generic [ref=e110]:
+          - generic [ref=e115]:
+            - figure [ref=e116]:
+              - link [ref=e117] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/living/
+            - heading "Living" [level=3] [ref=e119]:
+              - link "Living" [ref=e120] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/living/
+          - generic [ref=e125]:
+            - figure [ref=e126]:
+              - link [ref=e127] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/dining/
+            - heading "Dining" [level=3] [ref=e129]:
+              - link "Dining" [ref=e130] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/dining/
+          - generic [ref=e135]:
+            - figure [ref=e136]:
+              - link [ref=e137] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/collection-bed/
+            - heading "bed" [level=3] [ref=e139]:
+              - link "bed" [ref=e140] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/collection-bed/
+        - generic [ref=e147]:
+          - generic [ref=e148]:
+            - text: ”
+            - paragraph [ref=e149]: Our
+            - heading "Customers Say" [level=3] [ref=e150]
+          - generic [ref=e151]:
+            - generic [ref=e154]:
+              - paragraph [ref=e155]: I am a returning customer of PRIVE because they always provide me with excellent quality furniture at such an affordable price. I am a huge furniture enthusiast, and I can always rely on PRIVE to give me pieces with such intricate details that they can be centerpieces for my living room or kitchen. You can tell that PRIVE always makes their designs with so much love and attention, not to mention the craftsmanship and the chosen fabric are always top quality.
+              - paragraph [ref=e156]:
+                - generic [ref=e157]: Adeline Siregar – 35
+            - generic [ref=e160]:
+              - paragraph [ref=e161]: I found PRIVE at a perfect time when I was looking for new things for my new apartment. PRIVE understands what we look for in furniture, not just comfort and functionality but also the design and craftmanship. You could say I'm a side table collector, and PRIVE has an amazing array of side tables that are just so unique at an affordable price. I will definitely return to buy more at PRIVE.
+              - paragraph [ref=e162]:
+                - generic [ref=e163]: Matthew Halim – 47
+            - generic [ref=e166]:
+              - paragraph [ref=e167]: It's always a delight shopping at PRIVE because they have so many unique pieces in their collection. The staff is always so welcoming and helpful! I especially love the sofa and armchair collection because they always fit seamlessly into my house's aesthetics. The design is simple but elegant and most importantly they are all comfortable to sit and lounge on for a long time.
+              - paragraph [ref=e168]:
+                - generic [ref=e169]: Sharon Harper – 40
+            - generic [ref=e172]:
+              - paragraph [ref=e173]: I am a returning customer of PRIVE because they always provide me with excellent quality furniture at such an affordable price. I am a huge furniture enthusiast, and I can always rely on PRIVE to give me pieces with such intricate details that they can be centerpieces for my living room or kitchen. You can tell that PRIVE always makes their designs with so much love and attention, not to mention the craftsmanship and the chosen fabric are always top quality.
+              - paragraph [ref=e174]:
+                - generic [ref=e175]: Adeline Siregar – 35
+            - generic [ref=e178]:
+              - paragraph [ref=e179]: I found PRIVE at a perfect time when I was looking for new things for my new apartment. PRIVE understands what we look for in furniture, not just comfort and functionality but also the design and craftmanship. You could say I'm a side table collector, and PRIVE has an amazing array of side tables that are just so unique at an affordable price. I will definitely return to buy more at PRIVE.
+              - paragraph [ref=e180]:
+                - generic [ref=e181]: Matthew Halim – 47
+          - button "Previous slide" [ref=e182] [cursor=pointer]:
+            - img [ref=e183]
+            - img [ref=e185]
+          - button "Next slide" [ref=e187] [cursor=pointer]:
+            - img [ref=e188]
+            - img [ref=e190]
+        - generic [ref=e195]:
+          - generic [ref=e198]:
+            - paragraph [ref=e199]: Our
+            - heading "LATEST ARTICLE" [level=3] [ref=e200]
+          - article [ref=e205]:
+            - generic [ref=e206]:
+              - link [ref=e209] [cursor=pointer]:
+                - /url: https://prive-living.com/modern-kitchen-portfolio-mrs-r-prive/
+              - generic [ref=e210]:
+                - generic: "- - -"
+                - generic [ref=e211]:
+                  - heading "Modern Kitchen – Mrs. R" [level=4] [ref=e212]:
+                    - link "Modern Kitchen – Mrs. R" [ref=e213] [cursor=pointer]:
+                      - /url: https://prive-living.com/modern-kitchen-portfolio-mrs-r-prive/
+                  - paragraph [ref=e214]: Kitchen Portfolio – Mrs. R – Bintaro, Jakarta Selatan Transforming the ordinary into the extraordinary, this kitchen ingeniously utilizes the space beneath the stairs to craft a cozy haven for our feline friends. Despite this unconventional addition, the design maintains its sleek and mi
+                - link "Read More" [ref=e218] [cursor=pointer]:
+                  - /url: https://prive-living.com/modern-kitchen-portfolio-mrs-r-prive/
+                  - generic [ref=e219]: Read More
+        - generic [ref=e227]:
+          - article [ref=e228]:
+            - generic [ref=e229]:
+              - link [ref=e232] [cursor=pointer]:
+                - /url: https://prive-living.com/modern-kitchen-portfolio-mrs-r-prive/
+              - generic [ref=e233]:
+                - generic: "- - -"
+                - generic [ref=e234]:
+                  - heading "Modern Kitchen – Mrs. R" [level=4] [ref=e235]:
+                    - link "Modern Kitchen – Mrs. R" [ref=e236] [cursor=pointer]:
+                      - /url: https://prive-living.com/modern-kitchen-portfolio-mrs-r-prive/
+                  - paragraph [ref=e237]: Kitchen Portfolio – Mrs. R – Bintaro, Jakarta Selatan Transforming t
+                - link "Read More" [ref=e241] [cursor=pointer]:
+                  - /url: https://prive-living.com/modern-kitchen-portfolio-mrs-r-prive/
+                  - generic [ref=e242]: Read More
+          - article [ref=e243]:
+            - generic [ref=e244]:
+              - link "PRIVE Bellini Ottoman in Green" [ref=e247] [cursor=pointer]:
+                - /url: https://prive-living.com/color-psychology-finding-the-right-color-in-every-room/
+                - img "PRIVE Bellini Ottoman in Green" [ref=e248]
+              - generic [ref=e249]:
+                - generic: "- - -"
+                - generic [ref=e250]:
+                  - 'heading "Color Psychology: Finding the Right Color in Every Room" [level=4] [ref=e251]':
+                    - 'link "Color Psychology: Finding the Right Color in Every Room" [ref=e252] [cursor=pointer]':
+                      - /url: https://prive-living.com/color-psychology-finding-the-right-color-in-every-room/
+                  - paragraph [ref=e253]: Colors are more than just a visual element in our living spaces—they have a po
+                - link "Read More" [ref=e257] [cursor=pointer]:
+                  - /url: https://prive-living.com/color-psychology-finding-the-right-color-in-every-room/
+                  - generic [ref=e258]: Read More
+          - article [ref=e259]:
+            - generic [ref=e260]:
+              - link "PRIVE at JFW 2025" [ref=e263] [cursor=pointer]:
+                - /url: https://prive-living.com/prive-at-jfw-2025-the-interconnection-between-fashion-and-interior-design/
+                - img "PRIVE at JFW 2025" [ref=e264]
+              - generic [ref=e265]:
+                - generic: "- - -"
+                - generic [ref=e266]:
+                  - 'heading "PRIVE at JFW 2025: The Interconnection Between Fashion and Interior Design" [level=4] [ref=e267]':
+                    - 'link "PRIVE at JFW 2025: The Interconnection Between Fashion and Interior Design" [ref=e268] [cursor=pointer]':
+                      - /url: https://prive-living.com/prive-at-jfw-2025-the-interconnection-between-fashion-and-interior-design/
+                  - paragraph [ref=e269]: Creating a collection, whether it’s for fashion or interior design, is an art
+                - link "Read More" [ref=e273] [cursor=pointer]:
+                  - /url: https://prive-living.com/prive-at-jfw-2025-the-interconnection-between-fashion-and-interior-design/
+                  - generic [ref=e274]: Read More
+        - link "See more article" [ref=e281] [cursor=pointer]:
+          - /url: https://prive-living.com/news/
+          - generic [ref=e282]: See more article
+        - generic [ref=e294]:
+          - heading "Our dedicated team is here to assist you" [level=2] [ref=e297]
+          - link "CONTACT US" [ref=e305] [cursor=pointer]:
+            - /url: https://prive-living.com/contact-us/#contactUs
+            - generic [ref=e307]: CONTACT US
+        - generic [ref=e315]:
+          - paragraph [ref=e316]: Showroom
+          - heading "Store location" [level=2] [ref=e317]
+        - generic [ref=e319]:
+          - generic [ref=e324]:
+            - heading "SENOPATI" [level=2] [ref=e325]
+            - generic [ref=e326]:
+              - paragraph [ref=e327]: Jl. Senopati No.70, Kebayoran Baru,
+              - paragraph [ref=e328]: Kota Jakarta Selatan, DKI Jakarta 12110
+              - paragraph [ref=e329]:
+                - generic [ref=e330]: "+62217255637"
+          - generic [ref=e335]:
+            - heading "OPENING HOURS" [level=3] [ref=e336]
+            - paragraph [ref=e338]:
+              - text: "Monday - Friday : 10 AM - 7 PM"
+              - text: "Saturday : 10 AM – 5 PM"
+              - text: "Sunday : Closed"
+          - link "DIRECTION" [ref=e346] [cursor=pointer]:
+            - /url: https://www.google.com/maps/place/PRIVE+at+Ambiente/@-6.2316028,106.8093622,15z/data=!4m6!3m5!1s0x2e69f15bfa9be43f:0x127169de39ffb6b0!8m2!3d-6.2316028!4d106.8093622!16s%2Fg%2F11rxdlc5j?entry=ttu%20
+            - generic [ref=e347]: DIRECTION
+        - generic [ref=e357]:
+          - generic [ref=e362]:
+            - heading "KEMANG" [level=2] [ref=e363]
+            - generic [ref=e364]:
+              - paragraph [ref=e365]: Jl. Kemang Selatan Raya No.150, Pasar Minggu,
+              - paragraph [ref=e366]: Kota Jakarta Selatan, DKI Jakarta 12560
+              - paragraph [ref=e367]:
+                - generic [ref=e368]: "+622122789885"
+          - generic [ref=e373]:
+            - heading "OPENING HOURS" [level=3] [ref=e374]
+            - paragraph [ref=e376]:
+              - text: "Monday - Friday : 10 AM - 7 PM"
+              - text: "Saturday : 10 AM – 5 PM"
+              - text: "Sunday : Closed"
+          - link "DIRECTION" [ref=e384] [cursor=pointer]:
+            - /url: https://www.google.com/maps/place/PRIVE+Furniture/@-6.2742169,106.8175604,17z/data=!3m1!4b1!4m5!3m4!1s0x2e69f358a3214a91:0x4dd097d0e2a44784!8m2!3d-6.2742281!4d106.8197474?hl=en
+            - generic [ref=e385]: DIRECTION
+        - generic [ref=e395]:
+          - generic [ref=e400]:
+            - heading "SURABAYA" [level=2] [ref=e401]
+            - generic [ref=e402]:
+              - paragraph [ref=e403]: Jl. Mayjen Sungkono No.113, Dukuhpakis,
+              - paragraph [ref=e404]: Surabaya, Jawa Timur 60225
+              - paragraph [ref=e405]: "+623199548107"
+          - generic [ref=e410]:
+            - heading "OPENING HOURS" [level=3] [ref=e411]
+            - paragraph [ref=e413]:
+              - text: "Monday - Friday : 10 AM - 7 PM"
+              - text: "Saturday : 10 AM – 5 PM"
+              - text: "Sunday : Closed"
+          - link "DIRECTION" [ref=e421] [cursor=pointer]:
+            - /url: https://www.google.com/maps/place/Jl.+Mayjen+Sungkono+No.113,+Dukuh+Pakis,+Kec.+Dukuhpakis,+Surabaya,+Jawa+Timur+60225/@-7.2906391,112.7142927,20z/data=!4m5!3m4!1s0x2dd7fc7579e4bc27:0xead92c8da5a09a61!8m2!3d-7.2907062!4d112.7142382?entry=ttu%20
+            - generic [ref=e422]: DIRECTION
+    - contentinfo [ref=e423]:
+      - generic [ref=e427]:
+        - generic [ref=e428]:
+          - figure [ref=e430]:
+            - figure [ref=e432]
+          - paragraph [ref=e434]: We craft modern furniture using premium materials to ensure your home reflects the authentic essence of Italian style, creating spaces filled with joy and contentment.
+          - list [ref=e436]:
+            - listitem [ref=e437]:
+              - link "Instagram" [ref=e438] [cursor=pointer]:
+                - /url: https://www.instagram.com/privefurniture/
+                - img [ref=e439]
+                - generic [ref=e441]: Instagram
+        - generic [ref=e443]:
+          - heading "Collection" [level=5] [ref=e444]
+          - list [ref=e446]:
+            - listitem [ref=e447]:
+              - link "Living" [ref=e448] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/living/
+            - listitem [ref=e449]:
+              - link "Dining" [ref=e450] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/dining/
+            - listitem [ref=e451]:
+              - link "Bed" [ref=e452] [cursor=pointer]:
+                - /url: https://prive-living.com/product-category/collection-bed/bed/
+        - generic [ref=e454]:
+          - heading "Corporate" [level=5] [ref=e455]
+          - list [ref=e457]:
+            - listitem [ref=e458]:
+              - link "Blog" [ref=e459] [cursor=pointer]:
+                - /url: /news/
+            - listitem [ref=e460]:
+              - link "About Us" [ref=e461] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=e462]:
+              - link "Contact Us" [ref=e463] [cursor=pointer]:
+                - /url: /contact-us/#contactUs
+            - listitem [ref=e464]:
+              - link "Privacy Policy" [ref=e465] [cursor=pointer]:
+                - /url: https://prive-living.com/privacy-policy/
+        - generic [ref=e466]:
+          - paragraph [ref=e468]:
+            - strong [ref=e469]: Get our newsletter
+          - generic [ref=e472]:
+            - generic [ref=e473]:
+              - status
+              - list
+            - form "Contact form" [ref=e474]:
+              - generic [ref=e475]:
+                - textbox "Type your E-mail" [ref=e477] [cursor=pointer]
+                - button "Submit" [ref=e478] [cursor=pointer]:
+                  - generic [ref=e479]: Submit
+    - generic [ref=e481]:
+      - link [ref=e482] [cursor=pointer]:
+        - /url: javascript:void(0)
+        - img [ref=e483]
+      - generic [ref=e488]:
+        - heading "Send Me Newsletter" [level=4] [ref=e489]
+        - paragraph [ref=e490]: Sign up to receive all the latest news and updates
+        - generic [ref=e491]:
+          - generic [ref=e492]:
+            - status
+            - list
+          - form "Contact form" [ref=e493]:
+            - generic [ref=e494]:
+              - textbox "Type your E-mail" [ref=e496] [cursor=pointer]
+              - button "Submit" [ref=e497] [cursor=pointer]:
+                - generic [ref=e498]: Submit
+  - generic [ref=e501] [cursor=pointer]:
+    - text: Need Help?
+    - strong [ref=e502]: Chat with us
+  - generic [ref=e504]: desktop
+```
