@@ -1,0 +1,155 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Prive Living Logo" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Prive Living Logo" [ref=e6]
+      - navigation [ref=e7]:
+        - link "Living" [ref=e8] [cursor=pointer]:
+          - /url: /product-category/living
+        - link "Dining" [ref=e9] [cursor=pointer]:
+          - /url: /product-category/dining
+        - link "Bed" [ref=e10] [cursor=pointer]:
+          - /url: /product-category/collection-bed
+        - button "Cabinetry" [ref=e12] [cursor=pointer]
+        - link "Contact Us" [ref=e13] [cursor=pointer]:
+          - /url: /contact-us#contactUs
+      - button "Search" [ref=e16] [cursor=pointer]:
+        - img [ref=e17]
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - img "Contact Us hero" [ref=e21]
+      - generic [ref=e24]:
+        - heading "About Us" [level=1] [ref=e25]
+        - paragraph [ref=e26]: At PRIVE, We find inspiration in the essence of home, valuing the significance of belonging and emphasizing individual uniqueness by crafting modern yet classic pieces with premium materials, ensuring your home is a sanctuary of comfort and style.
+    - generic [ref=e28]:
+      - heading "Our Story" [level=2] [ref=e29]
+      - paragraph [ref=e30]: Home is where everything begins. Here at PRIVE, we make sure to celebrate and treasure every part of the home that tells who you are. We truly believe that every part of our home says a little bit of something about us, that is why PRIVE wants to ensure you’ll only have the best and the most authentic part of yourself shared in every corner of your home. Picking the finest raw materials is key. We carefully select genuine leather along with premium wood and fabric to create a modern feel that pays homage to the finesse of Italian style. PRIVE carefully crafts each of our furniture with the sole mission to indulge your aesthetic sense and fulfill your need for functionality. We collaborate with committed artisans to deliver sophisticated pieces and ensure each one of them is superior in quality. From the sleek armchairs and tables to the signature comfort of our sofa and bed collection, we invite you to experience a new chapter of modern living that is filled with pure joy and contentment.
+    - generic [ref=e31]:
+      - img "Design consultation background" [ref=e32]
+      - generic [ref=e35]:
+        - article [ref=e36]:
+          - img "Consultation icon" [ref=e38]
+          - generic [ref=e39]:
+            - heading "Living" [level=3] [ref=e40]
+            - paragraph [ref=e41]: Everyday Comfort Redefined
+        - article [ref=e42]:
+          - img "Dining icon" [ref=e44]
+          - generic [ref=e45]:
+            - heading "Dining" [level=3] [ref=e46]
+            - paragraph [ref=e47]: Culinary Delights and Shared Moments
+        - article [ref=e48]:
+          - img "Bed icon" [ref=e50]
+          - generic [ref=e51]:
+            - heading "Bed" [level=3] [ref=e52]
+            - paragraph [ref=e53]: Indulge in Serenity
+    - generic [ref=e56]:
+      - button "Previous store" [ref=e57] [cursor=pointer]:
+        - img [ref=e59]
+        - img [ref=e62]
+      - button "Next store" [ref=e64] [cursor=pointer]:
+        - img [ref=e66]
+        - img [ref=e69]
+      - generic [ref=e71]:
+        - article [ref=e72]:
+          - img "Prive Living Jakarta showroom" [ref=e74]
+          - generic [ref=e75]:
+            - heading "Visit Our Store" [level=2] [ref=e77]
+            - heading "Senopati" [level=3] [ref=e78]
+            - paragraph [ref=e79]: "Monday - Friday: 10 AM - 7 PM Saturday: 10 AM - 5 PM Sunday: Closed"
+            - paragraph [ref=e80]: Jl. Senopati No.70, Kebayoran Baru, Kota Jakarta Selatan, DKI Jakarta 12110
+            - paragraph [ref=e81]: "+62217255637"
+            - link "Show In Maps" [ref=e82] [cursor=pointer]:
+              - /url: https://www.google.com/maps/place/PRIVE+at+Ambiente/@-6.2316028,106.8093622,15z/data=!4m6!3m5!1s0x2e69f15bfa9be43f:0x127169de39ffb6b0!8m2!3d-6.2316028!4d106.8093622!16s%2Fg%2F11rxdlc5j?entry=ttu%20
+        - article [ref=e83]:
+          - img "Prive Living Kemang showroom" [ref=e85]
+          - generic [ref=e86]:
+            - heading "Visit Our Store" [level=2] [ref=e88]
+            - heading "Kemang" [level=3] [ref=e89]
+            - paragraph [ref=e90]: "Monday - Friday: 10 AM - 7 PM Saturday: 10 AM - 5 PM Sunday: Closed"
+            - paragraph [ref=e91]: Jl. Kemang Selatan Raya No. 150, Pasar Minggu, Kota Jakarta Selatan, DKI Jakarta 12560
+            - paragraph [ref=e92]: "+622122789885"
+            - link "Show In Maps" [ref=e93] [cursor=pointer]:
+              - /url: https://www.google.com/maps/place/PRIVE+Furniture/@-6.2742169,106.8175604,17z/data=!3m1!4b1!4m5!3m4!1s0x2e69f358a3214a91:0x4dd097d0e2a44784!8m2!3d-6.2742281!4d106.8197474?hl=en
+        - article [ref=e94]:
+          - img "Prive Living Surabaya showroom" [ref=e96]
+          - generic [ref=e97]:
+            - heading "Visit Our Store" [level=2] [ref=e99]
+            - heading "Surabaya" [level=3] [ref=e100]
+            - paragraph [ref=e101]: "Monday - Friday: 10 AM - 7 PM Saturday: 10 AM - 5 PM Sunday: Closed"
+            - paragraph [ref=e102]: Jl. Mayjen Sungkono No. 113, Dukuhpakis, Surabaya, Jawa Timur 60225
+            - paragraph [ref=e103]: "+623199548107"
+            - link "Show In Maps" [ref=e104] [cursor=pointer]:
+              - /url: https://www.google.com/maps/place/Jl.+Mayjen+Sungkono+No.113,+Dukuh+Pakis,+Kec.+Dukuhpakis,+Surabaya,+Jawa+Timur+60225/@-7.2906391,112.7142927,20z/data=!4m5!3m4!1s0x2dd7fc7579e4bc27:0xead92c8da5a09a61!8m2!3d-7.2907065!4d112.7142391?entry=ttu
+    - generic [ref=e106]:
+      - generic [ref=e107]:
+        - heading "Get In Touch" [level=2] [ref=e108]
+        - paragraph [ref=e109]: With US
+      - generic [ref=e110]:
+        - generic [ref=e111]:
+          - textbox "Type your First Name" [ref=e113]
+          - textbox "Type your Last Name" [ref=e115]
+        - generic [ref=e116]:
+          - textbox "Type your Email" [ref=e118]
+          - textbox "Type your Phone Number" [ref=e120]
+        - textbox "Type your Message" [ref=e122]
+        - generic [ref=e123]:
+          - checkbox "Please agree to the term and condition before sending message" [ref=e124]
+          - generic [ref=e125]: Please agree to the term and condition before sending message
+        - button "Send Message" [ref=e126] [cursor=pointer]
+  - contentinfo [ref=e127]:
+    - generic [ref=e128]:
+      - generic [ref=e129]:
+        - generic [ref=e130]:
+          - link "Prive Living Logo":
+            - /url: /
+            - img "Prive Living Logo"
+          - paragraph [ref=e131]: We craft modern furniture using premium materials to ensure your home reflects the authentic essence of Italian style, creating spaces filled with joy and contentment.
+          - link "Instagram" [ref=e133] [cursor=pointer]:
+            - /url: https://www.instagram.com/privefurniture/
+            - img [ref=e134]
+        - generic [ref=e136]:
+          - heading "Collection" [level=3] [ref=e137]
+          - list [ref=e138]:
+            - listitem [ref=e139]:
+              - link "Living" [ref=e140] [cursor=pointer]:
+                - /url: /product-category/living
+            - listitem [ref=e141]:
+              - link "Dining" [ref=e142] [cursor=pointer]:
+                - /url: /product-category/dining
+            - listitem [ref=e143]:
+              - link "Bed" [ref=e144] [cursor=pointer]:
+                - /url: /product-category/collection-bed
+        - generic [ref=e145]:
+          - heading "Corporate" [level=3] [ref=e146]
+          - list [ref=e147]:
+            - listitem [ref=e148]:
+              - link "Blog" [ref=e149] [cursor=pointer]:
+                - /url: /news
+            - listitem [ref=e150]:
+              - link "About Us" [ref=e151] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=e152]:
+              - link "Contact Us" [ref=e153] [cursor=pointer]:
+                - /url: /contact-us#contactUs
+            - listitem [ref=e154]:
+              - link "Privacy Policy" [ref=e155] [cursor=pointer]:
+                - /url: /privacy-policy
+        - generic [ref=e156]:
+          - heading "Get Our Newsletter" [level=3] [ref=e157]
+          - generic [ref=e158]:
+            - textbox "Your email address" [ref=e159]
+            - button "Submit" [ref=e160] [cursor=pointer]
+      - paragraph [ref=e162]: © 2026 Prive Living. All rights reserved.
+  - generic [ref=e163]:
+    - generic [ref=e164]:
+      - generic [ref=e165]: Need Help? Chat with us
+      - button "Open WhatsApp chat" [ref=e166] [cursor=pointer]:
+        - img [ref=e167]
+    - button "Scroll to top":
+      - img
+  - alert [ref=e169]
+```

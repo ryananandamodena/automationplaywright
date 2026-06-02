@@ -1,0 +1,145 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Prive Living Logo" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Prive Living Logo" [ref=e6]
+      - navigation [ref=e7]:
+        - link "Living" [ref=e8] [cursor=pointer]:
+          - /url: /product-category/living
+        - link "Dining" [ref=e9] [cursor=pointer]:
+          - /url: /product-category/dining
+        - link "Bed" [ref=e10] [cursor=pointer]:
+          - /url: /product-category/collection-bed
+        - button "Cabinetry" [ref=e12] [cursor=pointer]
+        - link "Contact Us" [ref=e13] [cursor=pointer]:
+          - /url: /contact-us#contactUs
+      - button "Search" [ref=e16] [cursor=pointer]:
+        - img [ref=e17]
+  - main [ref=e19]:
+    - generic [ref=e21]:
+      - paragraph [ref=e22]: Our
+      - heading "What's On" [level=1] [ref=e23]
+    - generic [ref=e26]:
+      - article [ref=e27]:
+        - link "How to Choose the Perfect Sofa for Your Living Room" [ref=e28] [cursor=pointer]:
+          - /url: /how-to-choose-the-perfect-sofa
+          - img "How to Choose the Perfect Sofa for Your Living Room" [ref=e30]
+        - generic [ref=e31]: Interior Design Tips
+        - link "How to Choose the Perfect Sofa for Your Living Room" [ref=e32] [cursor=pointer]:
+          - /url: /how-to-choose-the-perfect-sofa
+          - heading "How to Choose the Perfect Sofa for Your Living Room" [level=2] [ref=e33]
+        - paragraph [ref=e34]: A comprehensive guide to selecting a sofa that complements your living space.
+        - link "Read More" [ref=e35] [cursor=pointer]:
+          - /url: /how-to-choose-the-perfect-sofa
+      - article [ref=e36]:
+        - link "Top 5 Dining Tables for 2026" [ref=e37] [cursor=pointer]:
+          - /url: /top-5-dining-tables-2026
+          - img "Top 5 Dining Tables for 2026" [ref=e39]
+        - generic [ref=e40]: Product Highlights
+        - link "Top 5 Dining Tables for 2026" [ref=e41] [cursor=pointer]:
+          - /url: /top-5-dining-tables-2026
+          - heading "Top 5 Dining Tables for 2026" [level=2] [ref=e42]
+        - paragraph [ref=e43]: Discover the most stylish and functional dining tables this year.
+        - link "Read More" [ref=e44] [cursor=pointer]:
+          - /url: /top-5-dining-tables-2026
+      - article [ref=e45]:
+        - link "Creating a Cozy Bedroom Retreat" [ref=e46] [cursor=pointer]:
+          - /url: /creating-a-cozy-bedroom-retreat
+          - img "Creating a Cozy Bedroom Retreat" [ref=e48]
+        - generic [ref=e49]: Lifestyle & Inspiration
+        - link "Creating a Cozy Bedroom Retreat" [ref=e50] [cursor=pointer]:
+          - /url: /creating-a-cozy-bedroom-retreat
+          - heading "Creating a Cozy Bedroom Retreat" [level=2] [ref=e51]
+        - paragraph [ref=e52]: Transform your bedroom into the ultimate relaxation sanctuary.
+        - link "Read More" [ref=e53] [cursor=pointer]:
+          - /url: /creating-a-cozy-bedroom-retreat
+      - article [ref=e54]:
+        - link "Making Sustainable Furniture Choices" [ref=e55] [cursor=pointer]:
+          - /url: /sustainable-furniture-choices
+          - img "Making Sustainable Furniture Choices" [ref=e57]
+        - generic [ref=e58]: Interior Design Tips
+        - link "Making Sustainable Furniture Choices" [ref=e59] [cursor=pointer]:
+          - /url: /sustainable-furniture-choices
+          - heading "Making Sustainable Furniture Choices" [level=2] [ref=e60]
+        - paragraph [ref=e61]: How to furnish your home with eco-friendly and sustainable options.
+        - link "Read More" [ref=e62] [cursor=pointer]:
+          - /url: /sustainable-furniture-choices
+      - article [ref=e63]:
+        - link "Wardrobe Organization Tips for a Tidy Home" [ref=e64] [cursor=pointer]:
+          - /url: /wardrobe-organization-tips
+          - img "Wardrobe Organization Tips for a Tidy Home" [ref=e66]
+        - generic [ref=e67]: Lifestyle & Inspiration
+        - link "Wardrobe Organization Tips for a Tidy Home" [ref=e68] [cursor=pointer]:
+          - /url: /wardrobe-organization-tips
+          - heading "Wardrobe Organization Tips for a Tidy Home" [level=2] [ref=e69]
+        - paragraph [ref=e70]: Maximize your wardrobe space with these clever organization strategies.
+        - link "Read More" [ref=e71] [cursor=pointer]:
+          - /url: /wardrobe-organization-tips
+      - article [ref=e72]:
+        - link "Luxury Kitchen Design Trends for Modern Homes" [ref=e73] [cursor=pointer]:
+          - /url: /luxury-kitchen-design-trends
+          - img "Luxury Kitchen Design Trends for Modern Homes" [ref=e75]
+        - generic [ref=e76]: Product Highlights
+        - link "Luxury Kitchen Design Trends for Modern Homes" [ref=e77] [cursor=pointer]:
+          - /url: /luxury-kitchen-design-trends
+          - heading "Luxury Kitchen Design Trends for Modern Homes" [level=2] [ref=e78]
+        - paragraph [ref=e79]: Explore the latest trends in luxury kitchen cabinetry and design.
+        - link "Read More" [ref=e80] [cursor=pointer]:
+          - /url: /luxury-kitchen-design-trends
+  - contentinfo [ref=e81]:
+    - generic [ref=e82]:
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - link "Prive Living Logo":
+            - /url: /
+            - img "Prive Living Logo"
+          - paragraph [ref=e85]: We craft modern furniture using premium materials to ensure your home reflects the authentic essence of Italian style, creating spaces filled with joy and contentment.
+          - link "Instagram" [ref=e87] [cursor=pointer]:
+            - /url: https://www.instagram.com/privefurniture/
+            - img [ref=e88]
+        - generic [ref=e90]:
+          - heading "Collection" [level=3] [ref=e91]
+          - list [ref=e92]:
+            - listitem [ref=e93]:
+              - link "Living" [ref=e94] [cursor=pointer]:
+                - /url: /product-category/living
+            - listitem [ref=e95]:
+              - link "Dining" [ref=e96] [cursor=pointer]:
+                - /url: /product-category/dining
+            - listitem [ref=e97]:
+              - link "Bed" [ref=e98] [cursor=pointer]:
+                - /url: /product-category/collection-bed
+        - generic [ref=e99]:
+          - heading "Corporate" [level=3] [ref=e100]
+          - list [ref=e101]:
+            - listitem [ref=e102]:
+              - link "Blog" [ref=e103] [cursor=pointer]:
+                - /url: /news
+            - listitem [ref=e104]:
+              - link "About Us" [ref=e105] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=e106]:
+              - link "Contact Us" [ref=e107] [cursor=pointer]:
+                - /url: /contact-us#contactUs
+            - listitem [ref=e108]:
+              - link "Privacy Policy" [ref=e109] [cursor=pointer]:
+                - /url: /privacy-policy
+        - generic [ref=e110]:
+          - heading "Get Our Newsletter" [level=3] [ref=e111]
+          - generic [ref=e112]:
+            - textbox "Your email address" [ref=e113]
+            - button "Submit" [ref=e114] [cursor=pointer]
+      - paragraph [ref=e116]: © 2026 Prive Living. All rights reserved.
+  - generic [ref=e117]:
+    - generic [ref=e118]:
+      - generic [ref=e119]: Need Help? Chat with us
+      - button "Open WhatsApp chat" [ref=e120] [cursor=pointer]:
+        - img [ref=e121]
+    - button "Scroll to top":
+      - img
+  - alert [ref=e123]
+```

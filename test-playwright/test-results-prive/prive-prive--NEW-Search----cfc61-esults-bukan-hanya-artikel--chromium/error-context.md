@@ -1,0 +1,98 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Prive Living Logo" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Prive Living Logo" [ref=e6]
+      - navigation [ref=e7]:
+        - link "Living" [ref=e8] [cursor=pointer]:
+          - /url: /product-category/living
+        - link "Dining" [ref=e9] [cursor=pointer]:
+          - /url: /product-category/dining
+        - link "Bed" [ref=e10] [cursor=pointer]:
+          - /url: /product-category/collection-bed
+        - button "Cabinetry" [ref=e12] [cursor=pointer]
+        - link "Contact Us" [ref=e13] [cursor=pointer]:
+          - /url: /contact-us#contactUs
+      - button "Search" [ref=e16] [cursor=pointer]:
+        - img [ref=e17]
+  - main [ref=e19]:
+    - generic [ref=e22]:
+      - link "Home" [ref=e23] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e24]: "-"
+      - generic [ref=e25]: Search results for "sofa"
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - heading "New search:" [level=2] [ref=e29]
+        - generic [ref=e30]:
+          - textbox "Type Here..." [active] [ref=e31]: sofa
+          - button "Search" [ref=e32] [cursor=pointer]:
+            - img [ref=e33]
+        - generic [ref=e35]: If you are not happy with the results below please do another search
+      - generic [ref=e38]:
+        - link "How to Choose the Perfect Sofa for Your Living Room" [ref=e40] [cursor=pointer]:
+          - /url: /how-to-choose-the-perfect-sofa
+          - img "How to Choose the Perfect Sofa for Your Living Room" [ref=e42]
+        - generic [ref=e43]:
+          - generic [ref=e45]: Article
+          - link "How to Choose the Perfect Sofa for Your Living Room" [ref=e46] [cursor=pointer]:
+            - /url: /how-to-choose-the-perfect-sofa
+            - heading "How to Choose the Perfect Sofa for Your Living Room" [level=3] [ref=e47]
+          - generic [ref=e48]: A comprehensive guide to selecting a sofa that complements your living space.
+  - contentinfo [ref=e49]:
+    - generic [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - link "Prive Living Logo" [ref=e53] [cursor=pointer]:
+            - /url: /
+            - img "Prive Living Logo" [ref=e54]
+          - paragraph [ref=e55]: We craft modern furniture using premium materials to ensure your home reflects the authentic essence of Italian style, creating spaces filled with joy and contentment.
+          - link "Instagram" [ref=e57] [cursor=pointer]:
+            - /url: https://www.instagram.com/privefurniture/
+            - img [ref=e58]
+        - generic [ref=e60]:
+          - heading "Collection" [level=3] [ref=e61]
+          - list [ref=e62]:
+            - listitem [ref=e63]:
+              - link "Living" [ref=e64] [cursor=pointer]:
+                - /url: /product-category/living
+            - listitem [ref=e65]:
+              - link "Dining" [ref=e66] [cursor=pointer]:
+                - /url: /product-category/dining
+            - listitem [ref=e67]:
+              - link "Bed" [ref=e68] [cursor=pointer]:
+                - /url: /product-category/collection-bed
+        - generic [ref=e69]:
+          - heading "Corporate" [level=3] [ref=e70]
+          - list [ref=e71]:
+            - listitem [ref=e72]:
+              - link "Blog" [ref=e73] [cursor=pointer]:
+                - /url: /news
+            - listitem [ref=e74]:
+              - link "About Us" [ref=e75] [cursor=pointer]:
+                - /url: /contact-us
+            - listitem [ref=e76]:
+              - link "Contact Us" [ref=e77] [cursor=pointer]:
+                - /url: /contact-us#contactUs
+            - listitem [ref=e78]:
+              - link "Privacy Policy" [ref=e79] [cursor=pointer]:
+                - /url: /privacy-policy
+        - generic [ref=e80]:
+          - heading "Get Our Newsletter" [level=3] [ref=e81]
+          - generic [ref=e82]:
+            - textbox "Your email address" [ref=e83]
+            - button "Submit" [ref=e84] [cursor=pointer]
+      - paragraph [ref=e86]: © 2026 Prive Living. All rights reserved.
+  - generic [ref=e87]:
+    - generic [ref=e88]:
+      - generic [ref=e89]: Need Help? Chat with us
+      - button "Open WhatsApp chat" [ref=e90] [cursor=pointer]:
+        - img [ref=e91]
+    - button "Scroll to top":
+      - img
+  - alert [ref=e93]
+```
