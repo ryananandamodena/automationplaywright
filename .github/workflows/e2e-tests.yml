@@ -41,18 +41,21 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: |
+            Ryan/package-lock.json
+            Ryan/test-playwright/package-lock.json
       
       # 3. Install dependencies
       - name: Install dependencies
         run: |
-          npm ci
-          npx playwright install --with-deps chromium
+          npm ci --prefix Ryan
+          npm ci --prefix Ryan/test-playwright
+          npx --prefix Ryan/test-playwright playwright install --with-deps chromium
       
       # 4. Run Contract Creation Test
       - name: Run Contract Creation Test
         if: matrix.test == 'contract'
-        working-directory: test-playwright
+        working-directory: Ryan/test-playwright
         env:
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
@@ -64,7 +67,7 @@ jobs:
       # 5. Run Full E2E Test (Contract + Service)
       - name: Run Full E2E Test
         if: matrix.test == 'service'
-        working-directory: test-playwright
+        working-directory: Ryan/test-playwright
         env:
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
@@ -76,7 +79,7 @@ jobs:
       # 6. Run Approval Flow Test
       - name: Run Approval Flow Test
         if: matrix.test == 'approval'
-        working-directory: test-playwright
+        working-directory: Ryan/test-playwright
         env:
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
@@ -96,8 +99,8 @@ jobs:
         with:
           name: test-screenshots-${{ matrix.test }}
           path: |
-            test-playwright/*.png
-            test-results/
+            Ryan/test-playwright/*.png
+            Ryan/test-playwright/test-results/
           retention-days: 7
       
       # 8. Send notification on failure (optional - uncomment if needed)
