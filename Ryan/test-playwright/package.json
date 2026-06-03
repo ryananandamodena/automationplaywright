@@ -10,6 +10,16 @@
     "test:sales-form": "playwright test fms/fms/vehicle/sales/sales-form-mcp.spec.js",
     "test:sales-form:headed": "playwright test fms/fms/vehicle/sales/sales-form-mcp.spec.js --headed",
     "test:sales-form:debug": "playwright test fms/fms/vehicle/sales/sales-form-mcp.spec.js --debug",
+    "test:visual": "playwright test visual-tests/ --project=chromium",
+    "test:visual:headed": "playwright test visual-tests/ --headed",
+    "test:visual:all": "playwright test visual-tests/",
+    "test:visual:debug": "PWDEBUG=1 playwright test visual-tests/",
+    "test:visual:hero": "playwright test prive/prive-visual-ai.spec.js -g \"Hero Section\"",
+    "test:allure": "playwright test",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "allure:serve": "allure serve allure-results",
+    "test:allure:report": "npm run test:allure && npm run allure:generate && npm run allure:open",
     "codegen": "playwright codegen",
     "show-report": "playwright show-report"
   },
@@ -17,8 +27,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@applitools/eyes-playwright": "^1.47.4",
     "@playwright/mcp": "^0.0.43",
     "@playwright/test": "^1.56.1",
+    "allure-commandline": "^2.42.0",
+    "allure-playwright": "^3.9.0",
     "exceljs": "^4.4.0"
   },
   "dependencies": {

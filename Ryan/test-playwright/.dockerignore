@@ -1,0 +1,72 @@
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Test results (will be generated in container)
+test-results
+test-results-*
+playwright-report
+allure-results
+allure-report
+screenshots
+prive-screenshots
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+!README.md
+
+# Temp files
+*.log
+*.tmp
+*.cache
+
+# Build artifacts
+dist
+build
+coverage
+
+# Env files (use docker-compose env instead)
+.env
+.env.local
+.env.*.local
+
+# Storage state (should be generated fresh)
+storageState.json
+
+# Screenshots and videos (generated at runtime)
+*.png
+*.jpg
+*.webm
+*.mp4
+
+# JSON result files (generated at runtime)
+*-results.json
+*.json
+!package.json
+!tsconfig.json
+!playwright.config.js
+
+# Misc
+.dockerignore
+Dockerfile
+docker-compose.yml

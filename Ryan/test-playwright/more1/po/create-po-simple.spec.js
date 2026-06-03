@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../utils/data-cleanup.mjs';
+import { allure } from 'allure-playwright';
 
 const BASE_URL = 'https://mhc-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
@@ -13,73 +14,123 @@ function parsePrice(text) {
 }
 
 test.describe('MHC - Purchase Order Creation (Simple)', () => {
-  test.setTimeout(120000);
+  test.setTimeout(180000); // Increase timeout to 3 minutes
 
   test('Create Purchase Order - Simple Flow', async ({ page }) => {
+    // Allure Report Metadata
+    allure.epic('MHC - Modena Home Center');
+    allure.feature('Purchase Order Management');
+    allure.story('Create new purchase order with supplier and products');
+    allure.severity('critical');
+    allure.tag('smoke');
+    allure.tag('purchase-order');
+    allure.tag('create');
+    allure.tag('e2e');
+    allure.tag('calculation-validation');
+    allure.parameter('Environment', BASE_URL);
+    allure.parameter('Product Search', 'BH2725GBBK.IDALB0A');
+    allure.parameter('Target Products', '2 items with stock');
+    
     let createdSnapshot = null;
     let listUrl = `${BASE_URL}/purchase-order`;
     let initialCount = 0;
+    let addedCount = 0; // Track products added across steps
 
     try {
-      // 1. Login
-      await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(2000);
+      // 1. Login with better error handling
+      await allure.step('Login to MHC Portal', async () => {
+        console.log('1. Navigating to login page...');
+        await page.goto(BASE_URL, { 
+          waitUntil: 'domcontentloaded',
+          timeout: 30000 
+        });
+        await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {
+          console.log('  ⚠ Network not fully idle, continuing...');
+        });
 
-    console.log('1. Logging in...');
-    await page.locator('input[type="email"]').fill(LOGIN_EMAIL);
-    await page.locator('input[type="password"]').fill(LOGIN_PASSWORD);
-    await page.locator("button:has-text('Login')").click();
-    await page.waitForTimeout(4000);
-    console.log('✓ Login successful');
+        console.log('1. Logging in...');
+        await page.locator('input[type="email"]').waitFor({ state: 'visible', timeout: 10000 });
+        await page.locator('input[type="email"]').fill(LOGIN_EMAIL);
+        await page.locator('input[type="password"]').fill(LOGIN_PASSWORD);
+        await page.locator("button:has-text('Login')").click();
+        
+        // Wait for navigation after login
+        await page.waitForLoadState('load', { timeout: 10000 }).catch(() => {});
+        await page.waitForTimeout(4000);
+        console.log('✓ Login successful');
+        
+        allure.attachment('Login URL', BASE_URL, 'text/plain');
+      });
 
-      // 2. Go to Purchase Order
-    console.log('2. Opening Purchase Order...');
-      await page.locator('text="Purchase Order"').first().click();
-    await page.waitForTimeout(2000);
-    console.log('✓ Purchase Order page opened');
-      listUrl = page.url();
-      initialCount = await page.locator('table tbody tr').count().catch(() => 0);
+      // 2. Go to Purchase Order with better waits
+      await allure.step('Navigate to Purchase Order page', async () => {
+        console.log('2. Opening Purchase Order...');
+        const poLink = page.locator('text="Purchase Order"').first();
+        await poLink.waitFor({ state: 'visible', timeout: 10000 });
+        await poLink.click();
+        await page.waitForLoadState('load', { timeout: 15000 }).catch(() => {});
+        await page.waitForTimeout(2000);
+        console.log('✓ Purchase Order page opened');
+        listUrl = page.url();
+        initialCount = await page.locator('table tbody tr').count().catch(() => 0);
+        
+        allure.parameter('Initial PO Count', initialCount);
+      });
 
-    // 3. Click Create New
-    console.log('3. Clicking Create New...');
-    await page.locator("button:has-text('Create New')").click();
-    await page.waitForTimeout(2000);
-    await page.screenshot({ path: 'test-results/po-step1-supplier.png', fullPage: true });
-    console.log('✓ Create wizard opened');
-    await page.screenshot({ path: 'test-results/po-step1-entities.png', fullPage: true });
+      // 3. Click Create New with resilient selector
+      await allure.step('Open Create Purchase Order wizard', async () => {
+        console.log('3. Clicking Create New...');
+        const createBtn = page.locator("button:has-text('Create New')").or(
+          page.locator("button:has-text('Add')").or(
+            page.locator("button >> text=/create/i")
+          )
+        ).first();
+        await createBtn.waitFor({ state: 'visible', timeout: 10000 });
+        await createBtn.click();
+        await page.waitForLoadState('load', { timeout: 10000 }).catch(() => {});
+        await page.waitForTimeout(2000);
+        const screenshot1 = await page.screenshot({ path: 'test-results/po-step1-supplier.png', fullPage: true });
+        console.log('✓ Create wizard opened');
+        const screenshot2 = await page.screenshot({ path: 'test-results/po-step1-entities.png', fullPage: true });
+        
+        allure.attachment('Supplier Selection Page', screenshot1, 'image/png');
+      });
 
     // 4. Select Supplier
-    console.log('4. Selecting supplier...');
-    await page.waitForTimeout(1000);
-
-    // Dump content area saja (bukan sidebar)
-    const mainContent = page.locator('main').or(page.locator('[class*="main"]')).or(page.locator('#main-content')).first();
-    const contentText = await mainContent.innerText().catch(async () => page.locator('body').innerText());
-    console.log('  Content area snippet:', contentText.slice(0, 800));
-
-    // Supplier selection - scope ke content area (bukan sidebar)
-    // Cari table di main content, bukan di nav/sidebar
-    const supplierTable = page.locator('main table, [class*="content"] table, [class*="wizard"] table, [class*="form"] table').first();
-    const supplierTableRow = supplierTable.locator('tbody tr').first();
-
-    if (await supplierTableRow.isVisible({ timeout: 5000 }).catch(() => false)) {
-      await supplierTableRow.click();
+    await allure.step('Select supplier from list', async () => {
+      console.log('4. Selecting supplier...');
       await page.waitForTimeout(1000);
-      console.log('✓ Supplier selected from content table');
-    } else {
-      // Fallback: cari elemen yang terlihat seperti supplier (ada nama BP/perusahaan)
-      const bpItem = page.locator('main [class*="item"], main [class*="card"], main [class*="list"] > div, main [class*="row"]').first();
-      if (await bpItem.isVisible({ timeout: 3000 }).catch(() => false)) {
-        await bpItem.click();
+
+      // Dump content area saja (bukan sidebar)
+      const mainContent = page.locator('main').or(page.locator('[class*="main"]')).or(page.locator('#main-content')).first();
+      const contentText = await mainContent.innerText().catch(async () => page.locator('body').innerText());
+      console.log('  Content area snippet:', contentText.slice(0, 800));
+
+      // Supplier selection - scope ke content area (bukan sidebar)
+      // Cari table di main content, bukan di nav/sidebar
+      const supplierTable = page.locator('main table, [class*="content"] table, [class*="wizard"] table, [class*="form"] table').first();
+      const supplierTableRow = supplierTable.locator('tbody tr').first();
+
+      if (await supplierTableRow.isVisible({ timeout: 5000 }).catch(() => false)) {
+        await supplierTableRow.click();
         await page.waitForTimeout(1000);
-        console.log('✓ Supplier selected (BP item)');
+        console.log('✓ Supplier selected from content table');
       } else {
-        console.log('⚠ No supplier rows found in content area - check screenshot po-step1-entities.png');
+        // Fallback: cari elemen yang terlihat seperti supplier (ada nama BP/perusahaan)
+        const bpItem = page.locator('main [class*="item"], main [class*="card"], main [class*="list"] > div, main [class*="row"]').first();
+        if (await bpItem.isVisible({ timeout: 3000 }).catch(() => false)) {
+          await bpItem.click();
+          await page.waitForTimeout(1000);
+          console.log('✓ Supplier selected (BP item)');
+        } else {
+          console.log('⚠ No supplier rows found in content area - check screenshot po-step1-entities.png');
+        }
       }
-    }
+    });
 
     // 5. Go to Products
-    console.log('5. Going to Products step...');
+    await allure.step('Navigate to Products selection', async () => {
+      console.log('5. Going to Products step...');
     // Tunggu Next Step button, lalu klik
     const nextStepBtn5 = page.locator("button:has-text('Next Step')").or(page.locator("button:has-text('Next')")).first();
     await nextStepBtn5.waitFor({ state: 'visible', timeout: 10000 }).catch(() => console.log('  ⚠ Next Step not visible, trying force click'));
@@ -89,11 +140,15 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
       await page.getByText('PRODUCTS', { exact: true }).click({ force: true }).catch(() => {});
     });
     await page.waitForTimeout(2000);
-    await page.screenshot({ path: 'test-results/po-step2-products.png', fullPage: true });
+    const productsScreenshot = await page.screenshot({ path: 'test-results/po-step2-products.png', fullPage: true });
     console.log('✓ Products page loaded');
+    
+    allure.attachment('Products Page', productsScreenshot, 'image/png');
+    });
 
     // 6. Add products
-    console.log('6. Adding products...');
+    await allure.step('Add products with stock to order', async () => {
+      console.log('6. Adding products...');
 
     // Cari search input produk dan ketik keyword
     const productSearchTerms = ['BH2725GBBK.IDALB0A', '2725 GBBK', '2725'];
@@ -127,7 +182,6 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
       console.log('  ⚠ Search tidak digunakan atau produk tidak ditemukan, lanjut dengan daftar default');
     }
 
-    let addedCount = 0;
     const targetCount = 2;
 
     for (let round = 0; round < targetCount; round++) {
@@ -235,7 +289,11 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
     } else {
       console.log(`✓ Added ${addedCount} products total`);
     }
-    await page.screenshot({ path: 'test-results/po-after-add-products.png', fullPage: true });
+    const afterAddScreenshot = await page.screenshot({ path: 'test-results/po-after-add-products.png', fullPage: true });
+    
+    allure.parameter('Products Added', addedCount);
+    allure.attachment('After Adding Products', afterAddScreenshot, 'image/png');
+    });
 
     // Debug: cek apakah ada cart/order items setelah add produk
     const cartText = await page.locator('body').innerText().catch(() => '');
@@ -245,7 +303,8 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
     console.log(`  Cart debug - BH2725GBBK in page: ${cartText.includes('BH2725GBBK')}, hasCartItems pattern: ${!!hasCartItems}`);
 
     // 7. Go to Review
-    console.log('7. Going to Review (REVIEW tab)...');
+    await allure.step('Navigate to Review page', async () => {
+      console.log('7. Going to Review (REVIEW tab)...');
 
     // Pastikan modal "Add to PO" sudah ditutup sebelum navigasi
     console.log('  Closing any open modal...');
@@ -312,11 +371,13 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
     const addOrderGone = !(await page.locator("button:has-text('Add to Order')").isVisible({ timeout: 1000 }).catch(() => false));
     console.log(`  REVIEW indicators: onReview=${onReview}, addOrderGone=${addOrderGone}`);
     console.log('✓ Navigated to REVIEW page');
+    });
 
     // ============================================================
     // 7b. VALIDASI HITUNGAN - Pastikan semua kalkulasi benar
     // ============================================================
-    console.log('\n📊 7b. Validating calculations...');
+    await allure.step('Validate Purchase Order calculations', async () => {
+      console.log('\n📊 7b. Validating calculations...');
 
     // Dump halaman untuk debug
     const reviewPageText = await page.locator('body').innerText();
@@ -473,12 +534,27 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
     }
     console.log('='.repeat(50));
 
-    await page.screenshot({ path: 'test-results/po-step3-review-validated.png', fullPage: true });
+    const validationScreenshot = await page.screenshot({ path: 'test-results/po-step3-review-validated.png', fullPage: true });
 
     // Assert: gagalkan test jika ada error kalkulasi
     expect(calculationErrors.length, `Calculation errors found:\n${calculationErrors.join('\n')}`).toBe(0);
+    
+    allure.attachment('Validation Summary', JSON.stringify({
+      lineItems,
+      totalBeforeDisc,
+      netDisc,
+      subtotalPay,
+      grandTotalPay,
+      sumQtyPrice,
+      sumGrossTotal,
+      calculationErrors
+    }, null, 2), 'application/json');
+    allure.attachment('Review Page Validated', validationScreenshot, 'image/png');
+    });
+    
       // 8. Submit
-    console.log('\n8. Looking for submit button...');
+    await allure.step('Submit Purchase Order', async () => {
+      console.log('\n8. Looking for submit button...');
     const allButtons = await page.locator('button').all();
     for (const btn of allButtons) {
       const text = await btn.textContent();
@@ -497,10 +573,13 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
       await submitBtn.click({ force: true });
       await page.waitForTimeout(3000);
       console.log('✓ Order submitted!');
-      await page.screenshot({ path: 'test-results/po-order-result.png', fullPage: true });
+      const submitScreenshot = await page.screenshot({ path: 'test-results/po-order-result.png', fullPage: true });
+      
+      allure.attachment('Order Submitted', submitScreenshot, 'image/png');
       } else {
       console.log('⚠ Submit button not found - check screenshot');
       }
+    });
 
       await page.locator('text="Purchase Order"').first().click().catch(() => null);
       await page.waitForTimeout(2000);

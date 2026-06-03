@@ -1,0 +1,34 @@
+# Gitignore untuk test-playwright folder
+# Environment variables (API keys, secrets)
+.env
+.env.local
+
+# Test results
+test-results/
+playwright-report/
+prive-screenshots/
+screenshots/
+*.png
+
+# Allure reports
+allure-results/
+allure-report/
+.allure/
+
+# Node modules
+node_modules/
+
+# Storage state (may contain sensitive data)
+storageState.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

@@ -1,0 +1,40 @@
+services:
+  playwright-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mhc-playwright-tests
+    environment:
+      - CI=true
+      - NODE_ENV=test
+      - BASE_URL_MHC=https://mhc-dev.modena.com
+      - BASE_URL_FMS=https://portal-dev.modena.com
+    volumes:
+      # Mount test results for viewing on host
+      - ./test-results:/app/test-results
+      - ./allure-results:/app/allure-results
+      - ./allure-report:/app/allure-report
+      - ./screenshots:/app/screenshots
+      - ./playwright-report:/app/playwright-report
+    networks:
+      - test-network
+    command: npx playwright test --reporter=list,allure-playwright
+
+  # Optional: Allure report server
+  allure-server:
+    image: frankescobar/allure-docker-service:2.29.0
+    container_name: allure-report-server
+    environment:
+      - CHECK_RESULTS_EVERY_SECONDS=3
+      - KEEP_HISTORY=TRUE
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./allure-results:/app/allure-results
+      - ./allure-report:/app/allure-report
+    networks:
+      - test-network
+
+networks:
+  test-network:
+    driver: bridge

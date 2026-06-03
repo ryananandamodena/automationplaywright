@@ -66,7 +66,14 @@ async function createContract() {
     
     // Open form
     console.log('\n📍 OPEN FORM');
-    await page.click('button:has-text("Add Contract")');
+    // Multiple selector strategies for resilience
+    const addButton = page.locator('button:has-text("Add Contract")').or(
+      page.locator('button:has-text("Add")'),
+      page.locator('button[class*="add"]'),
+      page.locator('button >> text=/add/i')
+    );
+    await addButton.waitFor({ state: 'visible', timeout: 10000 });
+    await addButton.click();
     await page.waitForTimeout(3000);
     console.log('✓ Form opened');
     
@@ -157,7 +164,13 @@ async function createContract() {
     
     // Submit
     console.log('\n📍 SUBMIT');
-    await page.click('button:has-text("Save Contract")');
+    const saveButton = page.locator('button:has-text("Save Contract")').or(
+      page.locator('button:has-text("Save")'),
+      page.locator('button[type="submit"]'),
+      page.locator('button >> text=/save/i')
+    );
+    await saveButton.waitFor({ state: 'visible', timeout: 5000 });
+    await saveButton.click();
     console.log('Clicked Save Contract button');
     await page.waitForTimeout(3000);
     
