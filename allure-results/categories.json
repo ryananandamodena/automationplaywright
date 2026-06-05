@@ -1,0 +1,1 @@
+[{"name":"Failed Tests","matchedStatuses":["failed"]},{"name":"Flaky Tests","matchedStatuses":["failed"],"messageRegex":".*timeout.*"}]
