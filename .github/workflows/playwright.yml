@@ -31,7 +31,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Ryan/test-playwright/more1/mhc-full
+        working-directory: test-playwright/more1/mhc-full
 
     steps:
       # ── Checkout code ────────────────────────────────────
@@ -44,12 +44,12 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: Ryan/test-playwright/package-lock.json
+          cache-dependency-path: test-playwright/package-lock.json
 
       # ── Install dependencies ─────────────────────────────
       - name: Install npm dependencies
         run: npm install
-        working-directory: Ryan/test-playwright
+        working-directory: test-playwright
 
       # ── Install Playwright browsers ──────────────────────
       - name: Install Playwright Chromium
@@ -97,7 +97,7 @@ jobs:
         if: always()
         with:
           name: playwright-report-${{ github.run_number }}
-          path: Ryan/test-playwright/more1/mhc-full/playwright-report/
+          path: test-playwright/more1/mhc-full/playwright-report/
           retention-days: 30
 
       # ── Upload test results & screenshots ─────────────────
@@ -106,7 +106,7 @@ jobs:
         if: failure()
         with:
           name: test-results-${{ github.run_number }}
-          path: Ryan/test-playwright/test-results/
+          path: test-playwright/more1/mhc-full/test-results/
           retention-days: 7
 
       # ── Upload JSON results ────────────────────────────────
@@ -115,5 +115,5 @@ jobs:
         if: always()
         with:
           name: test-results-json-${{ github.run_number }}
-          path: Ryan/test-playwright/more1/mhc-full/test-results/results.json
+          path: test-playwright/more1/mhc-full/test-results/results.json
           retention-days: 30

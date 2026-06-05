@@ -47,18 +47,18 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: Ryan/test-playwright/package-lock.json
+          cache-dependency-path: test-playwright/package-lock.json
 
       - name: 📦 Install dependencies
-        working-directory: Ryan/test-playwright
+        working-directory: test-playwright
         run: npm ci
 
       - name: 🎭 Install Playwright browsers
-        working-directory: Ryan/test-playwright
+        working-directory: test-playwright
         run: npx playwright install --with-deps ${{ matrix.project }}
 
       - name: 🧪 Run Playwright tests
-        working-directory: Ryan/test-playwright
+        working-directory: test-playwright
         run: |
           if [ "${{ github.event.inputs.test_suite }}" == "smoke" ]; then
             npx playwright test --grep @smoke --project=${{ matrix.project }}
@@ -78,7 +78,7 @@ jobs:
 
       - name: 📊 Generate Allure report
         if: always()
-        working-directory: Ryan/test-playwright
+        working-directory: test-playwright
         run: npx allure generate allure-results -o allure-report --clean
 
       - name: 📤 Upload Allure results
@@ -86,7 +86,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-results-${{ matrix.project }}
-          path: Ryan/test-playwright/allure-results/
+          path: test-playwright/allure-results/
           retention-days: 30
 
       - name: 📤 Upload Allure report
@@ -94,7 +94,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-report-${{ matrix.project }}
-          path: Ryan/test-playwright/allure-report/
+          path: test-playwright/allure-report/
           retention-days: 30
 
       - name: 📤 Upload Playwright report
@@ -102,7 +102,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report-${{ matrix.project }}
-          path: Ryan/test-playwright/playwright-report/
+          path: test-playwright/playwright-report/
           retention-days: 30
 
       - name: 📸 Upload test screenshots
@@ -110,7 +110,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-screenshots-${{ matrix.project }}
-          path: Ryan/test-playwright/test-results/
+          path: test-playwright/test-results/
           retention-days: 7
 
   publish-report:

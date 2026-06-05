@@ -19,7 +19,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'retain-on-failure',
-    headless: false,
+    headless: process.env.PLAYWRIGHT_HEADLESS === 'true' || !!process.env.CI,
     viewport: { width: 1280, height: 720 },
   },
   projects: [

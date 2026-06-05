@@ -38,34 +38,40 @@ if (fs.existsSync(envFile)) {
 const args = process.argv.slice(2);
 const headless = args.includes('--headless');
 const noEmail = args.includes('--no-email');
+const noRun = args.includes('--no-run');
 
-// Bersihkan hasil lama
-if (fs.existsSync(RESULTS_JSON)) fs.unlinkSync(RESULTS_JSON);
-if (fs.existsSync(path.join(__dirname, 'test-results')))
-  fs.readdirSync(path.join(__dirname, 'test-results'))
-    .filter(f => f.endsWith('.png') || f.endsWith('.webm'))
-    .forEach(f => fs.unlinkSync(path.join(__dirname, 'test-results', f)));
+// Bersihkan hasil lama jika akan menjalankan test
+if (!noRun) {
+  if (fs.existsSync(RESULTS_JSON)) fs.unlinkSync(RESULTS_JSON);
+  if (fs.existsSync(path.join(__dirname, 'test-results')))
+    fs.readdirSync(path.join(__dirname, 'test-results'))
+      .filter(f => f.endsWith('.png') || f.endsWith('.webm'))
+      .forEach(f => fs.unlinkSync(path.join(__dirname, 'test-results', f)));
+}
 
 console.log('\n' + '='.repeat(60));
 console.log('🤖 MHC AUTOMATION TEST SUITE');
 console.log('   Target: https://mhc-dev.modena.com');
 console.log(`   Mode: ${headless ? 'Headless' : 'Headed (browser terlihat)'}`);
 console.log(`   Email: ${noEmail ? 'Dinonaktifkan' : 'Aktif → ryan.ananda@modena.com'}`);
+if (noRun) console.log('   Test Execution: SKIPPED (--no-run)');
 console.log('='.repeat(60) + '\n');
 
 // Jalankan Playwright
 let exitCode = 0;
-try {
-  const headlessFlag = headless ? ' --headed=false' : ' --headed';
-  const cmd = `npx playwright test --config="${CONFIG_FILE}"${headlessFlag} --reporter=line,json,html`;
-  console.log('▶ Menjalankan tests...\n');
-  execSync(cmd, {
-    cwd: __dirname,
-    stdio: 'inherit',
-    env: { ...process.env },
-  });
-} catch (err) {
-  exitCode = err.status || 1;
+if (!noRun) {
+  try {
+    const headlessFlag = headless ? ' --headed=false' : ' --headed';
+    const cmd = `npx playwright test --config="${CONFIG_FILE}"${headlessFlag} --reporter=line,json,html`;
+    console.log('▶ Menjalankan tests...\n');
+    execSync(cmd, {
+      cwd: __dirname,
+      stdio: 'inherit',
+      env: { ...process.env },
+    });
+  } catch (err) {
+    exitCode = err.status || 1;
+  }
 }
 
 // Baca dan tampilkan summary
