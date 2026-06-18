@@ -1,24 +1,43 @@
 name: E2E Tests - FMS Contract & Service
 
 on:
-  # Trigger on push to main/master/develop
   push:
     branches: [ main, master, develop ]
+    paths:
+      - 'Ryan/**'
+      - '.github/workflows/e2e-tests.yml'
   
-  # Trigger on pull request
   pull_request:
     branches: [ main, master, develop ]
+    paths:
+      - 'Ryan/**'
   
-  # Manual trigger
   workflow_dispatch:
+    inputs:
+      test_type:
+        description: 'Test type to run'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - contract
+          - e2e
+          - approval
+          - vehicle
+          - prive
+      browser:
+        description: 'Browser to use'
+        required: true
+        default: 'chromium'
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
   
-  # Scheduled run (every day at 2 AM WIB)
   schedule:
-    - cron: '0 19 * * *'  # 2 AM WIB = 7 PM UTC
-
-permissions:
-  contents: read
-  actions: read
+    - cron: '0 2 * * *'
 
 jobs:
   e2e-tests:
@@ -27,35 +46,29 @@ jobs:
     
     strategy:
       matrix:
-        test: [contract, service, approval]
+        test: [contract, e2e, approval]
       fail-fast: false
     
     steps:
-      # 1. Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: |
-            package-lock.json
-            test-playwright/package-lock.json
+          cache-dependency-path: Ryan/package-lock.json
       
-      # 3. Install dependencies
       - name: Install dependencies
+        working-directory: Ryan
         run: |
           npm ci
-          npm ci --prefix test-playwright
-          npx --prefix test-playwright playwright install --with-deps chromium
+          npx playwright install --with-deps chromium
       
-      # 4. Run Contract Creation Test
       - name: Run Contract Creation Test
-        if: matrix.test == 'contract'
-        working-directory: test-playwright
+        if: matrix.test == 'contract' || github.event.inputs.test_type == 'all' || github.event.inputs.test_type == 'contract'
+        working-directory: Ryan/test-playwright
         env:
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
@@ -64,10 +77,9 @@ jobs:
         run: node create-contract-simple.mjs
         continue-on-error: true
       
-      # 5. Run Full E2E Test (Contract + Service)
       - name: Run Full E2E Test
-        if: matrix.test == 'service'
-        working-directory: test-playwright
+        if: matrix.test == 'e2e' || github.event.inputs.test_type == 'all' || github.event.inputs.test_type == 'e2e'
+        working-directory: Ryan/test-playwright
         env:
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
@@ -76,10 +88,9 @@ jobs:
         run: node contract-service-e2e-flexible.mjs
         continue-on-error: true
       
-      # 6. Run Approval Flow Test
       - name: Run Approval Flow Test
-        if: matrix.test == 'approval'
-        working-directory: test-playwright
+        if: matrix.test == 'approval' || github.event.inputs.test_type == 'all' || github.event.inputs.test_type == 'approval'
+        working-directory: Ryan/test-playwright
         env:
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
@@ -92,34 +103,37 @@ jobs:
         run: node contract-approval-e2e.mjs
         continue-on-error: true
       
-      # 7. Upload screenshots on failure
-      - name: Upload screenshots
+      - name: Upload screenshots on failure
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-screenshots-${{ matrix.test }}
-          path: |
-            test-playwright/*.png
-            test-playwright/test-results/
+          name: screenshots-${{ matrix.test }}
+          path: Ryan/test-playwright/*.png
           retention-days: 7
       
-      # 8. Send notification on failure (optional - uncomment if needed)
-      # - name: Send Slack notification
-      #   if: failure()
-      #   uses: slackapi/slack-github-action@v1
-      #   with:
-      #     webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #     payload: |
-      #       {
-      #         "text": "E2E Tests Failed on ${{ matrix.test }}",
-      #         "blocks": [
-      #           {
-      #             "type": "section",
-      #             "text": {
-      #               "type": "mrkdwn",
-      #               "text": "*E2E Tests Failed* :x:\n*Test:* ${{ matrix.test }}\n*Branch:* ${{ github.ref }}\n*Commit:* ${{ github.sha }}"
-      #             }
-      #           }
-      #         ]
-      #       }
-
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.test }}
+          path: Ryan/test-results/
+          retention-days: 7
+      
+      - name: Send Slack notification on failure
+        if: failure()
+        uses: slackapi/slack-github-action@v1
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            {
+              "text": "E2E Tests Failed on ${{ matrix.test }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*E2E Tests Failed* :x:\n*Test:* ${{ matrix.test }}\n*Branch:* ${{ github.ref }}\n*Commit:* ${{ github.sha }}"
+                  }
+                }
+              ]
+            }

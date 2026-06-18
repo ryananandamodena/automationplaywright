@@ -11,20 +11,22 @@
 import { chromium } from 'playwright';
 import { cleanupContractBySnapshot, isAutoCleanupEnabled } from './utils/data-cleanup.mjs';
 
-const BASE_URL = 'https://portal-dev.modena.com';
+// Load environment variables (for CI/CD support)
+const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
+const HEADLESS = process.env.HEADLESS === 'true';
 
 // User accounts
 const USERS = {
   admin: {
-    email: 'ryan.ananda@modena.com',
-    password: 'P@ssw0rd_ryan.ananda',
-    name: 'Ryan Ananda',
+    email: process.env.ADMIN_EMAIL || 'ryan.ananda@modena.com',
+    password: process.env.ADMIN_PASSWORD || 'P@ssw0rd_ryan.ananda',
+    name: process.env.ADMIN_NAME || 'Ryan Ananda',
     role: 'Admin/Creator'
   },
   approver1: {
-    email: 'novyan.ramdhan@modena.com',
-    password: 'P@ssw0rd_novyan.ramdhan',
-    name: 'Novyan Ramdhan',
+    email: process.env.APPROVER1_EMAIL || 'novyan.ramdhan@modena.com',
+    password: process.env.APPROVER1_PASSWORD || 'P@ssw0rd_novyan.ramdhan',
+    name: process.env.APPROVER1_NAME || 'Novyan Ramdhan',
     role: 'Approver 1'
   },
   approver2: {
@@ -479,8 +481,8 @@ async function runApprovalE2E() {
   console.log('█'.repeat(60));
   
   const browser = await chromium.launch({
-    headless: false,
-    args: ['--start-maximized']
+    headless: HEADLESS,
+    args: HEADLESS ? ['--no-sandbox', '--disable-setuid-sandbox'] : ['--start-maximized']
   });
   
   const results = {

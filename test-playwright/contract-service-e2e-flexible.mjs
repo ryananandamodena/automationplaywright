@@ -14,12 +14,14 @@ import {
   isAutoCleanupEnabled,
 } from './utils/data-cleanup.mjs';
 
-const BASE_URL = 'https://portal-dev.modena.com';
+// Load environment variables (for CI/CD support)
+const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
 const USER = {
-  email: 'ryan.ananda@modena.com',
-  password: 'P@ssw0rd_ryan.ananda',
-  name: 'Ryan Ananda'
+  email: process.env.ADMIN_EMAIL || 'ryan.ananda@modena.com',
+  password: process.env.ADMIN_PASSWORD || 'P@ssw0rd_ryan.ananda',
+  name: process.env.ADMIN_NAME || 'Ryan Ananda'
 };
+const HEADLESS = process.env.HEADLESS === 'true';
 
 const createdSnapshots = {
   contract: null,
@@ -516,8 +518,8 @@ async function runE2E() {
   console.log('█'.repeat(60));
   
   const browser = await chromium.launch({
-    headless: false,
-    args: ['--incognito', '--start-maximized']
+    headless: HEADLESS,
+    args: HEADLESS ? ['--no-sandbox', '--disable-setuid-sandbox'] : ['--incognito', '--start-maximized']
   });
   
   const context = await browser.newContext({ viewport: null });
