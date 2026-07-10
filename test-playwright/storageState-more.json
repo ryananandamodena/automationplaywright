@@ -1,0 +1,54 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "https://more-dev.modena.com",
+      "localStorage": [
+        {
+          "name": "theme",
+          "value": "light"
+        },
+        {
+          "name": "role_code",
+          "value": "USR"
+        },
+        {
+          "name": "email",
+          "value": "muhzaenal5@gmail.com"
+        },
+        {
+          "name": "access_token_mhc",
+          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBY2N0Q29kZSI6Il9TWVMwMDAwMDAxMTAxMiIsIkFjY3ROYW1lIjoiR29vZHMgaW4gVHJhbnNpdCAoU0VGLCBNSEMwMSkiLCJBZGRyZXNzIjoiSmxuLiBCb3VsZXZhcmQgVGltdXIgTkUxLzUzIEtlbGFwYSBHYWRpbmcsIEpha2FydGEgVXRhcmEiLCJCUExGck5hbWUiOiJNSEMgS2VsYXBhIEdhZGluZyIsIkJQTElkIjoiMyIsIkJQTE5hbWUiOiJNSEMwMSIsIkNpdHkiOiJKYWthcnRhIiwiR3JvdXBDb2RlIjoiIiwiTUlfY2FyZGNvZGUiOlt7IkNhcmRDb2RlIjoiVlIwMS0wMDAwMDAwMDQiLCJDYXJkTmFtZSI6Ik1vZGVuYSBJbmRvbmVzaWEtU1BMLU1IQzAxIiwiVV9NX0JQX0NPREVfTUkiOiJDMDE4LTAwMDc0NiIsIlVfTV9UUF9UUlNLUyI6IlNQTCJ9LHsiQ2FyZENvZGUiOiJWUjAxLTAwMDAwMDAwMiIsIkNhcmROYW1lIjoiTW9kZW5hIEluZG9uZXNpYS1UUkQtTUhDMDEiLCJVX01fQlBfQ09ERV9NSSI6IkMwMTgtMDAwNjc3IiwiVV9NX1RQX1RSU0tTIjoiVFJEIn0seyJDYXJkQ29kZSI6IlZSMDEtMDAwMDAwMDAzIiwiQ2FyZE5hbWUiOiJNb2RlbmEgSW5kb25lc2lhLVBNUi1NSEMwMSIsIlVfTV9CUF9DT0RFX01JIjoiQzAxOC0wMDA2NzgiLCJVX01fVFBfVFJTS1MiOiJQTVIifSx7IkNhcmRDb2RlIjoiVlIwMS0wMDAwMDAwMDEiLCJDYXJkTmFtZSI6Ik1vZGVuYSBJbmRvbmVzaWEtRkdTLU1IQzAxIiwiVV9NX0JQX0NPREVfTUkiOiJDMDE4LTAwMDY3NiIsIlVfTV9UUF9UUlNLUyI6IkZHUyJ9LHsiQ2FyZENvZGUiOiJWUjAxLTAwMDAwMDAwNiIsIkNhcmROYW1lIjoiTW9kZW5hIEluZG9uZXNpYS1USUstTUhDMDEiLCJVX01fQlBfQ09ERV9NSSI6IkMwMTgtMDAxMDg5IiwiVV9NX1RQX1RSU0tTIjoiVElLIn1dLCJTZXJpZXNJc3N1ZSI6MCwiU2VyaWVzUGF5bWVudCI6MCwiU2VyaWVzUmVjZWlwdCI6MCwiZW1haWwiOiJtdWh6YWVuYWw1QGdtYWlsLmNvbSIsImV4cCI6MTc4MjE4NTY1MCwiaWF0IjoxNzgyMTgyMDUwLCJuZXRfZGlzY291bnQiOjAsInBob25lIjoiMjE0NTg3NDc2OSIsInJvbGVfaWQiOiI2Iiwicm9sZV9uYW1lIjoiQWRtaW4iLCJ1X21fbGVnYWwiOiJTRUYiLCJ1X21fcGtwIjoiWSIsInVzZXJfZnVsbG5hbWUiOiIiLCJ1c2VyX2lkIjoiMjAyMi5FMjAxNSIsInVzZXJfbmFtZSI6IlNhbGVzIERlYWxlciBNSEMgS2VsYXBhIEdhZGluZyAoS0cpIiwidXNlcl9zYXBfY29kZSI6IiIsInVzZXJfc2FwX2NvZGVfbWhjIjoiMiIsInVzZXJfd2FyZWhvdXNlX2Rpc3BsYXkiOiIwMUdEIiwidXNlcl93YXJlaG91c2VfaW5kZW50IjoiMDFHSSIsInVzZXJfd2FyZWhvdXNlX3N0b2NrIjoiMDFHUyIsIndhcmVob3VzZV9kaXNwbGF5X25hbWUiOiJNSEMgS2VsYXBhIEdhZGluZyAtIERpc3BsYXkiLCJ3YXJlaG91c2VfaW5kZW50X25hbWUiOiJNSEMgS2VsYXBhIEdhZGluZyAtIEluZGVuIiwid2FyZWhvdXNlX3N0b2NrX25hbWUiOiJNSEMgS2VsYXBhIEdhZGluZyAtIFN0b2NrIn0.278FJY62_Ffi9UyyMIhNKgAIMnMJYpq4FJI5h_qo7To"
+        },
+        {
+          "name": "access_token",
+          "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcC5tb2RlbmEuY29tIiwiYXVkIjoiaHR0cHM6Ly9hcHAubW9kZW5hLmNvbSIsImlhdCI6MTc4MjE4MjA0OCwiZXhwIjoxNzgyMjY4NDQ4LCJ1c2VyX2lkIjo3MzksInVzZXJuYW1lIjoibXVoemFlbmFsIiwiZnVsbG5hbWUiOiIiLCJlbWFpbCI6Im11aHphZW5hbDVAZ21haWwuY29tIiwicm9sZV9pZCI6Miwicm9sZSI6IlVzZXIiLCJlbXBsb3llZV9udW1iZXIiOm51bGwsInJvbGVfY29kZSI6IlVTUiIsImpvYl90aXRsZSI6IiIsImlzX2V4dGVybmFsIjp0cnVlfQ.mCCyoaIFGzQbAnjxMC_fSyhpFAtFudvbbzqHnU_QIU8"
+        },
+        {
+          "name": "role_id",
+          "value": "2"
+        },
+        {
+          "name": "role",
+          "value": "User"
+        },
+        {
+          "name": "user_data",
+          "value": "{\"status\":200,\"message\":\"Login success!\",\"issued-at\":1782182050,\"expired\":1782185650,\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBY2N0Q29kZSI6Il9TWVMwMDAwMDAxMTAxMiIsIkFjY3ROYW1lIjoiR29vZHMgaW4gVHJhbnNpdCAoU0VGLCBNSEMwMSkiLCJBZGRyZXNzIjoiSmxuLiBCb3VsZXZhcmQgVGltdXIgTkUxLzUzIEtlbGFwYSBHYWRpbmcsIEpha2FydGEgVXRhcmEiLCJCUExGck5hbWUiOiJNSEMgS2VsYXBhIEdhZGluZyIsIkJQTElkIjoiMyIsIkJQTE5hbWUiOiJNSEMwMSIsIkNpdHkiOiJKYWthcnRhIiwiR3JvdXBDb2RlIjoiIiwiTUlfY2FyZGNvZGUiOlt7IkNhcmRDb2RlIjoiVlIwMS0wMDAwMDAwMDQiLCJDYXJkTmFtZSI6Ik1vZGVuYSBJbmRvbmVzaWEtU1BMLU1IQzAxIiwiVV9NX0JQX0NPREVfTUkiOiJDMDE4LTAwMDc0NiIsIlVfTV9UUF9UUlNLUyI6IlNQTCJ9LHsiQ2FyZENvZGUiOiJWUjAxLTAwMDAwMDAwMiIsIkNhcmROYW1lIjoiTW9kZW5hIEluZG9uZXNpYS1UUkQtTUhDMDEiLCJVX01fQlBfQ09ERV9NSSI6IkMwMTgtMDAwNjc3IiwiVV9NX1RQX1RSU0tTIjoiVFJEIn0seyJDYXJkQ29kZSI6IlZSMDEtMDAwMDAwMDAzIiwiQ2FyZE5hbWUiOiJNb2RlbmEgSW5kb25lc2lhLVBNUi1NSEMwMSIsIlVfTV9CUF9DT0RFX01JIjoiQzAxOC0wMDA2NzgiLCJVX01fVFBfVFJTS1MiOiJQTVIifSx7IkNhcmRDb2RlIjoiVlIwMS0wMDAwMDAwMDEiLCJDYXJkTmFtZSI6Ik1vZGVuYSBJbmRvbmVzaWEtRkdTLU1IQzAxIiwiVV9NX0JQX0NPREVfTUkiOiJDMDE4LTAwMDY3NiIsIlVfTV9UUF9UUlNLUyI6IkZHUyJ9LHsiQ2FyZENvZGUiOiJWUjAxLTAwMDAwMDAwNiIsIkNhcmROYW1lIjoiTW9kZW5hIEluZG9uZXNpYS1USUstTUhDMDEiLCJVX01fQlBfQ09ERV9NSSI6IkMwMTgtMDAxMDg5IiwiVV9NX1RQX1RSU0tTIjoiVElLIn1dLCJTZXJpZXNJc3N1ZSI6MCwiU2VyaWVzUGF5bWVudCI6MCwiU2VyaWVzUmVjZWlwdCI6MCwiZW1haWwiOiJtdWh6YWVuYWw1QGdtYWlsLmNvbSIsImV4cCI6MTc4MjE4NTY1MCwiaWF0IjoxNzgyMTgyMDUwLCJuZXRfZGlzY291bnQiOjAsInBob25lIjoiMjE0NTg3NDc2OSIsInJvbGVfaWQiOiI2Iiwicm9sZV9uYW1lIjoiQWRtaW4iLCJ1X21fbGVnYWwiOiJTRUYiLCJ1X21fcGtwIjoiWSIsInVzZXJfZnVsbG5hbWUiOiIiLCJ1c2VyX2lkIjoiMjAyMi5FMjAxNSIsInVzZXJfbmFtZSI6IlNhbGVzIERlYWxlciBNSEMgS2VsYXBhIEdhZGluZyAoS0cpIiwidXNlcl9zYXBfY29kZSI6IiIsInVzZXJfc2FwX2NvZGVfbWhjIjoiMiIsInVzZXJfd2FyZWhvdXNlX2Rpc3BsYXkiOiIwMUdEIiwidXNlcl93YXJlaG91c2VfaW5kZW50IjoiMDFHSSIsInVzZXJfd2FyZWhvdXNlX3N0b2NrIjoiMDFHUyIsIndhcmVob3VzZV9kaXNwbGF5X25hbWUiOiJNSEMgS2VsYXBhIEdhZGluZyAtIERpc3BsYXkiLCJ3YXJlaG91c2VfaW5kZW50X25hbWUiOiJNSEMgS2VsYXBhIEdhZGluZyAtIEluZGVuIiwid2FyZWhvdXNlX3N0b2NrX25hbWUiOiJNSEMgS2VsYXBhIEdhZGluZyAtIFN0b2NrIn0.278FJY62_Ffi9UyyMIhNKgAIMnMJYpq4FJI5h_qo7To\",\"refresh_token\":\"07ca22d4029b7bf40437245eda60d33903f44f16dd5e36c076c1792830d6ff306b7d5f076678e4006f6e41f99919d7e9f5e5572838a438c81bc5c7c5573d575c\",\"user_id\":\"2022.E2015\",\"user_name\":\"Sales Dealer MHC Kelapa Gading (KG)\",\"user_fullname\":\"\",\"user_branch\":0,\"user_branch_name\":\"MHC Kelapa Gading\",\"user_role\":6,\"user_role_name\":\"Admin\",\"email\":\"muhzaenal5@gmail.com\",\"user_sap_code\":304,\"user_sap_code_mhc\":\"2\",\"role_id\":\"6\",\"role_name\":\"Admin\",\"BPLId\":\"3\",\"BPLName\":\"MHC01\",\"BPLFrName\":\"MHC Kelapa Gading\",\"GroupCode\":100,\"AcctCode\":\"_SYS00000011012\",\"AcctName\":\"Goods in Transit (SEF, MHC01)\",\"SeriesIssue\":6312,\"SeriesReceipt\":6269,\"SeriesPayment\":6629,\"user_warehouse_stock\":\"01GS\",\"warehouse_stock_name\":\"MHC Kelapa Gading - Stock\",\"user_warehouse_display\":\"01GD\",\"warehouse_display_name\":\"MHC Kelapa Gading - Display\",\"user_warehouse_indent\":\"01GI\",\"warehouse_indent_name\":\"MHC Kelapa Gading - Inden\",\"net_discount\":15,\"MI_cardcode\":[{\"CardCode\":\"VR01-000000004\",\"CardName\":\"Modena Indonesia-SPL-MHC01\",\"U_M_BP_CODE_MI\":\"C018-000746\",\"U_M_TP_TRSKS\":\"SPL\"},{\"CardCode\":\"VR01-000000002\",\"CardName\":\"Modena Indonesia-TRD-MHC01\",\"U_M_BP_CODE_MI\":\"C018-000677\",\"U_M_TP_TRSKS\":\"TRD\"},{\"CardCode\":\"VR01-000000003\",\"CardName\":\"Modena Indonesia-PMR-MHC01\",\"U_M_BP_CODE_MI\":\"C018-000678\",\"U_M_TP_TRSKS\":\"PMR\"},{\"CardCode\":\"VR01-000000001\",\"CardName\":\"Modena Indonesia-FGS-MHC01\",\"U_M_BP_CODE_MI\":\"C018-000676\",\"U_M_TP_TRSKS\":\"FGS\"},{\"CardCode\":\"VR01-000000006\",\"CardName\":\"Modena Indonesia-TIK-MHC01\",\"U_M_BP_CODE_MI\":\"C018-001089\",\"U_M_TP_TRSKS\":\"TIK\"}],\"Address\":\"Jln. Boulevard Timur NE1/53 Kelapa Gading, Jakarta Utara\",\"City\":\"Jakarta\",\"phone\":\"2145874769\",\"u_m_legal\":\"SEF\",\"u_m_pkp\":\"Y\"}"
+        },
+        {
+          "name": "refresh_token",
+          "value": "55f5011c78226359c3ae8a93c6ea6cf2b1cd5dfefa34ffff052fad408a8859457107fd0c307133c0c6ee938d53d5c209b4341050e69d3a1196e4170b8a001fb2"
+        },
+        {
+          "name": "fullname",
+          "value": ""
+        },
+        {
+          "name": "refresh_token_mhc",
+          "value": "07ca22d4029b7bf40437245eda60d33903f44f16dd5e36c076c1792830d6ff306b7d5f076678e4006f6e41f99919d7e9f5e5572838a438c81bc5c7c5573d575c"
+        }
+      ]
+    }
+  ]
+}

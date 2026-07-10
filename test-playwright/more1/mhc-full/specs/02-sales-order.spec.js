@@ -1,8 +1,28 @@
 import { test, expect } from '@playwright/test';
+import path from 'path';
 import { login, checkPageLoaded, captureConsoleErrors } from '../helpers/login.js';
 
-const BASE = 'https://mhc-dev.modena.com';
-const PRODUCT_SEARCH = 'BH2725';
+const BASE = 'https://more-dev.modena.com';
+const PRODUCT_SEARCH = 'BH2725GABK';
+const PAYMENT_PROOF_FILE = path.join(process.cwd(), 'fixtures', 'dummy-payment-proof.png');
+
+/**
+ * Setelah aksi tertentu (mis. Select campaign), aplikasi menampilkan SweetAlert2 (swal2)
+ * sebagai notifikasi yang menutupi seluruh layar (swal2-backdrop-show) dan memblokir semua
+ * klik berikutnya sampai ditutup - kalau tidak di-dismiss, klik selanjutnya timeout 5 menit.
+ */
+async function dismissSweetAlert(page) {
+  const swal = page.locator('.swal2-container').first();
+  if (await swal.isVisible({ timeout: 3000 }).catch(() => false)) {
+    const confirmBtn = swal.locator('.swal2-confirm, button:has-text("OK"), button:has-text("Ya")').first();
+    if (await confirmBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await confirmBtn.click({ force: true }).catch(() => {});
+    } else {
+      await page.keyboard.press('Escape').catch(() => {});
+    }
+    await page.waitForTimeout(1000);
+  }
+}
 
 // Helper: klik button di dalam modal (overlay intercepts pointer events biasa)
 async function clickModalButton(page, buttonText) {
@@ -25,7 +45,7 @@ test.describe('MHC - Sales Order', () => {
     const bugs = [];
     const consoleErrors = captureConsoleErrors(page);
     await login(page);
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     const { bugs: pageBugs } = await checkPageLoaded(page, '/sales-order');
@@ -73,7 +93,7 @@ test.describe('MHC - Sales Order', () => {
   test('Sales Order - Create SO full flow', async ({ page }) => {
     const bugs = [];
     await login(page);
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     // === STEP 1: CUSTOMER ===
@@ -257,7 +277,7 @@ test.describe('MHC - Sales Order', () => {
     test.setTimeout(180000);
     const bugs = [];
     await login(page);
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     // === STEP 1: CUSTOMER ===
@@ -440,6 +460,7 @@ test.describe('MHC - Sales Order', () => {
       } else {
         await selectBtn.click({ force: true });
         await page.waitForTimeout(2000);
+        await dismissSweetAlert(page);
         console.log('✓ Campaign berhasil dipilih');
 
         // Verifikasi campaign ter-apply: muncul info promo/diskon di Selected Items
@@ -465,7 +486,7 @@ test.describe('MHC - Sales Order', () => {
     // FASE 1: CREATE SO dengan Campaign/Promo
     // =============================================
     await login(page);
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     console.log('\n=== FASE 1: CREATE SALES ORDER ===');
@@ -580,6 +601,7 @@ test.describe('MHC - Sales Order', () => {
           const campaignTxt = await campaignRow.textContent().catch(() => '');
           await promoModal.locator("button:has-text('Select')").first().click({ force: true });
           await page.waitForTimeout(2000);
+          await dismissSweetAlert(page);
           console.log(`✓ Campaign dipilih: ${campaignTxt.trim().slice(0, 60)}`);
         } else {
           const closeBtn = promoModal.locator("button:has-text('Close')").first();
@@ -631,11 +653,11 @@ test.describe('MHC - Sales Order', () => {
     // Jika masih di create page, navigasi ke SO list dan buka SO terbaru yang Open
     let soDetailUrl = null;
     if (soNumber) {
-      soDetailUrl = `${BASE}/sales-order/form?docNumSO=${soNumber}`;
+      soDetailUrl = `${BASE}/mhc/sales-order/form?docNumSO=${soNumber}`;
     } else {
       // Navigate ke list SO, cari SO Open terbaru (baris pertama setelah refresh)
       console.log('  Navigasi ke SO list untuk cari SO yang baru dibuat...');
-      await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+      await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(3000);
 
       // Cari SO dengan status Open milik Dedi yang paling atas
@@ -659,7 +681,7 @@ test.describe('MHC - Sales Order', () => {
 
     if (!soDetailUrl) {
       // Navigate langsung ke URL detail jika sudah ada
-      await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+      await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(2000);
       await page.locator('table tbody tr').first().locator("button:has-text('View')").click();
       await page.waitForTimeout(3000);
@@ -710,21 +732,39 @@ test.describe('MHC - Sales Order', () => {
     console.log(`✓ Nominal: ${nominalVal}`);
 
     // Isi card number (dummy untuk testing)
+    // NOTE: "1234567890123456" gagal validasi checksum Luhn (standar nomor kartu kredit),
+    // jadi tombol Create Payment tetap disabled. Pakai nomor test Visa yang valid Luhn.
     const cardInput = page.locator('input[placeholder="Enter card number"]').first();
     if (await cardInput.isVisible({ timeout: 3000 }).catch(() => false)) {
-      await cardInput.fill('1234567890123456');
-      console.log('✓ Card number diisi: 1234567890123456');
+      await cardInput.fill('4532015112830366');
+      console.log('✓ Card number diisi: 4532015112830366 (valid Luhn)');
     } else {
       bugs.push('Input card number tidak muncul');
     }
+    await page.waitForTimeout(500);
 
-    // Verifikasi tombol Create Payment tersedia
+    // Field wajib "Upload Proof for All Payments" (JPEG/PNG) - tombol Create Payment
+    // tetap disabled kalau ini belum diisi, terlepas dari card number sudah valid.
+    const fileInput = page.locator('input[type="file"]').first();
+    if (await fileInput.count() > 0) {
+      await fileInput.setInputFiles(PAYMENT_PROOF_FILE);
+      console.log('✓ Bukti pembayaran (proof) diupload');
+      await page.waitForTimeout(1000);
+    } else {
+      bugs.push('Input upload proof pembayaran tidak ditemukan');
+    }
+
+    // Verifikasi tombol Create Payment tersedia & enabled
     const createPayBtn = page.locator("button:has-text('Create Payment')").first();
     if (!await createPayBtn.isVisible({ timeout: 5000 }).catch(() => false)) {
       bugs.push('Tombol Create Payment tidak ditemukan');
       expect(bugs).toHaveLength(0); return;
     }
-    console.log('✓ Tombol Create Payment tersedia');
+    if (!await createPayBtn.isEnabled({ timeout: 5000 }).catch(() => false)) {
+      bugs.push('Tombol Create Payment masih disabled setelah card number & proof diisi');
+      expect(bugs).toHaveLength(0); return;
+    }
+    console.log('✓ Tombol Create Payment tersedia & enabled');
 
     // Klik Create Payment
     await createPayBtn.click();
@@ -889,7 +929,7 @@ test.describe('MHC - Sales Order', () => {
     // ============================================================
     console.log('\n=== STEP 1: LOGIN & BUKA WIZARD ===');
     await login(page);
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     await page.locator("button:has-text('Create New')").first().click();
@@ -972,6 +1012,7 @@ test.describe('MHC - Sales Order', () => {
       const selectBtn = promoModal.locator("button:has-text('Select')").first();
       await selectBtn.click({ force: true });
       await page.waitForTimeout(1500);
+      await dismissSweetAlert(page);
       console.log(`✓ Campaign dipilih untuk ${itemLabel}: ${campaignTxt}`);
       return true;
     };
@@ -1080,7 +1121,7 @@ test.describe('MHC - Sales Order', () => {
     console.log(`  SO Number terdeteksi: ${soCreated || 'cek di list SO'}`);
 
     // Navigasi ke SO list dan cari SO baru
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
     const listBody = await page.locator('table tbody').innerText().catch(() => '');
     console.log(`  List SO terbaru:\n${listBody.split('\n').slice(0, 6).map(l => '    ' + l).join('\n')}`);
@@ -1110,6 +1151,12 @@ test.describe('MHC - Sales Order', () => {
   });
 
   test('Sales Order - detail SO (buka View item pertama)', async ({ page }) => {
+    const bugs = [];
+    await login(page);
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(3000);
+
+    const viewBtn = page.locator('table tbody tr').first().locator("button:has-text('View'), a:has-text('View')").first();
     if (!await viewBtn.isVisible({ timeout: 8000 }).catch(() => false)) {
       console.log('  ⚠ Tidak ada data SO atau tombol View - skip detail test');
       return;
@@ -1132,7 +1179,7 @@ test.describe('MHC - Sales Order', () => {
   test('Sales Order - search & filter', async ({ page }) => {
     const bugs = [];
     await login(page);
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     // Test search

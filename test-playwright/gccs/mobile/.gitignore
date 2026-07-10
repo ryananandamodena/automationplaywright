@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Test results
+test-results/
+mobile-test-report/
+playwright-report/
+mobile-test-results.json
+mobile-junit-results.xml
+
+# Screenshots and videos
+screenshots/
+videos/
+bug-reports/
+
+# Traces
+trace.zip
+*.trace
+
+# Environment variables
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+tmp/
+temp/

@@ -46,6 +46,12 @@ async function createContract() {
     
     // Navigate to FMS
     if (page.url().includes('my-application')) {
+      const allAppsTab = page.locator('text=All Apps');
+      if (await allAppsTab.isVisible()) {
+        console.log('Clicking All Apps tab...');
+        await allAppsTab.click();
+        await page.waitForTimeout(1500);
+      }
       await page.click('text=FMS (DEV)');
       await page.waitForTimeout(2000);
       
@@ -80,31 +86,90 @@ async function createContract() {
     // Fill form - select first option from everything
     console.log('\n📍 FILL FORM');
     
-    // Vendor - click container, wait for options, click first
-    console.log('Vendor...');
-    await page.locator('div.css-b62m3t-container').first().click();
-    await page.waitForTimeout(1000);
-    await page.keyboard.type('PT');
-    await page.waitForTimeout(2000);
-    
-    const vendorOpts = await page.locator('div[id*="react-select"][id*="option"]').count();
-    console.log(`  ${vendorOpts} options found`);
-    if (vendorOpts > 0) {
-      await page.locator('div[id*="react-select"][id*="option"]').first().click();
-      console.log('  ✓ Selected');
-    }
-    await page.waitForTimeout(500);
-    
     // Dates
     console.log('Dates...');
     await page.locator('input[type="date"]').first().fill('2026-04-01');
     await page.locator('input[type="date"]').nth(1).fill('2027-03-31');
     console.log('  ✓ Filled');
     
-    // Vehicle
-    console.log('Vehicle...');
-    await page.locator('select').first().selectOption({ index: 1 });
-    console.log('  ✓ Selected');
+    // Vendor and Vehicle Selection Loop
+    console.log('Finding a vendor with available vehicles...');
+    
+    // First, click to get list of vendors
+    await page.locator('div.css-b62m3t-container').first().click();
+    await page.waitForTimeout(1000);
+    await page.keyboard.type('PT');
+    await page.waitForTimeout(2000);
+    
+    const vendorOptionsText = await page.locator('div[id*="react-select"][id*="option"]').allTextContents();
+    console.log(`Found vendors:`, vendorOptionsText);
+    
+    // Close the dropdown first by pressing Escape
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(500);
+    
+    let vehicleSelected = false;
+    
+    for (const vendorName of vendorOptionsText) {
+      console.log(`Testing vendor: "${vendorName}"`);
+      
+      // Click vendor container
+      const vendorContainer = page.locator('div.css-b62m3t-container').first();
+      await vendorContainer.click();
+      await page.waitForTimeout(500);
+      
+      // Clear if there is already a value selected
+      const indicators = await vendorContainer.locator('div[class*="indicatorContainer"]').count();
+      if (indicators > 1) {
+        console.log('  Clearing previous vendor selection...');
+        const clearBtn = vendorContainer.locator('svg').first();
+        await clearBtn.click();
+        await page.waitForTimeout(1000);
+        await vendorContainer.click(); // Re-open
+        await page.waitForTimeout(500);
+      }
+      
+      // Type vendor name to search
+      await page.keyboard.type(vendorName);
+      await page.waitForTimeout(1500);
+      
+      // Click the option matching this vendor
+      const optionLocator = page.locator(`div[id*="react-select"][id*="option"]:has-text("${vendorName}")`).first();
+      if (await optionLocator.isVisible()) {
+        await optionLocator.click();
+        console.log('  Vendor selected, checking vehicles...');
+        await page.waitForTimeout(2000);
+        
+        // Check vehicle dropdown options
+        const vehicleSelect = page.locator('select').first();
+        const options = await vehicleSelect.locator('option').allTextContents();
+        const availableVehicles = options.filter(opt => opt.trim() && !opt.includes('--'));
+        console.log(`  Vehicles available: ${availableVehicles.length}`);
+        
+        if (availableVehicles.length > 0) {
+          // Select first vehicle
+          await vehicleSelect.selectOption({ index: 1 });
+          console.log(`  ✓ Vehicle selected: ${availableVehicles[0]}`);
+          vehicleSelected = true;
+          break;
+        } else {
+          console.log('  ⚠️ No vehicles available for this vendor.');
+        }
+      } else {
+        console.log('  ⚠️ Vendor option not visible in search');
+        await page.keyboard.press('Escape');
+        await page.waitForTimeout(500);
+      }
+    }
+    
+    if (!vehicleSelected) {
+      console.log('⚠️ Warning: No vendor with available vehicles found. Trying default select at index 1.');
+      try {
+        await page.locator('select').first().selectOption({ index: 1 }, { timeout: 2000 });
+      } catch (e) {
+        console.log('  Could not select vehicle: ' + e.message);
+      }
+    }
     await page.waitForTimeout(500);
     
     // Channel
@@ -165,10 +230,9 @@ async function createContract() {
     // Submit
     console.log('\n📍 SUBMIT');
     const saveButton = page.locator('button:has-text("Save Contract")').or(
-      page.locator('button:has-text("Save")'),
       page.locator('button[type="submit"]'),
-      page.locator('button >> text=/save/i')
-    );
+      page.locator('button:has-text("Save")')
+    ).first();
     await saveButton.waitFor({ state: 'visible', timeout: 5000 });
     await saveButton.click();
     console.log('Clicked Save Contract button');

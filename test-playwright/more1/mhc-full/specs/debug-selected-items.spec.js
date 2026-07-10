@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 import { login } from '../helpers/login.js';
 
-const BASE = 'https://mhc-dev.modena.com';
+const BASE = 'https://more-dev.modena.com';
 
 test('DEBUG: Dump Selected Items DOM setelah add produk', async ({ page }) => {
   test.setTimeout(120000);
 
   await login(page);
-  await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+  await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(3000);
 
   // Create New
@@ -25,7 +25,7 @@ test('DEBUG: Dump Selected Items DOM setelah add produk', async ({ page }) => {
 
   // Search & Add produk BH2725
   const searchInput = page.locator("input[placeholder*='Search product']").first();
-  await searchInput.fill('BH2725');
+  await searchInput.fill('BH 2725 GABK');
   await page.waitForTimeout(2500);
 
   // Klik Add to Order pada card pertama
@@ -155,7 +155,7 @@ test('DEBUG: Dump Selected Items DOM setelah add produk', async ({ page }) => {
   console.log('='.repeat(80));
 
   await searchInput.fill('');
-  await searchInput.fill('BH2725');
+  await searchInput.fill(' ');
   await page.waitForTimeout(2500);
 
   const card2 = page.locator('div.grid > div').first();

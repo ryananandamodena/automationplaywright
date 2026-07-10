@@ -3,7 +3,7 @@
  */
 import { BasePage } from './BasePage.js';
 
-const BASE = 'https://mhc-dev.modena.com';
+const BASE = 'https://more-dev.modena.com';
 
 export class SalesOrderPage extends BasePage {
   constructor(page) {

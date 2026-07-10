@@ -8,7 +8,7 @@
 const { test, expect } = require('@playwright/test');
 
 // Configuration
-const BASE_URL = process.env.MHC_BASE_URL || 'https://mhc-dev.modena.com';
+const BASE_URL = process.env.MHC_BASE_URL || 'https://more-dev.modena.com';
 const USER = {
   email: process.env.MHC_EMAIL || 'your.email@modena.com',
   password: process.env.MHC_PASSWORD || 'YourPassword',

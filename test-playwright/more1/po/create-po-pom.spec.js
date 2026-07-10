@@ -3,9 +3,9 @@ import { allure } from 'allure-playwright';
 import { LoginPage } from '../../pages/LoginPage.js';
 import { PurchaseOrderPage } from '../../pages/PurchaseOrderPage.js';
 
-const BASE_URL = 'https://mhc-dev.modena.com';
+const BASE_URL = 'https://more-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
-const LOGIN_PASSWORD = 'P@ssw0rd';
+const LOGIN_PASSWORD = 'P@ssw0rd_muhzaenal5';
 
 test.describe('MHC - Purchase Order (POM)', () => {
   test.setTimeout(180000);

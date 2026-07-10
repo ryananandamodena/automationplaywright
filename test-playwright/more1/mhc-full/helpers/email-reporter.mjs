@@ -87,7 +87,7 @@ function formatEmailHTML(results) {
         <!-- Header -->
         <div style="background:#1a1a2e;padding:24px;color:white;">
           <h1 style="margin:0;font-size:22px;">🤖 MHC Automation Test Report</h1>
-          <p style="margin:4px 0 0;color:#aaa;font-size:13px;">https://mhc-dev.modena.com | ${new Date().toLocaleString('id-ID')}</p>
+          <p style="margin:4px 0 0;color:#aaa;font-size:13px;">https://more-dev.modena.com | ${new Date().toLocaleString('id-ID')}</p>
         </div>
 
         <!-- Summary -->

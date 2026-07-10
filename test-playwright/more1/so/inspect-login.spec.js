@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Inspect MHC Login Page', async ({ page }) => {
-  await page.goto('https://mhc-dev.modena.com');
+  await page.goto('https://more-dev.modena.com');
   await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000);
 

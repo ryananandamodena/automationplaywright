@@ -8,10 +8,10 @@ test.describe('MHC - Dashboard', () => {
     const consoleErrors = captureConsoleErrors(page);
     await login(page);
 
-    await page.goto('https://mhc-dev.modena.com/', { waitUntil: 'domcontentloaded' });
+    await page.goto('https://more-dev.modena.com/', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
-    const { bugs } = await checkPageLoaded(page, 'mhc-dev.modena.com');
+    const { bugs } = await checkPageLoaded(page, 'more-dev.modena.com');
 
     // Cek sidebar/nav menu tampil
     const sidebar = page.locator('aside, nav');

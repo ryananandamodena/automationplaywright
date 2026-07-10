@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { login, checkPageLoaded, captureConsoleErrors } from '../helpers/login.js';
 
-const BASE = 'https://mhc-dev.modena.com';
+const BASE = 'https://more-dev.modena.com';
 
 // Helper generik untuk menu yang hanya perlu load check
 async function smokeTestPage(page, url, urlPart, pageLabel) {
@@ -33,7 +33,7 @@ async function smokeTestPage(page, url, urlPart, pageLabel) {
 test.describe('MHC - Delivery', () => {
   test.setTimeout(60000);
   test('Delivery - load & elemen utama', async ({ page }) => {
-    const bugs = await smokeTestPage(page, `${BASE}/delivery`, '/delivery', 'Delivery');
+    const bugs = await smokeTestPage(page, `${BASE}/mhc/delivery`, '/delivery', 'Delivery');
 
     // Cek tabel
     const table = page.locator('table').first();
@@ -49,7 +49,7 @@ test.describe('MHC - Delivery', () => {
 test.describe('MHC - Inventory Transfer', () => {
   test.setTimeout(60000);
   test('Inventory Transfer - load & elemen utama', async ({ page }) => {
-    const bugs = await smokeTestPage(page, `${BASE}/inventory-transfer`, '/inventory-transfer', 'Inventory Transfer');
+    const bugs = await smokeTestPage(page, `${BASE}/mhc/inventory-transfer`, '/inventory-transfer', 'Inventory Transfer');
 
     const table = page.locator('table, [class*="list"]').first();
     if (!await table.isVisible({ timeout: 8000 }).catch(() => false))
@@ -64,7 +64,7 @@ test.describe('MHC - Inventory Transfer', () => {
 test.describe('MHC - Operational Cost', () => {
   test.setTimeout(60000);
   test('Operational Cost - load & elemen utama', async ({ page }) => {
-    const bugs = await smokeTestPage(page, `${BASE}/operational-cost`, '/operational-cost', 'Operational Cost');
+    const bugs = await smokeTestPage(page, `${BASE}/mhc/operational-cost`, '/operational-cost', 'Operational Cost');
 
     const table = page.locator('table, [class*="list"]').first();
     if (!await table.isVisible({ timeout: 8000 }).catch(() => false))
@@ -79,7 +79,7 @@ test.describe('MHC - Operational Cost', () => {
 test.describe('MHC - Balance Inquiry', () => {
   test.setTimeout(60000);
   test('Balance Inquiry - load & elemen utama', async ({ page }) => {
-    const bugs = await smokeTestPage(page, `${BASE}/balance-inquiry`, '/balance-inquiry', 'Balance Inquiry');
+    const bugs = await smokeTestPage(page, `${BASE}/mhc/balance-inquiry`, '/balance-inquiry', 'Balance Inquiry');
     if (bugs.length > 0) console.error('BUGS:', bugs.join('; '));
     expect(bugs, `Bugs: ${bugs.join(', ')}`).toHaveLength(0);
   });
@@ -88,7 +88,7 @@ test.describe('MHC - Balance Inquiry', () => {
 test.describe('MHC - Withdrawal', () => {
   test.setTimeout(60000);
   test('Withdrawal - load & elemen utama', async ({ page }) => {
-    const bugs = await smokeTestPage(page, `${BASE}/withdrawal`, '/withdrawal', 'Withdrawal');
+    const bugs = await smokeTestPage(page, `${BASE}/mhc/withdrawal`, '/withdrawal', 'Withdrawal');
     if (bugs.length > 0) console.error('BUGS:', bugs.join('; '));
     expect(bugs, `Bugs: ${bugs.join(', ')}`).toHaveLength(0);
   });
@@ -97,7 +97,7 @@ test.describe('MHC - Withdrawal', () => {
 test.describe('MHC - Stock Ready', () => {
   test.setTimeout(60000);
   test('Stock Ready - load & elemen utama', async ({ page }) => {
-    const bugs = await smokeTestPage(page, `${BASE}/stock-ready`, '/stock-ready', 'Stock Ready');
+    const bugs = await smokeTestPage(page, `${BASE}/mhc/stock-ready`, '/stock-ready', 'Stock Ready');
 
     // Stock Ready menggunakan card/product layout (bukan table)
     // Cek filter category atau product item muncul
@@ -120,7 +120,7 @@ test.describe('MHC - Stock Ready', () => {
 test.describe('MHC - PO Verification', () => {
   test.setTimeout(60000);
   test('PO Verification - load & elemen utama', async ({ page }) => {
-    const bugs = await smokeTestPage(page, `${BASE}/purchase-stock-verification`, '/purchase-stock-verification', 'PO Verification');
+    const bugs = await smokeTestPage(page, `${BASE}/mhc/purchase-stock-verification`, '/purchase-stock-verification', 'PO Verification');
 
     const table = page.locator('table, [class*="list"]').first();
     if (!await table.isVisible({ timeout: 8000 }).catch(() => false))

@@ -59,7 +59,7 @@ test.describe('Visual Testing - News Module 📰', () => {
 
     // Navigate to News page
     console.log('🔍 Navigating to News page...');
-    await page.goto('https://mhc-dev.modena.com', { 
+    await page.goto('https://more-dev.modena.com', { 
       waitUntil: 'networkidle',
       timeout: 30000 
     });
@@ -89,7 +89,7 @@ test.describe('Visual Testing - News Module 📰', () => {
     await eyes.open(page, 'Modena MHC', 'News Filters');
 
     // Navigate
-    await page.goto('https://mhc-dev.modena.com', { 
+    await page.goto('https://more-dev.modena.com', { 
       waitUntil: 'networkidle',
       timeout: 30000 
     });
@@ -124,7 +124,7 @@ test.describe('Visual Testing - News Module 📰', () => {
     await eyes.open(page, 'Modena MHC', 'News Responsive');
 
     // Navigate
-    await page.goto('https://mhc-dev.modena.com', { 
+    await page.goto('https://more-dev.modena.com', { 
       waitUntil: 'networkidle',
       timeout: 30000 
     });
@@ -161,7 +161,7 @@ test.describe('Visual Testing - News Module 📰', () => {
     await eyes.open(page, 'Modena MHC', 'News Detail/Create');
 
     // Navigate
-    await page.goto('https://mhc-dev.modena.com', { 
+    await page.goto('https://more-dev.modena.com', { 
       waitUntil: 'networkidle',
       timeout: 30000 
     });

@@ -3,14 +3,14 @@
  */
 import { BasePage } from './BasePage.js';
 
-const BASE_URL = 'https://mhc-dev.modena.com';
+const BASE_URL = 'https://more-dev.modena.com';
 
 export class LoginPage extends BasePage {
   constructor(page) {
     super(page);
     this.emailInput = page.locator('input[type="email"]');
     this.passwordInput = page.locator('input[type="password"]');
-    this.loginButton = page.locator('button:has-text("Login")');
+    this.loginButton = page.locator('button:has-text("Sign In")');
     this.errorAlert = page.locator('[class*="error"], [class*="alert"], .text-red-500, [role="alert"]');
   }
 
@@ -30,7 +30,7 @@ export class LoginPage extends BasePage {
   async loginAsDefault() {
     await this.goto();
     await this.emailInput.fill('muhzaenal5@gmail.com');
-    await this.passwordInput.fill('P@ssw0rd');
+    await this.passwordInput.fill('P@ssw0rd_muhzaenal5');
     await this.loginButton.click();
     await this.page.waitForTimeout(4000);
     await this.page.waitForSelector('aside, nav, header', { timeout: 10000 }).catch(() => {});

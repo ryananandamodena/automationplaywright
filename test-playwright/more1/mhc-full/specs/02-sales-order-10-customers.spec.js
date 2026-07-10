@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { login } from '../helpers/login.js';
 
-const BASE = 'https://mhc-dev.modena.com';
+const BASE = 'https://more-dev.modena.com';
 
-const PRODUCT_SKU  = 'BH2725';
+const PRODUCT_SKU  = 'BH2725GABK';
 const ITEM_QTY     = 2;
 const DISCOUNT_PCT = 10; // persen diskon per item
 
@@ -12,15 +12,15 @@ const DISCOUNT_PCT = 10; // persen diskon per item
 // ============================================================
 const CUSTOMER_COMBOS = [
   { label: 'Customer #1 - Dedi',   keyword: 'Dedi',   rowIndex: 0 },
-  { label: 'Customer #2 - Ryan',   keyword: 'Ryan',   rowIndex: 0 },
-  { label: 'Customer #3 - Andi',   keyword: 'Andi',   rowIndex: 0 },
-  { label: 'Customer #4 - Budi',   keyword: 'Budi',   rowIndex: 0 },
-  { label: 'Customer #5 - Sari',   keyword: 'Sari',   rowIndex: 0 },
-  { label: 'Customer #6 - Hendra', keyword: 'Hendra', rowIndex: 0 },
-  { label: 'Customer #7 - Dewi',   keyword: 'Dewi',   rowIndex: 0 },
-  { label: 'Customer #8 - Ahmad',  keyword: 'Ahmad',  rowIndex: 0 },
-  { label: 'Customer #9 - Linda',  keyword: 'Linda',  rowIndex: 0 },
-  { label: 'Customer #10 - Row-9', keyword: '',       rowIndex: 9 },
+  { label: 'Customer #2 - Dedi',   keyword: 'Dedi',   rowIndex: 0 },
+  { label: 'Customer #3 - Dedi',   keyword: 'Dedi',   rowIndex: 0 },
+  { label: 'Customer #4 - Dedi',   keyword: 'Dedi',   rowIndex: 0 },
+  { label: 'Customer #5 - Dedi',   keyword: 'Dedi',   rowIndex: 0 },
+  { label: 'Customer #6 - Dedi',   keyword: 'Dedi',   rowIndex: 0 },
+  { label: 'Customer #7 - Dedi',   keyword: 'Dedi',   rowIndex: 0 },
+  { label: 'Customer #8 - Dedi',   keyword: 'Dedi',   rowIndex: 0 },
+  { label: 'Customer #9 - Dedi',   keyword: 'Dedi',   rowIndex: 0 },
+  { label: 'Customer #10 - Dedi', keyword: 'Dedi',   rowIndex: 0 },
 ];
 
 // ============================================================
@@ -287,7 +287,7 @@ test.describe('MHC - Create SO - 10 Kombinasi Customer', () => {
       console.log(`${'='.repeat(60)}`);
 
       await login(page);
-      await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+      await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(3000);
 
       const createBtn = page.locator("button:has-text('Create New')").first();
@@ -423,7 +423,7 @@ test.describe('MHC - Create SO - 10 Kombinasi Customer', () => {
       console.log(`  SO Number: ${soNumber || '(belum terdeteksi)'}`);
 
       // Verifikasi di list SO
-      await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+      await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(3000);
       const firstRow = (await page.locator('table tbody tr').first().textContent().catch(() => '')).trim();
       console.log(`✓ SO terbaru di list: ${firstRow.slice(0, 100)}`);

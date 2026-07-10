@@ -51,7 +51,7 @@ if (!noRun) {
 
 console.log('\n' + '='.repeat(60));
 console.log('🤖 MHC AUTOMATION TEST SUITE');
-console.log('   Target: https://mhc-dev.modena.com');
+console.log('   Target: https://more-dev.modena.com');
 console.log(`   Mode: ${headless ? 'Headless' : 'Headed (browser terlihat)'}`);
 console.log(`   Email: ${noEmail ? 'Dinonaktifkan' : 'Aktif → ryan.ananda@modena.com'}`);
 if (noRun) console.log('   Test Execution: SKIPPED (--no-run)');

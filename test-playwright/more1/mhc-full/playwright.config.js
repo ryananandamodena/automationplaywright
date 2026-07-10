@@ -15,7 +15,7 @@ export default defineConfig({
     ['json', { outputFile: path.join(__dirname, 'test-results', 'results.json') }],
   ],
   use: {
-    baseURL: 'https://mhc-dev.modena.com',
+    baseURL: 'https://more-dev.modena.com',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'retain-on-failure',

@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'https://mhc-dev.modena.com';
+const BASE_URL = 'https://more-dev.modena.com';
 
 async function loginToMHC(page) {
   console.log('  🔐 Logging in...');
   await page.goto(BASE_URL);
   await page.waitForTimeout(2000);
   await page.locator('input[type="email"]').fill('muhzaenal5@gmail.com');
-  await page.locator('input[type="password"]').fill('P@ssw0rd');
-  await page.locator("button:has-text('Login')").click();
+  await page.locator('input[type="password"]').fill('P@ssw0rd_muhzaenal5');
+  await page.locator("button:has-text('Sign In')").click();
   await page.waitForTimeout(5000);
   // Verify dashboard loaded (sidebar menu visible)
   await page.locator('button:has-text("Dashboard")').waitFor({ timeout: 15000 });

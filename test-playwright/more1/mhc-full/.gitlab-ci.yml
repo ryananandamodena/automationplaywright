@@ -1,0 +1,49 @@
+stages:
+  - e2e-test
+
+variables:
+  # Konfigurasi node modules caching untuk mempercepat build
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+  # Mapping variabel kredensial multi-role dari GitLab CI Settings ke Environment saat test berjalan
+  # PENTING: Password aslinya HARUS di-set di GitLab (Settings > CI/CD > Variables), jangan ditulis plaintext di sini!
+  TEST_USER_ADMIN: $TEST_USER_ADMIN
+  TEST_PASS_ADMIN: $TEST_PASS_ADMIN
+  TEST_USER_FINANCE: $TEST_USER_FINANCE
+  TEST_PASS_FINANCE: $TEST_PASS_FINANCE
+  TEST_USER_WAREHOUSE: $TEST_USER_WAREHOUSE
+  TEST_PASS_WAREHOUSE: $TEST_PASS_WAREHOUSE
+
+playwright_mhc_e2e:
+  stage: e2e-test
+  # Gunakan docker image resmi dari Microsoft Playwright (sesuaikan tag jika perlu)
+  image: mcr.microsoft.com/playwright:v1.44.0-jammy
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+  before_script:
+    # Karena kita berada di folder spesifik, pastikan pindah ke direktori yang benar jika ini monorepo
+    # cd test-playwright/more1/mhc-full
+    - npm ci
+  script:
+    # Jalankan keseluruhan test
+    - npx playwright test --reporter=list,html
+    
+    # Alternatif jika ingin menggunakan custom runner & kirim email otomatis:
+    # - node run-and-report.mjs --headless
+  artifacts:
+    # Simpan report Playwright terlepas dari status (passed/failed) agar bisa di-download & di-review
+    when: always
+    paths:
+      - playwright-report/
+      - test-results/
+    expire_in: 7 days
+  
+  # Trigger otomatis saat merge/push ke branch 'dev' atau 'main'
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_BRANCH == "main"

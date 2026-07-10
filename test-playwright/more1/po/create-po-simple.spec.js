@@ -2,9 +2,9 @@ import { test, expect } from '@playwright/test';
 import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../utils/data-cleanup.mjs';
 import { allure } from 'allure-playwright';
 
-const BASE_URL = 'https://mhc-dev.modena.com';
+const BASE_URL = 'https://more-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
-const LOGIN_PASSWORD = 'P@ssw0rd';
+const LOGIN_PASSWORD = 'P@ssw0rd_muhzaenal5';
 
 // Helper: parse angka dari string (e.g. "Rp 1.500.000" -> 1500000)
 function parsePrice(text) {
@@ -52,7 +52,7 @@ test.describe('MHC - Purchase Order Creation (Simple)', () => {
         await page.locator('input[type="email"]').waitFor({ state: 'visible', timeout: 10000 });
         await page.locator('input[type="email"]').fill(LOGIN_EMAIL);
         await page.locator('input[type="password"]').fill(LOGIN_PASSWORD);
-        await page.locator("button:has-text('Login')").click();
+        await page.locator("button:has-text('Sign In')").click();
         
         // Wait for navigation after login
         await page.waitForLoadState('load', { timeout: 10000 }).catch(() => {});

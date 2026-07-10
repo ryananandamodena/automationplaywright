@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('Inspect Sales Order Page', async ({ page }) => {
   // Login first
-  await page.goto('https://mhc-dev.modena.com');
+  await page.goto('https://more-dev.modena.com');
   await page.waitForTimeout(2000);
 
   const emailField = page.locator('input[type="email"]');
@@ -10,10 +10,10 @@ test('Inspect Sales Order Page', async ({ page }) => {
   await page.waitForTimeout(500);
 
   const passwordField = page.locator('input[type="password"]');
-  await passwordField.fill('P@ssw0rd');
+  await passwordField.fill('P@ssw0rd_muhzaenal5');
   await page.waitForTimeout(500);
 
-  const loginButton = page.locator("button:has-text('Login')");
+  const loginButton = page.locator("button:has-text('Sign In')");
   await loginButton.click();
   await page.waitForTimeout(4000);
 

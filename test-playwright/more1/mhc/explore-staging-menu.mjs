@@ -7,7 +7,7 @@
 
 import { chromium } from 'playwright';
 
-const BASE_URL = process.env.MHC_BASE_URL || 'https://mhc-dev.modena.com';
+const BASE_URL = process.env.MHC_BASE_URL || 'https://more-dev.modena.com';
 const USER = {
   email: process.env.MHC_EMAIL || 'your.email@modena.com',
   password: process.env.MHC_PASSWORD || 'YourPassword',
@@ -44,7 +44,7 @@ async function exploreMenu() {
     await passwordInput.fill(USER.password);
     
     // Click login button
-    const loginButton = await page.locator('button[type="submit"], button:has-text("Login"), button:has-text("Sign In")').first();
+    const loginButton = await page.locator('button[type="submit"], button:has-text("Sign In"), button:has-text("Sign In")').first();
     await loginButton.click();
     
     console.log('Waiting for login...');

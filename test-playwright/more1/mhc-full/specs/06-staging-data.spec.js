@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { login, checkPageLoaded, captureConsoleErrors } from '../helpers/login.js';
 
-const BASE = 'https://mhc-dev.modena.com';
+const BASE = 'https://more-dev.modena.com';
 
 // Daftar semua staging data menus
 const STAGING_MENUS = [
@@ -27,7 +27,7 @@ for (const menu of STAGING_MENUS) {
       const bugs = [];
       captureConsoleErrors(page);
       await login(page);
-      await page.goto(`${BASE}${menu.path}`, { waitUntil: 'domcontentloaded' });
+      await page.goto(`${BASE}/mhc${menu.path}`, { waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(3000);
 
       const { bugs: pageBugs } = await checkPageLoaded(page, menu.path);

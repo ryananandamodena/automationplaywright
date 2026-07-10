@@ -17,8 +17,8 @@ export function setupApiMonitor(page) {
     const status = response.status();
     const url = response.url();
 
-    // Hanya monitor API dari domain aplikasi (mhc-dev.modena.com)
-    if (!url.includes('mhc-dev.modena.com')) return;
+    // Hanya monitor API dari domain aplikasi (more-dev.modena.com)
+    if (!url.includes('more-dev.modena.com')) return;
     // Abaikan static assets dan favicon
     if (url.match(/\.(png|jpg|ico|woff|woff2|css|svg)(\?|$)/)) return;
     if (url.includes('favicon')) return;

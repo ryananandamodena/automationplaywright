@@ -55,7 +55,7 @@ test.describe('Visual Testing - Sales Order (Simple)', () => {
     await eyes.open(page, 'Modena MHC', 'SO List Page');
 
     // Navigate to Sales Order page
-    await page.goto('https://mhc-dev.modena.com', { 
+    await page.goto('https://more-dev.modena.com', { 
       waitUntil: 'networkidle',
       timeout: 30000 
     });

@@ -2,14 +2,14 @@ import { test, expect } from '@playwright/test';
 
 test('Inspect Create Sales Order Form', async ({ page }) => {
   // Login
-  await page.goto('https://mhc-dev.modena.com');
+  await page.goto('https://more-dev.modena.com');
   await page.waitForTimeout(2000);
 
   await page.locator('input[type="email"]').fill('muhzaenal5@gmail.com');
   await page.waitForTimeout(500);
-  await page.locator('input[type="password"]').fill('P@ssw0rd');
+  await page.locator('input[type="password"]').fill('P@ssw0rd_muhzaenal5');
   await page.waitForTimeout(500);
-  await page.locator("button:has-text('Login')").click();
+  await page.locator("button:has-text('Sign In')").click();
   await page.waitForTimeout(4000);
 
   // Wait for dashboard

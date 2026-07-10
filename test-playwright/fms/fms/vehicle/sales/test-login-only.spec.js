@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Test MHC Login Only', async ({ page }) => {
-  await page.goto('https://mhc-dev.modena.com');
+  await page.goto('https://more-dev.modena.com');
   await page.waitForLoadState('networkidle');
   await page.waitForTimeout(2000);
 
@@ -14,14 +14,14 @@ test('Test MHC Login Only', async ({ page }) => {
 
   // Fill password
   const passwordField = page.locator('input[type="password"]');
-  await passwordField.fill('P@ssw0rd');
+  await passwordField.fill('P@ssw0rd_muhzaenal5');
   await page.waitForTimeout(500);
 
   // Screenshot before clicking login
   await page.screenshot({ path: 'test-results/before-login-click.png', fullPage: true });
 
   // Click login
-  const loginButton = page.locator("button:has-text('Login')");
+  const loginButton = page.locator("button:has-text('Sign In')");
   await loginButton.click();
   console.log('Login button clicked, waiting...');
 

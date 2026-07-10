@@ -9,7 +9,7 @@ import { UserManagementPage } from '../pages/UserManagementPage.js';
 import { login } from '../helpers/login.js';
 import { INVALID_CREDENTIALS, USER_FORM } from '../fixtures/test-data.js';
 
-const BASE = 'https://mhc-dev.modena.com';
+const BASE = 'https://more-dev.modena.com';
 
 // ─────────────────────────────────────────────────────────
 // LOGIN FORM VALIDATION
@@ -20,7 +20,7 @@ test.describe('Form Validation - Login', () => {
   test('Login dengan email kosong harus gagal / tampilkan error', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
-    await loginPage.login('', 'P@ssw0rd');
+    await loginPage.login('', 'P@ssw0rd_muhzaenal5');
 
     // Browser native validation atau app-level error
     const stillOnLogin = await loginPage.isStillOnLoginPage();
@@ -50,7 +50,7 @@ test.describe('Form Validation - Login', () => {
   test('Login dengan email format salah harus gagal', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
-    await loginPage.login('bukan-email-valid', 'P@ssw0rd');
+    await loginPage.login('bukan-email-valid', 'P@ssw0rd_muhzaenal5');
     await page.waitForTimeout(2000);
 
     const stillOnLogin = await loginPage.isStillOnLoginPage();
@@ -210,7 +210,7 @@ test.describe('Form Validation - Sales Order', () => {
   test('Wizard Create SO - step 1 tanpa pilih customer tidak bisa lanjut', async ({ page }) => {
     const bugs = [];
     await login(page);
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     const createBtn = page.locator('button:has-text("Create New")').first();

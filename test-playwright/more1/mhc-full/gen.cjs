@@ -1,0 +1,1 @@
+const E=require('exceljs'); async function r(){const wb=new E.Workbook(); const ws=wb.addWorksheet('test'); ws.addRow(['hello']); await wb.xlsx.writeFile('test.xlsx'); console.log('ok');} r();

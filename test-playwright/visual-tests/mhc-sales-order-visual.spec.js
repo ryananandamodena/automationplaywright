@@ -62,7 +62,7 @@ test.describe('Visual AI Testing - MHC Sales Order 🎨', () => {
     await eyes.open(page, applitoolsConfig.appName, 'SO List Page');
 
     // Navigate to page
-    await page.goto('https://mhc-dev.modena.com/sales-order', { 
+    await page.goto('https://more-dev.modena.com/sales-order', { 
       waitUntil: 'networkidle' 
     });
 
@@ -95,10 +95,10 @@ test.describe('Visual AI Testing - MHC Sales Order 🎨', () => {
     await eyes.open(page, applitoolsConfig.appName, 'SO Creation Wizard');
 
     // Login first
-    await page.goto('https://mhc-dev.modena.com');
+    await page.goto('https://more-dev.modena.com');
     await page.locator('input[type="email"]').fill('muhzaenal5@gmail.com');
-    await page.locator('input[type="password"]').fill('P@ssw0rd');
-    await page.locator('button:has-text("Login")').click();
+    await page.locator('input[type="password"]').fill('P@ssw0rd_muhzaenal5');
+    await page.locator('button:has-text("Sign In")').click();
     await page.waitForTimeout(4000);
 
     // Navigate to SO
@@ -152,7 +152,7 @@ test.describe('Visual AI Testing - MHC Sales Order 🎨', () => {
   test('Visual check - Responsive design (mobile vs desktop)', async ({ page }) => {
     await eyes.open(page, applitoolsConfig.appName, 'Responsive Design Test');
 
-    await page.goto('https://mhc-dev.modena.com/sales-order');
+    await page.goto('https://more-dev.modena.com/sales-order');
 
     // Desktop view
     await page.setViewportSize({ width: 1920, height: 1080 });
@@ -185,7 +185,7 @@ test.describe('Visual AI Testing - MHC Sales Order 🎨', () => {
   test('Visual check - Dark mode vs Light mode (if supported)', async ({ page }) => {
     await eyes.open(page, applitoolsConfig.appName, 'Theme Comparison');
 
-    await page.goto('https://mhc-dev.modena.com/sales-order');
+    await page.goto('https://more-dev.modena.com/sales-order');
 
     // Light mode (default)
     await eyes.check('Light Mode', 
@@ -210,7 +210,7 @@ test.describe('Visual AI Testing - MHC Sales Order 🎨', () => {
   test('Visual check - Interactive elements (buttons, forms)', async ({ page }) => {
     await eyes.open(page, applitoolsConfig.appName, 'Interactive Elements');
 
-    await page.goto('https://mhc-dev.modena.com/sales-order');
+    await page.goto('https://more-dev.modena.com/sales-order');
     await page.locator('button:has-text("Create New")').click();
     await page.waitForTimeout(2000);
 

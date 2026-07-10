@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../utils/data-cleanup.mjs';
 
-const BASE_URL = 'https://mhc-dev.modena.com';
+const BASE_URL = 'https://more-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
-const LOGIN_PASSWORD = 'P@ssw0rd';
+const LOGIN_PASSWORD = 'P@ssw0rd_muhzaenal5';
 
 test.describe('MHC - Purchase Order Creation - FULL E2E', () => {
   test.setTimeout(180000);
@@ -21,7 +21,7 @@ test.describe('MHC - Purchase Order Creation - FULL E2E', () => {
 
     await page.locator('input[type="email"]').fill(LOGIN_EMAIL);
     await page.locator('input[type="password"]').fill(LOGIN_PASSWORD);
-    await page.locator("button:has-text('Login')").click();
+    await page.locator("button:has-text('Sign In')").click();
     await page.waitForTimeout(4000);
 
     await page.locator('text=/Welcome|Dashboard/i').first().waitFor({ timeout: 10000 });

@@ -8,7 +8,7 @@ class LoginPage {
     // Selectors
     this.emailInput = 'input[type="email"], input[name="email"], input[placeholder*="email"]';
     this.passwordInput = 'input[type="password"], input[name="password"]';
-    this.signInButton = 'button:has-text("Sign In"), button:has-text("Login"), button[type="submit"]';
+    this.signInButton = 'button:has-text("Sign In"), button:has-text("Sign In"), button[type="submit"]';
     this.fmsButton = 'text=FMS (DEV), text=FMS';
     this.confirmButton = 'button:has-text("Confirm")';
     this.userProfileButton = '[class*="profile"], [class*="avatar"], button:has-text("RA"), button:has-text("AG"), button:has-text("AK")';

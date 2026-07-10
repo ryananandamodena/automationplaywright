@@ -10,7 +10,7 @@ import { UserManagementPage } from '../pages/UserManagementPage.js';
 import { setupApiMonitor, formatApiReport } from '../helpers/api-monitor.js';
 import { SEARCH } from '../fixtures/test-data.js';
 
-const BASE = 'https://mhc-dev.modena.com';
+const BASE = 'https://more-dev.modena.com';
 
 // ─────────────────────────────────────────────────────────
 // SALES ORDER - Search
@@ -207,7 +207,7 @@ test.describe('Search & Filter - Purchase Order', () => {
     const bugs = [];
     const monitor = setupApiMonitor(page);
     await login(page);
-    await page.goto(`${BASE}/purchase-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/purchase-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     if (!await page.locator('table').first().isVisible({ timeout: 8000 }).catch(() => false)) {

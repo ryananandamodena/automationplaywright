@@ -97,6 +97,12 @@ async function login(page) {
   
   // Handle FMS selection if on my-application page
   if (page.url().includes('my-application')) {
+    const allAppsTab = page.locator('text=All Apps');
+    if (await allAppsTab.isVisible()) {
+      console.log('Clicking All Apps tab...');
+      await allAppsTab.click();
+      await page.waitForTimeout(1500);
+    }
     await page.click('text=FMS (DEV)');
     await page.waitForTimeout(2000);
     

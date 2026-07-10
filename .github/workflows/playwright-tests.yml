@@ -73,7 +73,7 @@ jobs:
           fi
         env:
           CI: true
-          BASE_URL_MHC: https://mhc-dev.modena.com
+          BASE_URL_MHC: https://more-dev.modena.com
           BASE_URL_FMS: https://portal-dev.modena.com
 
       - name: 📊 Generate Allure report

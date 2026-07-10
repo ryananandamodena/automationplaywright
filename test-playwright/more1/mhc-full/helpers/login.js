@@ -1,17 +1,29 @@
 // Shared login helper - digunakan oleh semua spec
-const BASE_URL = 'https://mhc-dev.modena.com';
+const BASE_URL = 'https://more-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
-const LOGIN_PASSWORD = 'P@ssw0rd';
+const LOGIN_PASSWORD = 'P@ssw0rd_muhzaenal5';
 
 export async function login(page) {
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(2000);
-  await page.locator('input[type="email"]').fill(LOGIN_EMAIL);
+  await page.locator('input[name="email"]').fill(LOGIN_EMAIL);
   await page.locator('input[type="password"]').fill(LOGIN_PASSWORD);
-  await page.locator("button:has-text('Login')").click();
-  await page.waitForTimeout(4000);
+  
+  // Pilih company MHC dari dropdown
+  const companyBtn = page.locator('button:has-text("Select a company")');
+  if (await companyBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
+    await companyBtn.click();
+    await page.waitForTimeout(1000);
+    await page.locator('button:has-text("MODENA HOME CENTER (MHC)")').click();
+    await page.waitForTimeout(500);
+  }
+  
+  // Klik Sign In
+  await page.locator('button:has-text("Sign In")').click();
+  await page.waitForTimeout(5000);
+  
   // Tunggu dashboard/header muncul
-  await page.waitForSelector('aside, nav, header', { timeout: 10000 }).catch(() => {});
+  await page.waitForSelector('aside, nav, header', { timeout: 15000 }).catch(() => {});
 }
 
 // Cek apakah halaman berhasil load (tidak ada error page)

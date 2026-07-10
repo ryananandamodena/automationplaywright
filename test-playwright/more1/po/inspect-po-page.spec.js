@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'https://mhc-dev.modena.com';
+const BASE_URL = 'https://more-dev.modena.com';
 const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
-const LOGIN_PASSWORD = 'P@ssw0rd';
+const LOGIN_PASSWORD = 'P@ssw0rd_muhzaenal5';
 
 test('Inspect Purchase Order Page', async ({ page }) => {
   // Login
@@ -13,7 +13,7 @@ test('Inspect Purchase Order Page', async ({ page }) => {
   await page.waitForTimeout(500);
   await page.locator('input[type="password"]').fill(LOGIN_PASSWORD);
   await page.waitForTimeout(500);
-  await page.locator("button:has-text('Login')").click();
+  await page.locator("button:has-text('Sign In')").click();
   await page.waitForTimeout(4000);
 
   // Wait for dashboard

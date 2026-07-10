@@ -7,7 +7,7 @@ import { test, expect } from '@playwright/test';
 import { login } from '../helpers/login.js';
 import { setupApiMonitor } from '../helpers/api-monitor.js';
 
-const BASE = 'https://mhc-dev.modena.com';
+const BASE = 'https://more-dev.modena.com';
 
 // ─────────────────────────────────────────────────────────
 // PAGINATION
@@ -18,7 +18,7 @@ test.describe('UI Functional - Pagination', () => {
   test('Sales Order - pagination berjalan (next page)', async ({ page }) => {
     const bugs = [];
     await login(page);
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     if (!await page.locator('table').first().isVisible({ timeout: 8000 }).catch(() => false)) {
@@ -86,7 +86,7 @@ test.describe('UI Functional - Pagination', () => {
   test('User Management - pagination berjalan', async ({ page }) => {
     const bugs = [];
     await login(page);
-    await page.goto(`${BASE}/users`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/users`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     if (!await page.locator('table').first().isVisible({ timeout: 8000 }).catch(() => false)) {
@@ -113,7 +113,7 @@ test.describe('UI Functional - Modal & Dialog', () => {
   test('Sales Order - wizard modal terbuka dan bisa ditutup', async ({ page }) => {
     const bugs = [];
     await login(page);
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     const createBtn = page.locator('button:has-text("Create New")').first();
@@ -199,7 +199,7 @@ test.describe('UI Functional - Dropdown & Select', () => {
   test('Profile - form dropdown/select berfungsi', async ({ page }) => {
     const bugs = [];
     await login(page);
-    await page.goto(`${BASE}/profile`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/profile`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     // Cek input fields
@@ -225,7 +225,7 @@ test.describe('UI Functional - Dropdown & Select', () => {
   test('Sales Order - dropdown filter status berfungsi', async ({ page }) => {
     const bugs = [];
     await login(page);
-    await page.goto(`${BASE}/sales-order`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sales-order`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     // Cari dropdown status/filter
@@ -269,10 +269,10 @@ test.describe('UI Functional - Loading State & Performance', () => {
     await login(page);
 
     const menus = [
-      { name: 'Sales Order', url: `${BASE}/sales-order`, part: '/sales-order' },
-      { name: 'Purchase Order', url: `${BASE}/purchase-order`, part: '/purchase-order' },
-      { name: 'Delivery', url: `${BASE}/delivery`, part: '/delivery' },
-      { name: 'User Management', url: `${BASE}/users`, part: '/users' },
+      { name: 'Sales Order', url: `${BASE}/mhc/sales-order`, part: '/sales-order' },
+      { name: 'Purchase Order', url: `${BASE}/mhc/purchase-order`, part: '/purchase-order' },
+      { name: 'Delivery', url: `${BASE}/mhc/delivery`, part: '/delivery' },
+      { name: 'User Management', url: `${BASE}/mhc/users`, part: '/users' },
     ];
 
     for (const menu of menus) {
@@ -309,10 +309,10 @@ test.describe('UI Functional - Loading State & Performance', () => {
     await login(page);
 
     const menus = [
-      `${BASE}/sales-order`,
-      `${BASE}/purchase-order`,
-      `${BASE}/users`,
-      `${BASE}/roles`,
+      `${BASE}/mhc/sales-order`,
+      `${BASE}/mhc/purchase-order`,
+      `${BASE}/mhc/users`,
+      `${BASE}/mhc/roles`,
     ];
 
     for (const url of menus) {

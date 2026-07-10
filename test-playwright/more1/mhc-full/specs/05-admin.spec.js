@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { login, checkPageLoaded, captureConsoleErrors } from '../helpers/login.js';
 
-const BASE = 'https://mhc-dev.modena.com';
+const BASE = 'https://more-dev.modena.com';
 
 test.describe('MHC - Profile', () => {
   test.setTimeout(60000);
@@ -9,7 +9,7 @@ test.describe('MHC - Profile', () => {
     const bugs = [];
     captureConsoleErrors(page);
     await login(page);
-    await page.goto(`${BASE}/profile`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/profile`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     const { bugs: pageBugs } = await checkPageLoaded(page, '/profile');
@@ -32,7 +32,7 @@ test.describe('MHC - User Management', () => {
     const bugs = [];
     captureConsoleErrors(page);
     await login(page);
-    await page.goto(`${BASE}/users`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/users`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     const { bugs: pageBugs } = await checkPageLoaded(page, '/users');
@@ -60,7 +60,7 @@ test.describe('MHC - User Management', () => {
   test('User - buka form Create User', async ({ page }) => {
     const bugs = [];
     await login(page);
-    await page.goto(`${BASE}/users`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/users`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     const createBtn = page.locator("button:has-text('Create'), button:has-text('Add'), button:has-text('Tambah')").first();
@@ -89,7 +89,7 @@ test.describe('MHC - Role Management', () => {
     const bugs = [];
     captureConsoleErrors(page);
     await login(page);
-    await page.goto(`${BASE}/roles`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/roles`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     const { bugs: pageBugs } = await checkPageLoaded(page, '/roles');
@@ -116,7 +116,7 @@ test.describe('MHC - Sync SAP', () => {
     const bugs = [];
     captureConsoleErrors(page);
     await login(page);
-    await page.goto(`${BASE}/sync-sap`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${BASE}/mhc/sync-sap`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     const { bugs: pageBugs } = await checkPageLoaded(page, '/sync-sap');

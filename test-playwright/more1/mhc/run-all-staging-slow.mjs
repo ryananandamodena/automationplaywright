@@ -7,10 +7,10 @@
 
 import { chromium } from 'playwright';
 
-const BASE_URL = process.env.MHC_BASE_URL || 'https://mhc-dev.modena.com';
+const BASE_URL = process.env.MHC_BASE_URL || 'https://more-dev.modena.com';
 const USER = {
   email: process.env.MHC_EMAIL || 'muhzaenal5@gmail.com',
-  password: process.env.MHC_PASSWORD || 'P@ssw0rd',
+  password: process.env.MHC_PASSWORD || 'P@ssw0rd_muhzaenal5',
 };
 
 const MENUS = [
