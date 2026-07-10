@@ -1,5 +1,6 @@
 stages:
   - e2e-test
+  - performance-test
 
 variables:
   # Konfigurasi node modules caching untuk mempercepat build
@@ -43,6 +44,30 @@ playwright_mhc_e2e:
     expire_in: 7 days
   
   # Trigger otomatis saat merge/push ke branch 'dev' atau 'main'
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_BRANCH == "main"
+
+# Load/stress test for all 7 apps (FMS, MHC, GCCS, PRIVE, SFA, SCMP, Service1).
+# Manual trigger only — run this on-demand from the GitLab pipeline UI, not on every push.
+k6_performance_test:
+  stage: performance-test
+  image: grafana/k6:latest
+  script:
+    - cd $CI_PROJECT_DIR/test-playwright/performance
+    - mkdir -p results
+    - for app in fms mhc gccs prive sfa scmp service1; do
+        echo "=== $app ===";
+        k6 run -e APP=$app --summary-export=results/$app-summary.json load-test.js || true;
+      done
+  artifacts:
+    when: always
+    paths:
+      - test-playwright/performance/results/
+    expire_in: 7 days
+  when: manual
+  allow_failure: true
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH == "dev"

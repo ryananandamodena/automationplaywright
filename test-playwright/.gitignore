@@ -10,6 +10,9 @@ prive-screenshots/
 screenshots/
 *.png
 
+# k6 performance test results
+performance/results/
+
 # Allure reports
 allure-results/
 allure-report/
