@@ -75,11 +75,11 @@ export class BasePage {
    * Check if element is visible
    */
   async isVisible(selector, timeout = 5000) {
-    const locator = typeof selector === 'string' 
-      ? this.page.locator(selector) 
+    const locator = typeof selector === 'string'
+      ? this.page.locator(selector)
       : selector;
-    
-    return await locator.isVisible({ timeout }).catch(() => false);
+
+    return await locator.waitFor({ state: 'visible', timeout }).then(() => true).catch(() => false);
   }
 
   /**

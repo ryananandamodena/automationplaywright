@@ -28,7 +28,7 @@ export class ContractPage extends BasePage {
       rentCostInput: 'input[placeholder="0"]',
       
       // Actions
-      saveButton: 'button:has-text("Save Contract"), button:has-text("Save"), button[type="submit"]',
+      saveButton: 'button:has-text("Save Contract")',
       cancelButton: 'button:has-text("Cancel")',
       deleteButton: 'button:has-text("Delete")',
       
@@ -153,21 +153,26 @@ export class ContractPage extends BasePage {
    */
   async createContract(contractData) {
     const initialCount = await this.getContractCount();
+    // The list is paginated (fixed page size), so a raw row-count diff can't
+    // detect a new contract once the list is full. New contracts sort to the
+    // top, so compare the first row's contract number instead.
+    const firstRowBefore = await this.page.locator(this.selectors.contractTable).first().textContent().catch(() => null);
     console.log(`📊 Initial contracts: ${initialCount}`);
-    
+
     await this.clickAddContract();
     await this.fillContractForm(contractData);
     await this.screenshot('contract-form-filled.png');
     const result = await this.saveContract();
-    
+
     // Wait for list to update
     await this.page.waitForTimeout(2000);
-    
+
     const finalCount = await this.getContractCount();
+    const firstRowAfter = await this.page.locator(this.selectors.contractTable).first().textContent().catch(() => null);
     console.log(`📊 Final contracts: ${finalCount}`);
-    
+
     return {
-      success: finalCount > initialCount,
+      success: finalCount > initialCount || (firstRowAfter !== null && firstRowAfter !== firstRowBefore),
       initialCount,
       finalCount,
       alert: result

@@ -7,7 +7,8 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   testDir: './',
-  
+  globalSetup: path.join(__dirname, 'global-setup.js'),
+
   // ⚡ PARALLEL EXECUTION - Run tests faster!
   // CI: 4 workers, Local: 2 workers for better resource usage
   workers: process.env.CI ? 4 : 2,

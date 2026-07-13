@@ -66,7 +66,12 @@ test.describe('Contract Management - Allure Reporting Demo', () => {
       });
       
       await allure.step(`Login with credentials: ${USER.email}`, async () => {
-        await loginPage.login(USER.email, USER.password);
+        const alreadyLoggedIn = await loginPage.isVisible(loginPage.selectors.emailInput, 3000) === false;
+        if (alreadyLoggedIn) {
+          console.log('✓ Already logged in via storageState, skipping login form');
+        } else {
+          await loginPage.login(USER.email, USER.password);
+        }
       });
       
       await allure.step('Select FMS (DEV) application', async () => {
@@ -79,22 +84,25 @@ test.describe('Contract Management - Allure Reporting Demo', () => {
     });
     
     // Step 2: Navigate to Contracts
+    let initialCount;
+    let firstRowBefore;
     await allure.step('Navigate to Contracts page', async () => {
       const contractPage = new ContractPage(page);
       await contractPage.navigate(BASE_URL);
-      
-      const initialCount = await contractPage.getContractCount();
+
+      initialCount = await contractPage.getContractCount();
+      firstRowBefore = await page.locator(contractPage.selectors.contractTable).first().textContent().catch(() => null);
       await allure.parameter('Initial Contract Count', initialCount);
-      
+
       // Attachment: Current URL
       await allure.attachment('Current URL', page.url(), 'text/plain');
     });
-    
+
     // Step 3: Create Contract
     let result;
     await allure.step('Create new contract', async () => {
       const contractPage = new ContractPage(page);
-      
+
       const contractData = {
         vendor: 'PT',
         startDate: '2026-04-01',
@@ -105,28 +113,39 @@ test.describe('Contract Management - Allure Reporting Demo', () => {
         mainUser: 'Ryan',
         rentCost: 5000000
       };
-      
+
       // Attachment: Test data
       await allure.attachment('Contract Data', JSON.stringify(contractData, null, 2), 'application/json');
-      
+
       await allure.step('Open contract form', async () => {
         await contractPage.clickAddContract();
       });
-      
+
       await allure.step('Fill contract form with test data', async () => {
         await contractPage.fillContractForm(contractData);
-        
+
         // Screenshot of filled form
         const formScreenshot = await page.screenshot({ fullPage: true });
         await allure.attachment('Filled Form Screenshot', formScreenshot, 'image/png');
       });
-      
+
       await allure.step('Submit contract form', async () => {
-        result = await contractPage.saveContract();
-        
+        const alert = await contractPage.saveContract();
+        await page.waitForTimeout(2000);
+
+        const finalCount = await contractPage.getContractCount();
+        const firstRowAfter = await page.locator(contractPage.selectors.contractTable).first().textContent().catch(() => null);
+
+        result = {
+          success: finalCount > initialCount || (firstRowAfter !== null && firstRowAfter !== firstRowBefore),
+          initialCount,
+          finalCount,
+          alert
+        };
+
         // Attachment: Server response/alert
-        if (result && result.alert) {
-          await allure.attachment('Server Response', JSON.stringify(result.alert, null, 2), 'application/json');
+        if (alert) {
+          await allure.attachment('Server Response', JSON.stringify(alert, null, 2), 'application/json');
         }
       });
     });
@@ -205,8 +224,8 @@ test.describe('Contract Management - Allure Reporting Demo', () => {
         await allure.attachment('Validation Errors', screenshot, 'image/png');
       });
       
-      // Check for error messages
-      const hasErrors = await page.locator('.error, .invalid, [class*="error"]').count() > 0;
+      // Check for error messages (field-level errors or toast/alert notifications)
+      const hasErrors = await page.locator('.error, .invalid, [class*="error"], [role="alert"]').count() > 0;
       await allure.parameter('Validation Triggered', hasErrors);
       
       expect(hasErrors).toBeTruthy();

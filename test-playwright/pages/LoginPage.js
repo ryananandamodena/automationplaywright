@@ -60,17 +60,31 @@ export class LoginPage extends BasePage {
    */
   async selectApplication(appName) {
     console.log(`📱 Selecting application: ${appName}`);
-    
+
     const appLink = this.page.locator(`text="${appName}"`);
-    const isVisible = await this.isVisible(appLink, 5000);
-    
+
+    // The app may already be visible on the default "Pinned" tab; only
+    // switch to "All Apps" if it isn't (avoids racing the tab re-render)
+    let isVisible = await this.isVisible(appLink, 3000);
+    if (!isVisible) {
+      const allAppsTab = this.page.locator('text="All Apps"').first();
+      if (await this.isVisible(allAppsTab, 3000)) {
+        await this.click(allAppsTab);
+        isVisible = await this.isVisible(appLink, 5000);
+      }
+    }
+
     if (isVisible) {
       await this.click(appLink);
-      await this.page.waitForTimeout(2000);
-      
+      await this.page.waitForTimeout(1000);
+
       // Handle confirmation dialog if any
       await this.handleSweetAlert('confirm');
-      
+
+      // Wait for the SSO token-exchange redirect (/fms/authentication?token=...) to settle
+      await this.page.waitForURL(url => !url.pathname.includes('/authentication'), { timeout: 15000 }).catch(() => {});
+      await this.page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+
       console.log(`✓ ${appName} application selected`);
       return true;
     }
@@ -84,8 +98,14 @@ export class LoginPage extends BasePage {
    */
   async loginAndSelectApp(baseUrl, email, password, appName = null) {
     await this.navigate(baseUrl);
-    await this.login(email, password);
-    
+
+    const alreadyLoggedIn = await this.isVisible(this.selectors.emailInput, 3000) === false;
+    if (alreadyLoggedIn) {
+      console.log('✓ Already logged in via storageState, skipping login form');
+    } else {
+      await this.login(email, password);
+    }
+
     if (appName) {
       await this.selectApplication(appName);
     }
