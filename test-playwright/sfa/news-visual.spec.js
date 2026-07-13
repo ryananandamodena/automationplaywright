@@ -1,4 +1,5 @@
-pplitools Visual AI Test - SFA News Module
+/**
+ * Applitools Visual AI Test - SFA News Module
  * Tests visual appearance of SFA News pages across browsers
  */
 

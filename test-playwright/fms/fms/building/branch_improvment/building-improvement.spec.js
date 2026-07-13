@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { buildingTestData } from './building-test-data.js';
+import { buildingTestData } from '../building-test-data.js';
 
 const BASE_URL = 'https://portal-dev.modena.com';
 const FORM_URL = `${BASE_URL}/fms/building/branch-improvement/form`;

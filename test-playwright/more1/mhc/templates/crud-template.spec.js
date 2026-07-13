@@ -5,7 +5,7 @@
  * Copy template ini dan sesuaikan dengan menu yang akan ditest
  */
 
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 // Configuration
 const BASE_URL = process.env.MHC_BASE_URL || 'https://more-dev.modena.com';

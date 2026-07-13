@@ -4,7 +4,7 @@
  * Test CRUD operations untuk menu PPN di Staging Data
  */
 
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 const BASE_URL = process.env.MHC_BASE_URL || 'https://more-dev.modena.com';
 const USER = {

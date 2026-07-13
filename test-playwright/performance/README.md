@@ -54,6 +54,17 @@ than simple form POSTs. If deeper authenticated-flow load testing is needed, tha
 - reverse-engineering each app's login API and scripting it directly in k6, or
 - using k6's browser module to drive real browser sessions (slower, fewer VUs per run).
 
+## Known limitations
+
+- **MHC**: the reverse proxy for `more-dev.modena.com` returns 404 for requests without a browser-like
+  `Accept` header (k6's default `http.get` doesn't send one). Fixed in `load-test.js` by sending
+  standard browser headers (`Accept`, `Accept-Language`, `User-Agent`) on every request.
+- **PRIVE** (`prive-living.com`): protected by Cloudflare bot-challenge (`Cf-Mitigated: challenge`).
+  Plain HTTP requests (curl, k6 `http.get`) always get a 403, even with browser-like headers, because
+  the challenge requires executing JavaScript. Load testing this app requires either an allowlist
+  exception from the Cloudflare/infra team for the test source IP, or driving it with k6's browser
+  module (real headless Chromium) instead of plain HTTP requests.
+
 ## Adding/editing target URLs
 
 Edit `apps.config.js` — each app has a `urls` array; add more entries to test additional pages per app.
