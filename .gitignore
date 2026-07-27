@@ -1,5 +1,9 @@
 node_modules/
 **/node_modules/
+venv/
+**/venv/
+.next/
+**/.next/
 
 # Playwright output
 test-results/
@@ -25,3 +29,8 @@ Thumbs.db
 
 # Screenshots dari MCP testing
 *.png
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
