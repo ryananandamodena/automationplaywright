@@ -4,7 +4,7 @@ import { vehicleTestData } from './vehicle-test-data.js';
 // Helper function for login and navigation to add vehicle form
 async function loginToFMS(page) {
   await page.goto('https://portal-dev.modena.com/login');
-  await page.getByRole('textbox', { name: 'Enter your email' }).fill('ryan.ananda@modena.com');
+  await page.getByRole('textbox', { name: 'Enter your email' }).fill(process.env.ADMIN_EMAIL);
   await page.getByRole('textbox', { name: 'Enter your password' }).fill('P@ssw0rd._ryan.anand');
   await page.getByRole('button', { name: 'Sign In', exact: true }).click();
   

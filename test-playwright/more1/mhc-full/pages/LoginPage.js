@@ -29,8 +29,8 @@ export class LoginPage extends BasePage {
   /** Login dengan kredensial default sistem */
   async loginAsDefault() {
     await this.goto();
-    await this.emailInput.fill('muhzaenal5@gmail.com');
-    await this.passwordInput.fill('P@ssw0rd_muhzaenal5');
+    await this.emailInput.fill(process.env.MHC_EMAIL);
+    await this.passwordInput.fill(process.env.MHC_PASSWORD);
     await this.loginButton.click();
     await this.page.waitForTimeout(4000);
     await this.page.waitForSelector('aside, nav, header', { timeout: 10000 }).catch(() => {});

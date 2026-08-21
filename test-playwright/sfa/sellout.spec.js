@@ -5,8 +5,8 @@ test.setTimeout(120000);
 
 const BASE_URL = 'https://portal-dev.modena.com';
 const SELLOUT_URL = `${BASE_URL}/sfa/sellout-detail-lines`;
-const USERNAME = 'ryan.ananda@modena.com';
-const PASSWORD = 'P@ssw0rd_ryan.ananda';
+const USERNAME = process.env.ADMIN_EMAIL;
+const PASSWORD = process.env.ADMIN_PASSWORD;
 
 async function loginAndGoToSellout(browser) {
   const context = await browser.newContext({ ignoreHTTPSErrors: true, acceptDownloads: true });

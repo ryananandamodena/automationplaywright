@@ -6,11 +6,11 @@ test('Inspect Sales Order Page', async ({ page }) => {
   await page.waitForTimeout(2000);
 
   const emailField = page.locator('input[type="email"]');
-  await emailField.fill('muhzaenal5@gmail.com');
+  await emailField.fill(process.env.MHC_EMAIL);
   await page.waitForTimeout(500);
 
   const passwordField = page.locator('input[type="password"]');
-  await passwordField.fill('P@ssw0rd_muhzaenal5');
+  await passwordField.fill(process.env.MHC_PASSWORD);
   await page.waitForTimeout(500);
 
   const loginButton = page.locator("button:has-text('Sign In')");

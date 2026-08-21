@@ -9,12 +9,12 @@ test('Test MHC Login Only', async ({ page }) => {
 
   // Fill email
   const emailField = page.locator('input[type="email"]');
-  await emailField.fill('muhzaenal5@gmail.com');
+  await emailField.fill(process.env.MHC_EMAIL);
   await page.waitForTimeout(500);
 
   // Fill password
   const passwordField = page.locator('input[type="password"]');
-  await passwordField.fill('P@ssw0rd_muhzaenal5');
+  await passwordField.fill(process.env.MHC_PASSWORD);
   await page.waitForTimeout(500);
 
   // Screenshot before clicking login

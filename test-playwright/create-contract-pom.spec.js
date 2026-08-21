@@ -11,8 +11,8 @@ import { ContractPage } from './pages/ContractPage.js';
 
 const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
 const USER = {
-  email: process.env.ADMIN_EMAIL || 'ryan.ananda@modena.com',
-  password: process.env.ADMIN_PASSWORD || 'P@ssw0rd_ryan.ananda',
+  email: process.env.ADMIN_EMAIL,
+  password: process.env.ADMIN_PASSWORD,
 };
 
 test.describe('FMS - Contract Management (POM)', () => {

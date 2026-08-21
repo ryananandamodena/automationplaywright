@@ -9,8 +9,8 @@ import { Eyes, Target, VisualGridRunner } from '@applitools/eyes-playwright';
 // Configuration
 const BASE_URL = 'https://portal-dev.modena.com';
 const NEWS_URL = `${BASE_URL}/sfa/scc-news`;
-const USERNAME = 'ade.maradona@modena.com';
-const PASSWORD = 'P@ssw0rd_ade.maradona';
+const USERNAME = process.env.SFA_EMAIL;
+const PASSWORD = process.env.SFA_PASSWORD;
 const APP_NAME = 'SFA - Sales Force Automation';
 
 test.describe('Visual AI Testing - SFA News Module 📰', () => {

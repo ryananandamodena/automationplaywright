@@ -10,8 +10,8 @@ import { cleanupContractBySnapshot, isAutoCleanupEnabled } from './utils/data-cl
 
 const BASE_URL = 'https://portal-dev.modena.com';
 const USER = {
-  email: 'ryan.ananda@modena.com',
-  password: 'P@ssw0rd_ryan.ananda',
+  email: process.env.ADMIN_EMAIL,
+  password: process.env.ADMIN_PASSWORD,
 };
 
 // Contract data templates

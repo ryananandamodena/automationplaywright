@@ -75,6 +75,38 @@ jobs:
           CI: true
           BASE_URL_MHC: https://more-dev.modena.com
           BASE_URL_FMS: https://portal-dev.modena.com
+          # Every credential below used to be hardcoded in the spec files
+          # this workflow runs (global-setup.js, MHC staging fixtures, FMS
+          # building-improvement, SFA, tersbarumobile) — now required from
+          # secrets. Missing any of these fails the specific suite that
+          # needs it with a clear "Missing required env var" error instead
+          # of a stale/wrong hardcoded login.
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          APPROVER1_EMAIL: ${{ secrets.APPROVER1_EMAIL }}
+          APPROVER1_PASSWORD: ${{ secrets.APPROVER1_PASSWORD }}
+          APPROVER2_EMAIL: ${{ secrets.APPROVER2_EMAIL }}
+          APPROVER2_PASSWORD: ${{ secrets.APPROVER2_PASSWORD }}
+          MHC_EMAIL: ${{ secrets.MHC_EMAIL }}
+          MHC_PASSWORD: ${{ secrets.MHC_PASSWORD }}
+          SFA_EMAIL: ${{ secrets.SFA_EMAIL }}
+          SFA_PASSWORD: ${{ secrets.SFA_PASSWORD }}
+          TERSBARU_EMAIL: ${{ secrets.TERSBARU_EMAIL }}
+          TERSBARU_PASSWORD: ${{ secrets.TERSBARU_PASSWORD }}
+          TERSBARU_APPROVER_EMAIL: ${{ secrets.TERSBARU_APPROVER_EMAIL }}
+          TERSBARU_APPROVER_PASSWORD: ${{ secrets.TERSBARU_APPROVER_PASSWORD }}
+          FMS_BUILDING_ADMIN_EMAIL: ${{ secrets.FMS_BUILDING_ADMIN_EMAIL }}
+          FMS_BUILDING_ADMIN_PASSWORD: ${{ secrets.FMS_BUILDING_ADMIN_PASSWORD }}
+          FMS_BUILDING_APPROVER_EMAIL: ${{ secrets.FMS_BUILDING_APPROVER_EMAIL }}
+          FMS_BUILDING_APPROVER_PASSWORD: ${{ secrets.FMS_BUILDING_APPROVER_PASSWORD }}
+          FMS_BUILDING_APPROVER2_EMAIL: ${{ secrets.FMS_BUILDING_APPROVER2_EMAIL }}
+          FMS_BUILDING_APPROVER2_PASSWORD: ${{ secrets.FMS_BUILDING_APPROVER2_PASSWORD }}
+          FMS_BUILDING_APPROVER3_EMAIL: ${{ secrets.FMS_BUILDING_APPROVER3_EMAIL }}
+          FMS_BUILDING_APPROVER3_PASSWORD: ${{ secrets.FMS_BUILDING_APPROVER3_PASSWORD }}
+          FMS_BUILDING_APPROVER4_EMAIL: ${{ secrets.FMS_BUILDING_APPROVER4_EMAIL }}
+          FMS_BUILDING_APPROVER4_PASSWORD: ${{ secrets.FMS_BUILDING_APPROVER4_PASSWORD }}
+          FMS_BUILDING_APPROVER5_EMAIL: ${{ secrets.FMS_BUILDING_APPROVER5_EMAIL }}
+          FMS_BUILDING_APPROVER5_PASSWORD: ${{ secrets.FMS_BUILDING_APPROVER5_PASSWORD }}
 
       - name: 📊 Generate Allure report
         if: always()

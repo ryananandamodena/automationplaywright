@@ -7,8 +7,8 @@ const __dirname = path.dirname(__filename);
 
 export default async function globalSetup(config) {
   const baseURL = process.env.BASE_URL || 'https://portal-dev.modena.com';
-  const email = process.env.ADMIN_EMAIL || 'ryan.ananda@modena.com';
-  const password = process.env.ADMIN_PASSWORD || 'P@ssw0rd_ryan.ananda';
+  const email = process.env.ADMIN_EMAIL;
+  const password = process.env.ADMIN_PASSWORD;
 
   const browser = await chromium.launch();
   const page = await browser.newPage({ ignoreHTTPSErrors: true });

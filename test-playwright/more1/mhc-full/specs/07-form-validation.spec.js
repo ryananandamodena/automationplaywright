@@ -20,7 +20,7 @@ test.describe('Form Validation - Login', () => {
   test('Login dengan email kosong harus gagal / tampilkan error', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
-    await loginPage.login('', 'P@ssw0rd_muhzaenal5');
+    await loginPage.login('', process.env.MHC_PASSWORD);
 
     // Browser native validation atau app-level error
     const stillOnLogin = await loginPage.isStillOnLoginPage();
@@ -37,7 +37,7 @@ test.describe('Form Validation - Login', () => {
   test('Login dengan password kosong harus gagal / tampilkan error', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
-    await loginPage.login('muhzaenal5@gmail.com', '');
+    await loginPage.login(process.env.MHC_EMAIL, '');
 
     const stillOnLogin = await loginPage.isStillOnLoginPage();
     const errorMsg = await loginPage.getErrorMessage();
@@ -50,7 +50,7 @@ test.describe('Form Validation - Login', () => {
   test('Login dengan email format salah harus gagal', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
-    await loginPage.login('bukan-email-valid', 'P@ssw0rd_muhzaenal5');
+    await loginPage.login('bukan-email-valid', process.env.MHC_PASSWORD);
     await page.waitForTimeout(2000);
 
     const stillOnLogin = await loginPage.isStillOnLoginPage();

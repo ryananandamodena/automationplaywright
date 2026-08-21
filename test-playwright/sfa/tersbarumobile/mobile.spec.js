@@ -115,14 +115,14 @@ async function runTest() {
       console.log(`  📍 Email field at (${editTexts[0].x}, ${editTexts[0].y})`);
       adbTap(editTexts[0].x, editTexts[0].y);
       await driver.pause(800);
-      adbType('arman.septian@modena.com');
+      adbType(process.env.TERSBARU_EMAIL);
       console.log('  ✅ Email entered');
 
       // Tap password field and type
       console.log(`  📍 Password field at (${editTexts[1].x}, ${editTexts[1].y})`);
       adbTap(editTexts[1].x, editTexts[1].y);
       await driver.pause(800);
-      adbType('P@ssw0rd_arman.septian');
+      adbType(process.env.TERSBARU_PASSWORD);
       console.log('  ✅ Password entered');
 
       await driver.pause(500);

@@ -6,8 +6,8 @@ const PKG = 'com.modena.salesmobile';
 const ACT = '.MainActivity';
 
 // Credentials
-const EMAIL = 'arman.septian@modena.com';
-const PASSWORD = 'P@ssw0rd_arman.septian';
+const EMAIL = process.env.TERSBARU_EMAIL;
+const PASSWORD = process.env.TERSBARU_PASSWORD;
 
 // Coordinates from previous successful UI dump (MEmu 900x1600 resolution)
 const COORDS = {

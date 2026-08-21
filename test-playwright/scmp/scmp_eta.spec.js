@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 const BASE = 'https://portal-dev.modena.com';
-const EMAIL = 'ryan.ananda@modena.com';
-const PASSWORD = 'P@ssw0rd_ryan.ananda';
+const EMAIL = process.env.ADMIN_EMAIL;
+const PASSWORD = process.env.ADMIN_PASSWORD;
 
 async function login(page) {
   await page.goto(`${BASE}/login`, { waitUntil: 'domcontentloaded' });

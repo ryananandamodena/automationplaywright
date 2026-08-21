@@ -1,5 +1,11 @@
 export const CREDENTIALS = {
-  valid: { username: 'FE_GCCS', password: 'P@ssw0rd.1' },
+  // Overridable via GitHub Actions secrets (GCCS_USERNAME/GCCS_PASSWORD) so
+  // CI doesn't need this test-env credential hardcoded in the repo; falls
+  // back to the known test account for local runs.
+  valid: {
+    username: process.env.GCCS_USERNAME || 'FE_GCCS',
+    password: process.env.GCCS_PASSWORD || 'P@ssw0rd.1',
+  },
   invalidUsername: { username: 'NOT_A_REAL_USER', password: 'P@ssw0rd.1' },
   invalidPassword: { username: 'FE_GCCS', password: 'WrongPass123!' },
   sqlInjection: { username: "' OR 1=1 --", password: "' OR 1=1 --" },

@@ -817,12 +817,16 @@ test.describe('[NEW] Navigation - prive-dev.modena.com', () => {
     // Cek nav links apakah visible atau tersembunyi di mobile
     const navLinks = page.locator('nav a');
     const navCount = await navLinks.count();
+    // Capped like the other live-DOM-count loops in this file (e.g. footerLinks.slice(0, 15)
+    // below, Math.min(count, 3) elsewhere) — a nav redesign (mega-menu, etc.) could otherwise
+    // make this scan scale with an arbitrary number of live nav links.
+    const navCheckLimit = Math.min(navCount, 20);
     let visibleNavCount = 0;
-    for (let i = 0; i < navCount; i++) {
+    for (let i = 0; i < navCheckLimit; i++) {
       const visible = await navLinks.nth(i).isVisible({ timeout: 1000 }).catch(() => false);
       if (visible) visibleNavCount++;
     }
-    console.log(`  Nav links visible at 375px: ${visibleNavCount}/${navCount}`);
+    console.log(`  Nav links visible at 375px: ${visibleNavCount}/${navCheckLimit} checked (of ${navCount} total)`);
 
     if (!hamburgerVisible && visibleNavCount > 3) {
       console.log('  ⚠ Desktop navigation masih ditampilkan di mobile viewport 375px tanpa hamburger');

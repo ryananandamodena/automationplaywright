@@ -10,18 +10,18 @@ test.use({
 // User credentials
 const users = {
   admin: {
-    email: 'ryan.ananda@modena.com',
-    password: 'P@ssw0rd_ryan.ananda',
+    email: process.env.ADMIN_EMAIL,
+    password: process.env.ADMIN_PASSWORD,
     name: 'Ryan Ananda'
   },
   approver1: {
-    email: 'novyan.ramahdahan@modena.com',
-    password: 'P@ssw0rd_novyan.ramahdahan',
+    email: process.env.APPROVER1_EMAIL,
+    password: process.env.APPROVER1_PASSWORD,
     name: 'Novyan Ramahdahan'
   },
   approver2: {
-    email: 'daniel.arietonga@modena.com',
-    password: 'P@ssw0rd_daniel.arietonga',
+    email: process.env.APPROVER2_EMAIL,
+    password: process.env.APPROVER2_PASSWORD,
     name: 'Daniel Arietonga'
   }
 };

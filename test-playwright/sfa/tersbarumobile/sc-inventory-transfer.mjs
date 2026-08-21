@@ -6,8 +6,8 @@ const PKG = 'com.modena.salesmobile';
 const ACT = '.MainActivity';
 
 // Credentials
-const EMAIL = 'arman.septian@modena.com';
-const PASSWORD = 'P@ssw0rd_arman.septian';
+const EMAIL = process.env.TERSBARU_EMAIL;
+const PASSWORD = process.env.TERSBARU_PASSWORD;
 
 // Coordinates from previous successful UI dump (MEmu 900x1600 resolution)
 const COORDS = {
@@ -130,11 +130,11 @@ if (lm) {
   console.log('  ✅ Email: iqbalilahi7@gmail.com');
   tap(COORDS.email.x, COORDS.email.y);
   sleep(1000);
-  typeText('iqbalilahi7@gmail.com');
+  typeText(process.env.TERSBARU_APPROVER_EMAIL);
 
   tap(COORDS.password.x, COORDS.password.y);
   sleep(1000);
-  typeText('P@ssw0rd_iqbalilahi7');
+  typeText(process.env.TERSBARU_APPROVER_PASSWORD);
   console.log('  ✅ Password entered');
 sleep(500);
 

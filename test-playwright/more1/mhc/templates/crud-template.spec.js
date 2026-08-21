@@ -1,8 +1,19 @@
 /**
- * MHC - CRUD TEST TEMPLATE
- * 
- * Template untuk test CRUD operations pada menu Staging Data
- * Copy template ini dan sesuaikan dengan menu yang akan ditest
+ * MHC - CRUD TEST TEMPLATE (superseded)
+ *
+ * This generic Create/Update/Delete template no longer matches the app: the
+ * "Sinkronisasi SAP" staging menus it was written for (Bank, BP, BP Branch,
+ * BP Group, BP Address, Legal, Warehouse, Order Type, GL Account, Series,
+ * PPh, PPN) were verified live on 2026-08-18 to be READ-ONLY sync viewers —
+ * search + AND/OR filter builder + sort + a single "Sinkronkan Semua" (Sync
+ * All) button, with no Add/Edit/Delete control anywhere in the UI.
+ *
+ * Use ../staging/staging/template-crud.spec.js instead, which wraps the
+ * shared List/Search/Filter/Sync suite in
+ * ../staging/staging/fixtures.js#registerStagingSuite(). Only reach for a
+ * from-scratch CRUD template like this one for a genuinely different menu
+ * that does have its own create/edit form — confirm that live before
+ * copying this file.
  */
 
 import { test, expect } from '@playwright/test';
@@ -17,7 +28,7 @@ const USER = {
 // Menu Configuration - CUSTOMIZE THIS
 const MENU_CONFIG = {
   menuName: 'Menu Name',           // e.g., 'Master Product'
-  menuPath: '/path/to/menu',       // e.g., '/staging/master-product'
+  menuPath: '/path/to/menu',       // e.g., '/mhc/staging/master-product' — note the company-slug prefix
   addButtonText: 'Add',            // Text on add button
   editButtonSelector: 'button:has-text("Edit")',
   deleteButtonSelector: 'button:has-text("Delete")',
@@ -49,14 +60,19 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
   // Setup: Login before all tests
   test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
-    
-    // Login
+
+    // Login — verified live 2026-08-18: fields are matched by placeholder,
+    // not input[type], and a required Company dropdown must be picked
+    // before Sign In. See ../staging/staging/fixtures.js#login() for the
+    // working version of this.
     await page.goto(BASE_URL);
-    await page.fill('input[type="email"]', USER.email);
-    await page.fill('input[type="password"]', USER.password);
-    await page.click('button[type="submit"]');
-    await page.waitForTimeout(3000);
-    
+    await page.locator('input[placeholder="Email"]').fill(USER.email);
+    await page.locator('input[placeholder="Password"]').fill(USER.password);
+    await page.getByText('Select a company').click();
+    await page.getByText('MODENA HOME CENTER (MHC)', { exact: true }).click();
+    await page.getByRole('button', { name: 'Sign In' }).click();
+    await page.waitForLoadState('networkidle');
+
     // Navigate to menu
     await page.goto(LIST_URL);
     await page.waitForTimeout(2000);
@@ -95,26 +111,26 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
   // TEST 1: CREATE
   test('1. CREATE - Should create new item successfully', async () => {
     console.log('\n📍 TEST: CREATE');
-    
+
     // Get initial count
     const initialCount = await page.locator('tbody tr').count();
     console.log(`Initial items: ${initialCount}`);
-    
+
     // Click Add button
     await page.click(`button:has-text("${MENU_CONFIG.addButtonText}")`);
     await page.waitForTimeout(2000);
-    
+
     // Fill form - CUSTOMIZE THIS SECTION
     // Example:
     // await page.fill('input[name="field1"]', TEST_DATA.create.field1);
     // await page.fill('input[name="field2"]', TEST_DATA.create.field2);
-    
+
     await page.screenshot({ path: `mhc-${MENU_CONFIG.menuName}-create-filled.png` });
-    
+
     // Submit form
     await page.click('button:has-text("Save"), button:has-text("Submit")');
     await page.waitForTimeout(3000);
-    
+
     // Verify success
     const finalCount = await page.locator('tbody tr').count();
     console.log(`Final items: ${finalCount}`);
@@ -122,7 +138,7 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
     if (finalCount > initialCount) {
       createdSnapshot = await page.locator('tbody tr').first().textContent().catch(() => null);
     }
-    
+
     expect(finalCount).toBeGreaterThan(initialCount);
     console.log('✅ CREATE: Success');
   });
@@ -130,16 +146,16 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
   // TEST 2: READ/LIST
   test('2. READ - Should display list of items', async () => {
     console.log('\n📍 TEST: READ');
-    
+
     // Check if table exists
     const tableExists = await page.locator('table').count() > 0;
     expect(tableExists).toBeTruthy();
-    
+
     // Check if rows exist
     const rowCount = await page.locator('tbody tr').count();
     console.log(`Total items: ${rowCount}`);
     expect(rowCount).toBeGreaterThan(0);
-    
+
     await page.screenshot({ path: `mhc-${MENU_CONFIG.menuName}-list.png` });
     console.log('✅ READ: Success');
   });
@@ -147,51 +163,51 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
   // TEST 3: SEARCH
   test('3. SEARCH - Should filter items by search term', async () => {
     console.log('\n📍 TEST: SEARCH');
-    
+
     // Get initial count
     const initialCount = await page.locator('tbody tr').count();
     console.log(`Before search: ${initialCount} items`);
-    
+
     // Perform search
     await page.fill(MENU_CONFIG.searchInputSelector, TEST_DATA.search);
     await page.waitForTimeout(2000);
-    
+
     // Get filtered count
     const filteredCount = await page.locator('tbody tr').count();
     console.log(`After search: ${filteredCount} items`);
-    
+
     await page.screenshot({ path: `mhc-${MENU_CONFIG.menuName}-search.png` });
-    
+
     // Clear search
     await page.fill(MENU_CONFIG.searchInputSelector, '');
     await page.waitForTimeout(2000);
-    
+
     console.log('✅ SEARCH: Success');
   });
 
   // TEST 4: UPDATE
   test('4. UPDATE - Should update existing item', async () => {
     console.log('\n📍 TEST: UPDATE');
-    
+
     // Click edit on first row
     await page.locator(MENU_CONFIG.editButtonSelector).first().click();
     await page.waitForTimeout(2000);
-    
+
     // Update form - CUSTOMIZE THIS SECTION
     // Example:
     // await page.fill('input[name="field1"]', TEST_DATA.update.field1);
     // await page.fill('input[name="field2"]', TEST_DATA.update.field2);
-    
+
     await page.screenshot({ path: `mhc-${MENU_CONFIG.menuName}-update-filled.png` });
-    
+
     // Submit form
     await page.click('button:has-text("Save"), button:has-text("Update")');
     await page.waitForTimeout(3000);
-    
+
     // Verify update
     const updatedText = await page.locator('tbody tr').first().textContent();
     console.log(`Updated row: ${updatedText}`);
-    
+
     await page.screenshot({ path: `mhc-${MENU_CONFIG.menuName}-updated.png` });
     console.log('✅ UPDATE: Success');
   });
@@ -199,22 +215,22 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
   // TEST 5: DELETE
   test('5. DELETE - Should delete item successfully', async () => {
     console.log('\n📍 TEST: DELETE');
-    
+
     // Get initial count
     const initialCount = await page.locator('tbody tr').count();
     console.log(`Before delete: ${initialCount} items`);
-    
+
     // Click delete on first row
     await page.locator(MENU_CONFIG.deleteButtonSelector).first().click();
     await page.waitForTimeout(1000);
-    
+
     // Confirm deletion (if confirmation dialog exists)
     const confirmButton = page.locator('button:has-text("Yes"), button:has-text("Confirm"), button:has-text("Delete")');
     if (await confirmButton.count() > 0) {
       await confirmButton.click();
       await page.waitForTimeout(2000);
     }
-    
+
     // Verify deletion
     const finalCount = await page.locator('tbody tr').count();
     console.log(`After delete: ${finalCount} items`);
@@ -222,9 +238,9 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
     if (finalCount < initialCount) {
       createdSnapshot = null;
     }
-    
+
     expect(finalCount).toBeLessThan(initialCount);
-    
+
     await page.screenshot({ path: `mhc-${MENU_CONFIG.menuName}-deleted.png` });
     console.log('✅ DELETE: Success');
   });
@@ -232,25 +248,25 @@ test.describe(`MHC - ${MENU_CONFIG.menuName} CRUD Tests`, () => {
   // TEST 6: VALIDATION
   test('6. VALIDATION - Should show validation errors', async () => {
     console.log('\n📍 TEST: VALIDATION');
-    
+
     // Click Add button
     await page.click(`button:has-text("${MENU_CONFIG.addButtonText}")`);
     await page.waitForTimeout(2000);
-    
+
     // Try to submit empty form
     await page.click('button:has-text("Save"), button:has-text("Submit")');
     await page.waitForTimeout(2000);
-    
+
     // Check for validation messages
     const validationMessages = await page.locator('text=/required|wajib|error|tidak boleh kosong/i').count();
     console.log(`Validation messages found: ${validationMessages}`);
-    
+
     await page.screenshot({ path: `mhc-${MENU_CONFIG.menuName}-validation.png` });
-    
+
     // Close form
     await page.click('button:has-text("Cancel"), button:has-text("Close")').catch(() => {});
     await page.waitForTimeout(1000);
-    
+
     console.log('✅ VALIDATION: Success');
   });
 });

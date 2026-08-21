@@ -5,13 +5,13 @@ const POLICY_28_URL = 'https://portal-dev.modena.com/fms/insurance/policies/view
 
 const USERS = {
   creator: {
-    email: 'novyan.ramadhan@modena.com',
-    password: 'P@ssw0rd_novyan.ramadhan',
+    email: process.env.APPROVER1_EMAIL,
+    password: process.env.APPROVER1_PASSWORD,
     name: 'Novyan Ramadhan'
   },
   approver: {
-    email: 'daniel.aritonang@modena.com',
-    password: 'P@ssw0rd_daniel.aritonang',
+    email: process.env.APPROVER2_EMAIL,
+    password: process.env.APPROVER2_PASSWORD,
     name: 'Daniel Aritonang'
   }
 };

@@ -140,7 +140,7 @@ export async function sendEmailReport(resultsJsonPath) {
   const smtpUser   = process.env.SMTP_USER   || '';
   const smtpPass   = process.env.SMTP_PASS   || '';
   const emailFrom  = process.env.EMAIL_FROM  || smtpUser;
-  const emailTo    = process.env.EMAIL_TO    || 'ryan.ananda@modena.com';
+  const emailTo    = process.env.ADMIN_EMAIL;
 
   if (!smtpUser || !smtpPass) {
     console.warn('⚠ SMTP_USER / SMTP_PASS tidak dikonfigurasi di .env - email tidak dikirim');

@@ -10,8 +10,8 @@ const BASE_URL = 'https://portal-dev.modena.com';
 const BUILDING_LIST_URL = `${BASE_URL}/fms/building`;
 
 // Credentials
-const RYAN_EMAIL = 'ryan.ananda@modena.com';
-const RYAN_PASSWORD = 'P@ssw0rd_ryan.ananda';
+const RYAN_EMAIL = process.env.ADMIN_EMAIL;
+const RYAN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // File paths — absolute, resolved from test-playwright/ dir
 const TEST_DIR = path.resolve(__dirname, '..', '..', '..');

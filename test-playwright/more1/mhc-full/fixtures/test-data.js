@@ -10,17 +10,17 @@ export const MHC_PREFIX = '/mhc';
 
 // ─── Kredensial ───────────────────────────────────────────
 export const VALID_CREDENTIALS = {
-  email: 'muhzaenal5@gmail.com',
-  password: 'P@ssw0rd_muhzaenal5',
+  email: process.env.MHC_EMAIL,
+  password: process.env.MHC_PASSWORD,
 };
 
 export const INVALID_CREDENTIALS = [
   { email: 'wrong@test.com', password: 'WrongPass!', desc: 'email tidak terdaftar' },
-  { email: 'muhzaenal5@gmail.com', password: 'wrongpassword', desc: 'password salah' },
-  { email: '', password: 'P@ssw0rd_muhzaenal5', desc: 'email kosong' },
-  { email: 'muhzaenal5@gmail.com', password: '', desc: 'password kosong' },
-  { email: 'notanemail', password: 'P@ssw0rd_muhzaenal5', desc: 'format email tidak valid' },
-  { email: 'a@b', password: 'P@ssw0rd_muhzaenal5', desc: 'email terlalu pendek' },
+  { email: process.env.MHC_EMAIL, password: 'wrongpassword', desc: 'password salah' },
+  { email: '', password: process.env.MHC_PASSWORD, desc: 'email kosong' },
+  { email: process.env.MHC_EMAIL, password: '', desc: 'password kosong' },
+  { email: 'notanemail', password: process.env.MHC_PASSWORD, desc: 'format email tidak valid' },
+  { email: 'a@b', password: process.env.MHC_PASSWORD, desc: 'email terlalu pendek' },
 ];
 
 // ─── Search Keywords ───────────────────────────────────────
@@ -90,7 +90,7 @@ export const USER_FORM = {
   invalidEmail: {
     name: 'Test User',
     email: 'not-an-email',
-    password: 'P@ssw0rd_muhzaenal5',
+    password: process.env.MHC_PASSWORD,
   },
   emptyRequired: {
     name: '',
@@ -100,7 +100,7 @@ export const USER_FORM = {
   longName: {
     name: 'A'.repeat(300),
     email: 'test@test.com',
-    password: 'P@ssw0rd_muhzaenal5',
+    password: process.env.MHC_PASSWORD,
   },
 };
 

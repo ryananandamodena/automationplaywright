@@ -6,8 +6,8 @@ const FORM_URL = `${BASE_URL}/fms/building/branch-improvement/form`;
 
 const USERS = {
   eastManager: {
-    email: process.env.FMS_EAST_EMAIL || 'agung.gunawan@modena.com',
-    password: process.env.FMS_EAST_PASSWORD || 'P@ssw0rd_agung.gunawan',
+    email: process.env.FMS_BUILDING_ADMIN_EMAIL,
+    password: process.env.FMS_BUILDING_ADMIN_PASSWORD,
     name: 'East Manager'
   }
 };

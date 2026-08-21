@@ -5,10 +5,10 @@ test('Login to portal-dev.modena.com and click FMS dev menu', async ({ page }) =
   await page.goto('https://portal-dev.modena.com/login');
 
   // Fill in the email
-  await page.getByRole('textbox', { name: 'Enter your email' }).fill('ryan.ananda@modena.com');
+  await page.getByRole('textbox', { name: 'Enter your email' }).fill(process.env.ADMIN_EMAIL);
 
   // Fill in the password
-  await page.getByRole('textbox', { name: 'Enter your password' }).fill('P@ssw0rd_ryan.ananda');
+  await page.getByRole('textbox', { name: 'Enter your password' }).fill(process.env.ADMIN_PASSWORD);
 
   // Click the Sign In button
   await page.getByRole('button', { name: 'Sign In', exact: true }).click();

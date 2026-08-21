@@ -12,8 +12,9 @@ export default defineConfig({
     ['list'],
   ],
   use: {
-    baseURL: 'https://gccs-test.modena.com',
-    headless: false,
+    baseURL: process.env.GCCS_BASE_URL || 'https://gccs-test.modena.com',
+    // Headed locally (handy for --headed/--debug runs), always headless in CI.
+    headless: !!process.env.CI,
     viewport: { width: 1440, height: 900 },
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

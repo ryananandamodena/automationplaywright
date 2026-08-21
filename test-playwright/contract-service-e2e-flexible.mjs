@@ -16,10 +16,26 @@ import {
 
 // Load environment variables (for CI/CD support)
 const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
+
+// This is a real Modena employee account, not a test/dummy login — its
+// password must never be hardcoded here. Set ADMIN_EMAIL/ADMIN_PASSWORD as
+// a GitHub Actions secret (or in your local .env); the script fails fast
+// with a clear error if either is missing.
+function requireEnv(name) {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(
+      `Missing required env var ${name} — set it as a GitHub Actions secret ` +
+      `(or in your local .env) before running this script.`
+    );
+  }
+  return value;
+}
+
 const USER = {
-  email: process.env.ADMIN_EMAIL || 'ryan.ananda@modena.com',
-  password: process.env.ADMIN_PASSWORD || 'P@ssw0rd_ryan.ananda',
-  name: process.env.ADMIN_NAME || 'Ryan Ananda'
+  email: requireEnv('ADMIN_EMAIL'),
+  password: requireEnv('ADMIN_PASSWORD'),
+  name: process.env.ADMIN_NAME || 'Admin'
 };
 const HEADLESS = process.env.HEADLESS === 'true';
 

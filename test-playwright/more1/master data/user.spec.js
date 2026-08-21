@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 const BASE_URL = 'https://more-dev.modena.com';
-const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
-const LOGIN_PASSWORD = 'P@ssw0rd_muhzaenal5';
+const LOGIN_EMAIL = process.env.MHC_EMAIL;
+const LOGIN_PASSWORD = process.env.MHC_PASSWORD;
 const USERS_URL = `${BASE_URL}/users`;
 
 // Helper: Login to MHC

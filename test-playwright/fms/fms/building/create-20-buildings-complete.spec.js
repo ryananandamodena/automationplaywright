@@ -6,8 +6,8 @@ const BUILDING_FORM_URL = `${BASE_URL}/fms/building/form`;
 const BUILDING_LIST_URL = `${BASE_URL}/fms/building`;
 
 // Ryan's credentials
-const RYAN_EMAIL = 'ryan.ananda@modena.com';
-const RYAN_PASSWORD = 'P@ssw0rd_ryan.ananda';
+const RYAN_EMAIL = process.env.ADMIN_EMAIL;
+const RYAN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // ============================================================
 // BUILDING DATA GENERATOR

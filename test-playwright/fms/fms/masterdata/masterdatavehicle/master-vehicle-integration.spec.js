@@ -15,8 +15,8 @@ const VEHICLE_LIST_URL = `${BASE_URL}/fms/vehicle`;
 const SERVICE_URL = `${BASE_URL}/fms/vehicle/service`;
 
 // Test credentials
-const TEST_EMAIL = 'ryan.ananda@modena.com';
-const TEST_PASSWORD = 'P@ssw0rd_ryan.ananda';
+const TEST_EMAIL = process.env.ADMIN_EMAIL;
+const TEST_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // ============================================================
 // HELPER: Login & Navigate to FMS

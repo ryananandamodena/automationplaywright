@@ -32,14 +32,14 @@ const INSURANCE_FORM_URL = `${BASE_URL}/fms/insurance/policies/form`;
 // ============================================================
 const USERS = {
   creator: {
-    email: 'novyan.ramadhan@modena.com',
-    password: 'P@ssw0rd_novyan.ramadhan',
+    email: process.env.APPROVER1_EMAIL,
+    password: process.env.APPROVER1_PASSWORD,
     name: 'Novyan Ramadhan',
     role: 'Policy Creator'
   },
   approver: {
-    email: 'daniel.aritonang@modena.com',
-    password: 'P@ssw0rd_daniel.aritonang',
+    email: process.env.APPROVER2_EMAIL,
+    password: process.env.APPROVER2_PASSWORD,
     name: 'Daniel Aritonang',
     role: 'Policy Approver'
   }

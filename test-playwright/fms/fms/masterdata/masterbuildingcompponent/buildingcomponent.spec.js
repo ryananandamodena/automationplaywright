@@ -133,8 +133,8 @@ test('Create 10 Building Component Records', async ({ page }) => {
     
     if (page.url().includes('login')) {
       console.log('Logging in...');
-      await page.getByRole('textbox', { name: 'Enter your email' }).fill('ryan.ananda@modena.com');
-      await page.getByRole('textbox', { name: 'Enter your password' }).fill('P@ssw0rd_ryan.ananda');
+      await page.getByRole('textbox', { name: 'Enter your email' }).fill(process.env.ADMIN_EMAIL);
+      await page.getByRole('textbox', { name: 'Enter your password' }).fill(process.env.ADMIN_PASSWORD);
       await page.getByRole('button', { name: 'Sign In', exact: true }).click();
       
       await page.waitForURL('**/my-application', { timeout: 15000 });
@@ -305,8 +305,8 @@ test('Create Building Component with Duplicate Code Handling', async ({ page }) 
     
     if (page.url().includes('login')) {
       console.log('Logging in...');
-      await page.getByRole('textbox', { name: 'Enter your email' }).fill('ryan.ananda@modena.com');
-      await page.getByRole('textbox', { name: 'Enter your password' }).fill('P@ssw0rd_ryan.ananda');
+      await page.getByRole('textbox', { name: 'Enter your email' }).fill(process.env.ADMIN_EMAIL);
+      await page.getByRole('textbox', { name: 'Enter your password' }).fill(process.env.ADMIN_PASSWORD);
       await page.getByRole('button', { name: 'Sign In', exact: true }).click();
       
       await page.waitForURL('**/my-application', { timeout: 15000 });

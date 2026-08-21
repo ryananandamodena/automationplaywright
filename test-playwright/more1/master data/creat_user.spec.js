@@ -6,8 +6,8 @@ async function loginToMHC(page) {
   console.log('  🔐 Logging in...');
   await page.goto(BASE_URL);
   await page.waitForTimeout(2000);
-  await page.locator('input[type="email"]').fill('muhzaenal5@gmail.com');
-  await page.locator('input[type="password"]').fill('P@ssw0rd_muhzaenal5');
+  await page.locator('input[type="email"]').fill(process.env.MHC_EMAIL);
+  await page.locator('input[type="password"]').fill(process.env.MHC_PASSWORD);
   await page.locator("button:has-text('Sign In')").click();
   await page.waitForTimeout(5000);
   // Verify dashboard loaded (sidebar menu visible)

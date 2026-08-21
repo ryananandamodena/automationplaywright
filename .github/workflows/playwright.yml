@@ -77,6 +77,10 @@ jobs:
           CI: true
           # Paksa headless di CI
           PLAYWRIGHT_HEADLESS: true
+          # fixtures/test-data.js used to hardcode this login — now required
+          # from secrets, so it must be forwarded here or every test fails.
+          MHC_EMAIL: ${{ secrets.MHC_EMAIL }}
+          MHC_PASSWORD: ${{ secrets.MHC_PASSWORD }}
         continue-on-error: true
 
       # ── Send email report ─────────────────────────────────

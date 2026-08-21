@@ -8,8 +8,8 @@
 
 const BASE_URL = 'https://portal-dev.modena.com';
 const VEHICLE_URL = `${BASE_URL}/fms/vehicle`;
-const LOGIN_EMAIL = 'ryan.ananda@modena.com';
-const LOGIN_PASSWORD = 'P@ssw0rd_ryan.ananda';
+const LOGIN_EMAIL = process.env.ADMIN_EMAIL;
+const LOGIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // Brand types for testing
 const VEHICLE_BRANDS = [

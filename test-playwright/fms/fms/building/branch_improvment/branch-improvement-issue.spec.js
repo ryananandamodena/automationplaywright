@@ -24,14 +24,14 @@ const MODULE_URL = `${BASE_URL}/fms/building/branch-improvement/form`;
 // ============================================================
 const testUsers = [
   {
-    email: 'agung.gunawan@modena.com',
-    password: 'P@ssw0rd_agung.gunawan',
+    email: process.env.FMS_BUILDING_ADMIN_EMAIL,
+    password: process.env.FMS_BUILDING_ADMIN_PASSWORD,
     name: 'Agung Sukmana Gunawan',
     role: 'Branch Manager (East)'
   },
   {
-    email: 'antonius.kawi@modena.com',
-    password: 'P@ssw0rd_antonius.kawi',
+    email: process.env.FMS_BUILDING_APPROVER_EMAIL,
+    password: process.env.FMS_BUILDING_APPROVER_PASSWORD,
     name: 'Antonius Kawi',
     role: 'Branch Manager (West)'
   }

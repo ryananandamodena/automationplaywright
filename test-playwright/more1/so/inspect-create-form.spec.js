@@ -5,9 +5,9 @@ test('Inspect Create Sales Order Form', async ({ page }) => {
   await page.goto('https://more-dev.modena.com');
   await page.waitForTimeout(2000);
 
-  await page.locator('input[type="email"]').fill('muhzaenal5@gmail.com');
+  await page.locator('input[type="email"]').fill(process.env.MHC_EMAIL);
   await page.waitForTimeout(500);
-  await page.locator('input[type="password"]').fill('P@ssw0rd_muhzaenal5');
+  await page.locator('input[type="password"]').fill(process.env.MHC_PASSWORD);
   await page.waitForTimeout(500);
   await page.locator("button:has-text('Sign In')").click();
   await page.waitForTimeout(4000);

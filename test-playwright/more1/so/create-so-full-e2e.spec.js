@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 import { cleanupTableRecordBySnapshot, isAutoCleanupEnabled } from '../../utils/data-cleanup.mjs';
 
 const BASE_URL = 'https://more-dev.modena.com';
-const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
-const LOGIN_PASSWORD = 'P@ssw0rd_muhzaenal5';
+const LOGIN_EMAIL = process.env.MHC_EMAIL;
+const LOGIN_PASSWORD = process.env.MHC_PASSWORD;
 
 test.describe('MHC - Sales Order Creation - FULL E2E', () => {
   test.setTimeout(180000);

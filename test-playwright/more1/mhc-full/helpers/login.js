@@ -1,7 +1,7 @@
 // Shared login helper - digunakan oleh semua spec
 const BASE_URL = 'https://more-dev.modena.com';
-const LOGIN_EMAIL = 'muhzaenal5@gmail.com';
-const LOGIN_PASSWORD = 'P@ssw0rd_muhzaenal5';
+const LOGIN_EMAIL = process.env.MHC_EMAIL;
+const LOGIN_PASSWORD = process.env.MHC_PASSWORD;
 
 export async function login(page) {
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });

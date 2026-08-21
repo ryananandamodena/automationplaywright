@@ -32,12 +32,12 @@ test.describe('Login Portal & Navigate to FMS Dev', () => {
 
       // Isi email
       console.log('📝 Mengisi email...');
-      await emailField.fill('ryan.ananda@modena.com');
+      await emailField.fill(process.env.ADMIN_EMAIL);
 
       // Isi password
       console.log('📝 Mengisi password...');
       const passwordField = page.locator('input[type="password"]').first();
-      await passwordField.fill('P@ssw0rd_ryan.ananda');
+      await passwordField.fill(process.env.ADMIN_PASSWORD);
 
       // Screenshot setelah isi form
       await page.screenshot({ path: 'test-results/02-filled-form.png', fullPage: true });

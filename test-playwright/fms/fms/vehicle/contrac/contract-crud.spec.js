@@ -13,8 +13,8 @@ async function loginAndGoToContract(page) {
 
   // Jika diredirect ke login
   if (page.url().includes('/login')) {
-    await page.locator('input[type="email"], input[name="email"]').first().fill('ryan.ananda@modena.com');
-    await page.locator('input[type="password"]').first().fill('P@ssw0rd_ryan.ananda');
+    await page.locator('input[type="email"], input[name="email"]').first().fill(process.env.ADMIN_EMAIL);
+    await page.locator('input[type="password"]').first().fill(process.env.ADMIN_PASSWORD);
     await page.getByRole('button', { name: 'Sign In' }).click();
     await page.waitForTimeout(5000);
 

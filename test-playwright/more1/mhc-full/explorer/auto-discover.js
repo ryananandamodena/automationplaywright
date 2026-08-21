@@ -18,8 +18,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const BASE_URL = 'https://more-dev.modena.com';
 const CREDENTIALS = {
-  email: 'muhzaenal5@gmail.com',
-  password: 'P@ssw0rd_muhzaenal5',
+  email: process.env.MHC_EMAIL,
+  password: process.env.MHC_PASSWORD,
 };
 
 /**
@@ -94,8 +94,10 @@ async function detectPageFeatures(page, url) {
     const dateInputs = await page.locator('input[type="date"], input[placeholder*="date" i], input[placeholder*="tanggal" i]').count().catch(() => 0);
     features.dateRangePicker = dateInputs > 0;
 
-    // Deteksi form inputs
-    const formInputElements = await page.locator('input:not([type="hidden"]):not([type="search"])').all().catch(() => []);
+    // Deteksi form inputs — cap the scan: a data-heavy page (big form or a table with inline
+    // inputs) could otherwise mean an unbounded number of getAttribute() round-trips here.
+    const MAX_INPUTS_TO_INSPECT = 30;
+    const formInputElements = (await page.locator('input:not([type="hidden"]):not([type="search"])').all().catch(() => [])).slice(0, MAX_INPUTS_TO_INSPECT);
     for (const input of formInputElements) {
       const name = await input.getAttribute('name').catch(() => '');
       const placeholder = await input.getAttribute('placeholder').catch(() => '');
@@ -149,9 +151,14 @@ async function discoverMenus(page) {
       if (allLinks.length > 0) break;
     }
 
-    // Filter unique menus
+    // Filter unique menus. Capped: if the sidebar markup changes or a selector above matches
+    // page content instead of the sidebar, allLinks could balloon to hundreds of entries — each
+    // discovered menu gets a full navigation + screenshot + detectPageFeatures() scan below, so
+    // an unbounded list here means an unbounded number of those per run.
+    const MAX_MENUS = 50;
     const seen = new Set();
     for (const link of allLinks) {
+      if (menus.length >= MAX_MENUS) break;
       const key = `${link.text}|${link.href}`;
       if (!seen.has(key)) {
         seen.add(key);
@@ -159,6 +166,9 @@ async function discoverMenus(page) {
       }
     }
 
+    if (allLinks.length > MAX_MENUS) {
+      console.warn(`  ⚠ Sidebar link scan found ${allLinks.length} candidates — capped to ${MAX_MENUS}. If this is a real menu overflow (not a bad selector match), raise MAX_MENUS.`);
+    }
     console.log(`  ✓ Found ${menus.length} menu items in sidebar`);
   } catch (e) {
     console.error(`  ⚠ Error discovering menus: ${e.message}`);

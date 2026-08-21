@@ -9,9 +9,24 @@ import { cleanupContractBySnapshot, isAutoCleanupEnabled } from './utils/data-cl
 
 // Load environment variables
 const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
+
+// Real Modena employee account, not a test/dummy login — password must
+// never be hardcoded here. Set ADMIN_EMAIL/ADMIN_PASSWORD as a GitHub
+// Actions secret (or in your local .env).
+function requireEnv(name) {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(
+      `Missing required env var ${name} — set it as a GitHub Actions secret ` +
+      `(or in your local .env) before running this script.`
+    );
+  }
+  return value;
+}
+
 const USER = {
-  email: process.env.ADMIN_EMAIL || 'ryan.ananda@modena.com',
-  password: process.env.ADMIN_PASSWORD || 'P@ssw0rd_ryan.ananda',
+  email: requireEnv('ADMIN_EMAIL'),
+  password: requireEnv('ADMIN_PASSWORD'),
 };
 const HEADLESS = process.env.HEADLESS === 'true';
 

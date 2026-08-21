@@ -15,24 +15,42 @@ import { cleanupContractBySnapshot, isAutoCleanupEnabled } from './utils/data-cl
 const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
 const HEADLESS = process.env.HEADLESS === 'true';
 
+// User accounts — these are real Modena employee accounts, not test/dummy
+// logins, so their passwords must NEVER be hardcoded here (a past version of
+// this file did exactly that — if you're rotating credentials because of
+// that, see the note in README/CI_CD setup docs). Every field is required
+// from the environment; the script fails fast with a clear error instead of
+// silently falling back to a stale or missing credential.
+function requireEnv(name) {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(
+      `Missing required env var ${name} — set it as a GitHub Actions secret ` +
+      `(or in your local .env) before running this script. Real employee ` +
+      `credentials must never be hardcoded in this file.`
+    );
+  }
+  return value;
+}
+
 // User accounts
 const USERS = {
   admin: {
-    email: process.env.ADMIN_EMAIL || 'ryan.ananda@modena.com',
-    password: process.env.ADMIN_PASSWORD || 'P@ssw0rd_ryan.ananda',
-    name: process.env.ADMIN_NAME || 'Ryan Ananda',
+    email: requireEnv('ADMIN_EMAIL'),
+    password: requireEnv('ADMIN_PASSWORD'),
+    name: process.env.ADMIN_NAME || 'Admin/Creator',
     role: 'Admin/Creator'
   },
   approver1: {
-    email: process.env.APPROVER1_EMAIL || 'novyan.ramdhan@modena.com',
-    password: process.env.APPROVER1_PASSWORD || 'P@ssw0rd_novyan.ramdhan',
-    name: process.env.APPROVER1_NAME || 'Novyan Ramdhan',
+    email: requireEnv('APPROVER1_EMAIL'),
+    password: requireEnv('APPROVER1_PASSWORD'),
+    name: process.env.APPROVER1_NAME || 'Approver 1',
     role: 'Approver 1'
   },
   approver2: {
-    email: 'daniel.aritonga@modena.com',
-    password: 'P@ssw0rd_daniel.aritonga',
-    name: 'Daniel Aritonga',
+    email: requireEnv('APPROVER2_EMAIL'),
+    password: requireEnv('APPROVER2_PASSWORD'),
+    name: process.env.APPROVER2_NAME || 'Approver 2',
     role: 'Approver 2'
   }
 };

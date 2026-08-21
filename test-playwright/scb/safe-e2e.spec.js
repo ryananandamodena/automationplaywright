@@ -22,8 +22,8 @@ import { LoginPage } from '../pages/LoginPage.js';
 
 const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
 const USER = {
-  email: process.env.ADMIN_EMAIL || 'ryan.ananda@modena.com',
-  password: process.env.ADMIN_PASSWORD || 'P@ssw0rd_ryan.ananda',
+  email: process.env.ADMIN_EMAIL,
+  password: process.env.ADMIN_PASSWORD,
 };
 
 /** Every page discovered in the manual QA pass, keyed by sidebar label path. */

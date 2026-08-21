@@ -15,8 +15,8 @@ import { allure } from 'allure-playwright';
 const BASE = 'https://more-dev.modena.com';
 const SO_CREATE_URL = 'https://more-dev.modena.com/mhc/sales-order/create';
 const CREDS = {
-  email: 'muhzaenal5@gmail.com',
-  password: 'P@ssw0rd_muhzaenal5',
+  email: process.env.MHC_EMAIL,
+  password: process.env.MHC_PASSWORD,
 };
 const TS = Date.now().toString().slice(-6);
 const SO_REF = `AutoSO-${TS}`;

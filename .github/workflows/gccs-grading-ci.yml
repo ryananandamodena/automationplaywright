@@ -1,0 +1,88 @@
+name: GCCS Master Grading E2E
+
+# Dedicated pipeline for test-playwright/gccs/grading (login, grade
+# categories, questions setup, item grading incl. bulk, workorder grading
+# API, warehouse grading). This suite has its own playwright.config.ts
+# (different baseURL/fixtures than the repo-root config), so it's run with
+# an explicit --config pointing at it rather than relying on the root
+# catch-all Playwright workflow to sweep it up.
+
+on:
+  push:
+    branches: [main, master, develop]
+    paths:
+      - 'test-playwright/gccs/grading/**'
+      - '.github/workflows/gccs-grading-ci.yml'
+
+  pull_request:
+    branches: [main, master, develop]
+    paths:
+      - 'test-playwright/gccs/grading/**'
+
+  workflow_dispatch:
+    inputs:
+      test_file:
+        description: 'Specific spec to run (blank = all)'
+        required: false
+        default: ''
+
+  # Test env, not prod — safe to run unattended overnight.
+  schedule:
+    - cron: '0 20 * * *' # 03:00 WIB
+
+jobs:
+  grading-e2e:
+    name: 🎓 GCCS Master Grading
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    defaults:
+      run:
+        working-directory: test-playwright
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: test-playwright/package-lock.json
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎭 Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: 🧪 Run GCCS Master Grading suite
+        working-directory: test-playwright/gccs/grading
+        env:
+          CI: true
+          GCCS_BASE_URL: https://gccs-test.modena.com
+          GCCS_USERNAME: ${{ secrets.GCCS_USERNAME }}
+          GCCS_PASSWORD: ${{ secrets.GCCS_PASSWORD }}
+        run: |
+          if [ -n "${{ github.event.inputs.test_file }}" ]; then
+            npx playwright test "${{ github.event.inputs.test_file }}" --config=playwright.config.ts
+          else
+            npx playwright test --config=playwright.config.ts
+          fi
+
+      - name: 📤 Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gccs-grading-report-${{ github.run_number }}
+          path: test-playwright/gccs/grading/report/
+          retention-days: 30
+
+      - name: 📤 Upload traces & screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gccs-grading-test-results-${{ github.run_number }}
+          path: test-playwright/gccs/grading/test-results/
+          retention-days: 7

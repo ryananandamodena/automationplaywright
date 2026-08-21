@@ -21,8 +21,8 @@ async function loginAndGoToBuilding(page) {
     if (!isEmailVisible) return false;
     
     console.log(`Login page detected (URL: ${page.url()}), logging in...`);
-    await emailInput.fill('ryan.ananda@modena.com');
-    await page.locator('input[type="password"]').first().fill('P@ssw0rd_ryan.ananda');
+    await emailInput.fill(process.env.ADMIN_EMAIL);
+    await page.locator('input[type="password"]').first().fill(process.env.ADMIN_PASSWORD);
     await page.locator('button[type="submit"]').first().click();
     
     // Wait for navigation away from login page

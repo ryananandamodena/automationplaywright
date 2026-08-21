@@ -24,8 +24,8 @@ import { test, expect } from '@playwright/test';
  */
 
 const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
-const LOGIN_EMAIL = process.env.ADMIN_EMAIL || 'ryan.ananda@modena.com';
-const LOGIN_PASSWORD = process.env.ADMIN_PASSWORD || 'P@ssw0rd_ryan.ananda';
+const LOGIN_EMAIL = process.env.ADMIN_EMAIL;
+const LOGIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const SALES_FORM_URL = `${BASE_URL}/fms/vehicle/sales/form`;
 const SALES_LIST_URL = `${BASE_URL}/fms/vehicle/sales`;
 

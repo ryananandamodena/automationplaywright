@@ -30,32 +30,32 @@ const BRANCH_IMPROVEMENT_URL = `${BASE_URL}/fms/building/branch-improvement`;
 // ============================================================
 const USERS = {
   creator: {
-    email: 'agung.gunawan@modena.com',
-    password: 'P@ssw0rd_agung.gunawan',
+    email: process.env.FMS_BUILDING_ADMIN_EMAIL,
+    password: process.env.FMS_BUILDING_ADMIN_PASSWORD,
     name: 'Agung Sukmana Gunawan',
     role: 'Creator / Branch Manager'
   },
   approver1: {
-    email: 'jimmy.tanweli@modena.com',
-    password: 'P@ssw0rd_jimmy.tanweli',
+    email: process.env.FMS_BUILDING_APPROVER2_EMAIL,
+    password: process.env.FMS_BUILDING_APPROVER2_PASSWORD,
     name: 'Jimmy Tanweli',
     role: 'Approver 1'
   },
   approver2: {
-    email: 'jemmi.liem@modena.com',
-    password: 'P@ssw0rd_jemmi.liem',
+    email: process.env.FMS_BUILDING_APPROVER3_EMAIL,
+    password: process.env.FMS_BUILDING_APPROVER3_PASSWORD,
     name: 'Jemmi Liem',
     role: 'Approver 2'
   },
   approver3: {
-    email: 'eko.suyitno@modena.com',
-    password: 'P@ssw0rd_eko.suyitno',
+    email: process.env.FMS_BUILDING_APPROVER4_EMAIL,
+    password: process.env.FMS_BUILDING_APPROVER4_PASSWORD,
     name: 'Eko Suyitno',
     role: 'Approver 3'
   },
   finalApprover: {
-    email: 'daniel.jizhar@modena.com',
-    password: 'P@ssw0rd_daniel.jizhar',
+    email: process.env.FMS_BUILDING_APPROVER5_EMAIL,
+    password: process.env.FMS_BUILDING_APPROVER5_PASSWORD,
     name: 'Daniel Jizhar',
     role: 'Final Approver'
   }

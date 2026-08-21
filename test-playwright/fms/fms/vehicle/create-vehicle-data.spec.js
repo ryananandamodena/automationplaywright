@@ -117,8 +117,8 @@ async function loginToFMS(page) {
   // Handle login page redirect
   if (page.url().includes('/login')) {
     console.log('ℹ️  Login page detected, entering credentials');
-    await page.locator('[name="email"], input[type="email"]').first().fill('ryan.ananda@modena.com', { timeout: 5000 });
-    await page.locator('input[type="password"]').first().fill('P@ssw0rd_ryan.ananda', { timeout: 5000 });
+    await page.locator('[name="email"], input[type="email"]').first().fill(process.env.ADMIN_EMAIL, { timeout: 5000 });
+    await page.locator('input[type="password"]').first().fill(process.env.ADMIN_PASSWORD, { timeout: 5000 });
     await page.getByRole('button', { name: 'Sign In' }).click();
     await page.waitForURL(/my-application|\/fms\//, { timeout: 25000 }).catch(() => {});
     if (page.url().includes('my-application')) {
@@ -158,8 +158,8 @@ async function loginToFMS(page) {
 
     if (page.url().includes('/login')) {
       console.log('ℹ️  Full re-login from login page');
-      await page.locator('[name="email"], input[type="email"]').first().fill('ryan.ananda@modena.com', { timeout: 5000 });
-      await page.locator('input[type="password"]').first().fill('P@ssw0rd_ryan.ananda', { timeout: 5000 });
+      await page.locator('[name="email"], input[type="email"]').first().fill(process.env.ADMIN_EMAIL, { timeout: 5000 });
+      await page.locator('input[type="password"]').first().fill(process.env.ADMIN_PASSWORD, { timeout: 5000 });
       await page.getByRole('button', { name: 'Sign In' }).click();
       await page.waitForURL(/my-application|\/fms\//, { timeout: 30000 }).catch(() => {});
     }

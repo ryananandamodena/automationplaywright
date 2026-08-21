@@ -9,8 +9,8 @@ async function loginAndGoToVehicle(page) {
 
   // Handle login page redirect
   if (page.url().includes('/login')) {
-    await page.locator('input[type="email"], input[name="email"]').first().fill('ryan.ananda@modena.com', { timeout: 5000 });
-    await page.locator('input[type="password"]').first().fill('P@ssw0rd_ryan.ananda', { timeout: 5000 });
+    await page.locator('input[type="email"], input[name="email"]').first().fill(process.env.ADMIN_EMAIL, { timeout: 5000 });
+    await page.locator('input[type="password"]').first().fill(process.env.ADMIN_PASSWORD, { timeout: 5000 });
     await page.getByRole('button', { name: 'Sign In' }).click();
     await page.waitForURL(/my-application|\/fms\//, { timeout: 25000 }).catch(() => {});
     if (page.url().includes('my-application')) {
@@ -53,8 +53,8 @@ async function loginAndGoToVehicle(page) {
       }
     } else {
       // Full credential login required
-      await page.locator('input[type="email"], input[name="email"]').first().fill('ryan.ananda@modena.com', { timeout: 5000 });
-      await page.locator('input[type="password"]').first().fill('P@ssw0rd_ryan.ananda', { timeout: 5000 });
+      await page.locator('input[type="email"], input[name="email"]').first().fill(process.env.ADMIN_EMAIL, { timeout: 5000 });
+      await page.locator('input[type="password"]').first().fill(process.env.ADMIN_PASSWORD, { timeout: 5000 });
       await page.getByRole('button', { name: 'Sign In' }).click();
       await page.waitForURL(/my-application|\/fms\//, { timeout: 30000 }).catch(() => {});
       if (page.url().includes('my-application')) {
@@ -418,8 +418,8 @@ test.describe('FMS - Vehicle List CRUD', () => {
         if (page.url().includes('/login') || page.url().includes('my-application')) {
           console.log('TC-07: Session expired during export, re-logging in...');
           if (page.url().includes('/login')) {
-            await page.locator('input[type="email"], input[name="email"]').first().fill('ryan.ananda@modena.com');
-            await page.locator('input[type="password"]').first().fill('P@ssw0rd_ryan.ananda');
+            await page.locator('input[type="email"], input[name="email"]').first().fill(process.env.ADMIN_EMAIL);
+            await page.locator('input[type="password"]').first().fill(process.env.ADMIN_PASSWORD);
             await page.getByRole('button', { name: 'Sign In' }).click();
             await page.waitForTimeout(5000);
           }

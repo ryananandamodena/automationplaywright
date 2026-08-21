@@ -48,8 +48,8 @@ async function loginAndGoToBuildingUtility(page) {
   
   // Login if on login page
   if (page.url().includes('/login')) {
-    await page.locator('input[type="email"], input[name="email"]').first().fill('ryan.ananda@modena.com');
-    await page.locator('input[type="password"]').first().fill('P@ssw0rd_ryan.ananda');
+    await page.locator('input[type="email"], input[name="email"]').first().fill(process.env.ADMIN_EMAIL);
+    await page.locator('input[type="password"]').first().fill(process.env.ADMIN_PASSWORD);
     await page.getByRole('button', { name: 'Sign In', exact: true }).click();
     
     await page.waitForTimeout(3000);

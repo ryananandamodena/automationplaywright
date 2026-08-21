@@ -11,8 +11,8 @@ test('Create Master Vehicle Model - Batch', async ({ page }) => {
     const emailVisible = await page.getByRole('textbox', { name: 'Enter your email' }).isVisible({ timeout: 5000 });
     if (emailVisible) {
       // Login process
-      await page.getByRole('textbox', { name: 'Enter your email' }).fill('ryan.ananda@modena.com');
-      await page.getByRole('textbox', { name: 'Enter your password' }).fill('P@ssw0rd_ryan.ananda');
+      await page.getByRole('textbox', { name: 'Enter your email' }).fill(process.env.ADMIN_EMAIL);
+      await page.getByRole('textbox', { name: 'Enter your password' }).fill(process.env.ADMIN_PASSWORD);
       await page.getByRole('button', { name: 'Sign In', exact: true }).click();
       await page.waitForLoadState('networkidle');
     }

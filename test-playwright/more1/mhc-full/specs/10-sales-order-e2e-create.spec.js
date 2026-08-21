@@ -22,8 +22,8 @@ const SO_CREATE_URL = 'https://more-dev.modena.com/mhc/sales-order/create';
 const SO_LIST_URL = 'https://more-dev.modena.com/mhc/sales-order';
 
 const CREDS = {
-  email: 'muhzaenal5@gmail.com',
-  password: 'P@ssw0rd_muhzaenal5',
+  email: process.env.MHC_EMAIL,
+  password: process.env.MHC_PASSWORD,
 };
 
 const TS = Date.now().toString().slice(-6);

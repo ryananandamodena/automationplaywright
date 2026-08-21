@@ -5,8 +5,8 @@ const VEHICLE_FORM_URL = `${BASE_URL}/fms/vehicle/form`;
 
 const USERS = {
   creator: {
-    email: 'ryan.ananda@modena.com',
-    password: 'P@ssw0rd_ryan.ananda',
+    email: process.env.ADMIN_EMAIL,
+    password: process.env.ADMIN_PASSWORD,
     name: 'Ryan Ananda'
   }
 };

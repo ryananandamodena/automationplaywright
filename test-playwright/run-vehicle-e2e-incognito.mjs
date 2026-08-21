@@ -1,24 +1,39 @@
 import { chromium } from 'playwright';
 import { cleanupVehicleByPlate, isAutoCleanupEnabled } from './utils/data-cleanup.mjs';
 
-const BASE_URL = 'https://portal-dev.modena.com';
+const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
+
+// These are real Modena employee accounts, not test/dummy logins — their
+// passwords must never be hardcoded here. Set ADMIN_EMAIL/ADMIN_PASSWORD,
+// APPROVER1_EMAIL/APPROVER1_PASSWORD, APPROVER2_EMAIL/APPROVER2_PASSWORD as
+// GitHub Actions secrets (or in your local .env) before running this script.
+function requireEnv(name) {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(
+      `Missing required env var ${name} — set it as a GitHub Actions secret ` +
+      `(or in your local .env) before running this script.`
+    );
+  }
+  return value;
+}
 
 // User credentials
 const users = {
   admin: {
-    email: 'ryan.ananda@modena.com',
-    password: 'P@ssw0rd_ryan.ananda',
-    name: 'Ryan Ananda'
+    email: requireEnv('ADMIN_EMAIL'),
+    password: requireEnv('ADMIN_PASSWORD'),
+    name: process.env.ADMIN_NAME || 'Admin'
   },
   approver1: {
-    email: 'novyan.ramahdahan@modena.com',
-    password: 'P@ssw0rd_novyan.ramahdahan',
-    name: 'Novyan Ramahdahan'
+    email: requireEnv('APPROVER1_EMAIL'),
+    password: requireEnv('APPROVER1_PASSWORD'),
+    name: process.env.APPROVER1_NAME || 'Approver 1'
   },
   approver2: {
-    email: 'daniel.arietonga@modena.com',
-    password: 'P@ssw0rd_daniel.arietonga',
-    name: 'Daniel Arietonga'
+    email: requireEnv('APPROVER2_EMAIL'),
+    password: requireEnv('APPROVER2_PASSWORD'),
+    name: process.env.APPROVER2_NAME || 'Approver 2'
   }
 };
 
