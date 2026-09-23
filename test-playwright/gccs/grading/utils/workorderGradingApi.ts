@@ -1,4 +1,4 @@
-import { APIRequestContext, APIResponse } from '@playwright/test';
+import type { APIRequestContext, APIResponse } from '@playwright/test';
 
 /** Endpoint under test - lives under /api/v1, not the SPA's root (that returns 405). */
 export const WORKORDER_GRADING_ENDPOINT = '/api/v1/transaction/workorder/grading';
@@ -10,7 +10,9 @@ export interface WorkorderGradingPayload {
   phone_number: string;
   product_code: string;
   serial_number: string;
-  post_code: string;
+  post_code?: string;
+  wh_code?: string;
+  request_date?: string;
   app_name: string;
 }
 

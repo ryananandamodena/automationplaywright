@@ -1,0 +1,475 @@
+<title>Automation Testing Weekly Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f3f4f7;
+    --surface: #ffffff;
+    --surface-2: #eceef3;
+    --border: #dcdfe6;
+    --ink: #1b2130;
+    --ink-muted: #5a6272;
+    --ink-faint: #8890a0;
+    --accent: #3450c9;
+    --accent-ink: #ffffff;
+    --accent-soft: #e8ecfb;
+    --good: #1a8f52;
+    --good-soft: #e3f5ea;
+    --warn: #a9721b;
+    --warn-soft: #fbf0dd;
+    --bad: #c53a34;
+    --bad-soft: #fce9e7;
+    --shadow: 0 1px 2px rgba(20, 25, 40, 0.04), 0 8px 24px -12px rgba(20, 25, 40, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12151d;
+      --surface: #191d27;
+      --surface-2: #1f2430;
+      --border: #2b3040;
+      --ink: #e7e9ef;
+      --ink-muted: #a3aab8;
+      --ink-faint: #6b7280;
+      --accent: #6b85e8;
+      --accent-ink: #0d1120;
+      --accent-soft: #232c4a;
+      --good: #4cba85;
+      --good-soft: #16281f;
+      --warn: #d9a446;
+      --warn-soft: #2c2415;
+      --bad: #e2685f;
+      --bad-soft: #2c1917;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12151d;
+    --surface: #191d27;
+    --surface-2: #1f2430;
+    --border: #2b3040;
+    --ink: #e7e9ef;
+    --ink-muted: #a3aab8;
+    --ink-faint: #6b7280;
+    --accent: #6b85e8;
+    --accent-ink: #0d1120;
+    --accent-soft: #232c4a;
+    --good: #4cba85;
+    --good-soft: #16281f;
+    --warn: #d9a446;
+    --warn-soft: #2c2415;
+    --bad: #e2685f;
+    --bad-soft: #2c1917;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: "IBM Plex Sans", system-ui, sans-serif; text-wrap: balance; margin: 0; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+  .page {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+  }
+  header.top h1 { font-size: 30px; font-weight: 700; letter-spacing: -0.01em; }
+  header.top p { color: var(--ink-muted); margin: 8px 0 0; max-width: 46ch; }
+  .period-box {
+    text-align: right;
+    flex-shrink: 0;
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--ink-muted);
+    font-size: 13px;
+  }
+  .period-box .range { color: var(--ink); font-size: 16px; font-weight: 600; display: block; margin-bottom: 4px; }
+
+  /* ---------- Stat strip ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 18px;
+    box-shadow: var(--shadow);
+  }
+  .stat .num { font-family: "IBM Plex Mono", monospace; font-size: 26px; font-weight: 600; line-height: 1; }
+  .stat .num small { font-size: 14px; font-weight: 500; color: var(--ink-faint); }
+  .stat .label { font-size: 12.5px; color: var(--ink-muted); margin-top: 6px; }
+  .stat.good .num { color: var(--good); }
+
+  /* ---------- Section ---------- */
+  section.block { margin-bottom: 36px; }
+  .block-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .block-head h2 { font-size: 20px; font-weight: 600; }
+  .block-head .idx { font-family: "IBM Plex Mono", monospace; color: var(--ink-faint); font-size: 13px; margin-right: 8px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+  }
+  .card + .card { margin-top: 12px; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 3px 9px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .chip.good { background: var(--good-soft); color: var(--good); }
+  .chip.warn { background: var(--warn-soft); color: var(--warn); }
+  .chip.bad  { background: var(--bad-soft); color: var(--bad); }
+  .chip.new  { background: var(--accent-soft); color: var(--accent); }
+
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 10px; }
+  .card-top h3 { font-size: 16.5px; font-weight: 600; }
+  .card-top .meta { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-faint); margin-top: 3px; }
+  .card p.desc { color: var(--ink-muted); margin: 0 0 12px; max-width: 68ch; }
+
+  .evidence {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .evidence li {
+    padding-left: 18px;
+    position: relative;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .evidence li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .evidence code, .card code {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+
+  .kv-row {
+    display: flex;
+    gap: 22px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+    flex-wrap: wrap;
+  }
+  .kv { font-size: 13px; }
+  .kv .k { color: var(--ink-faint); display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+  .kv .v { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--ink); }
+  .kv .v.good { color: var(--good); }
+
+  /* ---------- Findings table ---------- */
+  .findings-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead th {
+    text-align: left;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 0 10px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--ink);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.sev { width: 90px; }
+  td.desc-col { color: var(--ink-muted); }
+
+  /* ---------- Follow ups ---------- */
+  .followups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .followup {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--warn);
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .followup .k { font-family: "IBM Plex Mono", monospace; font-size: 11px; text-transform: uppercase; color: var(--warn); letter-spacing: 0.04em; margin-bottom: 6px; display: block; }
+  .followup p { margin: 0; font-size: 13.5px; color: var(--ink-muted); }
+
+  footer.sign {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--ink-faint);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+  }
+
+  @media (max-width: 760px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .followups { grid-template-columns: 1fr; }
+    header.top { flex-direction: column; }
+    .period-box { text-align: left; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="top">
+    <div>
+      <span class="eyebrow">Automation &amp; QA — Ryan Ananda</span>
+      <h1>Automation Testing Weekly Report</h1>
+      <p>Ringkasan pekerjaan automation testing (Playwright) minggu ini: satu suite baru, dua bug false-fail diperbaiki, dan satu revisi besar berdasarkan verifikasi langsung ke environment.</p>
+    </div>
+    <div class="period-box">
+      <span class="range">11–18 Agustus 2026</span>
+      repo: automationplaywright
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat good">
+      <div class="num">62</div>
+      <div class="label">Test baru — GCCS Master Grading</div>
+    </div>
+    <div class="stat good">
+      <div class="num">60<small>/60</small></div>
+      <div class="label">MHC Staging — lulus setelah rewrite live</div>
+    </div>
+    <div class="stat">
+      <div class="num">2</div>
+      <div class="label">Bug false-fail diperbaiki (checkout, orders)</div>
+    </div>
+    <div class="stat">
+      <div class="num">3</div>
+      <div class="label">Aplikasi tersentuh: GCCS, Merchandise, MHC</div>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 1 ================= -->
+  <section class="block">
+    <div class="block-head">
+      <h2><span class="idx">01</span>GCCS Master Grading — suite baru</h2>
+      <span class="chip new">New coverage</span>
+    </div>
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <h3>Login, Grade Categories, Questions Setup, Item Grading, Bulk Grading, Warehouse Grading</h3>
+          <div class="meta">gccs/grading — TypeScript + Page Object Model — gccs-test.modena.com</div>
+        </div>
+        <span class="chip good">62 tests / 7 spec files</span>
+      </div>
+      <p class="desc">Suite E2E baru untuk modul Master Grading GCCS, dibangun dengan Page Object Model (BasePage, LoginPage, GradeCategoriesPage, QuestionsSetupPage, ItemGradingPage) dan data-driven test cases (valid/invalid/boundary/security payload) di <code>utils/testData.ts</code>.</p>
+      <ul class="evidence">
+        <li>7 file spec: login, grade categories, questions setup, item grading, bulk grading dinamis, workorder grading API, warehouse grading.</li>
+        <li>Business rule terverifikasi live: default questions auto-attach ke Item Grading baru, points total di-cap 100, duplicate grade name ditolak server-side, max score harus ≥ min score (client-side).</li>
+        <li>3 temuan didokumentasikan di <code>TEST_CASES.md</code>: duplikasi teks pertanyaan ("question 3" muncul 2x dengan flag berbeda), product-item selector tanpa indikasi lazy-load untuk katalog besar, dan konfirmasi step "Are you sure?" di setiap create/update.</li>
+      </ul>
+      <div class="kv-row">
+        <div class="kv"><span class="k">Ditambahkan</span><span class="v">10–11 Agu</span></div>
+        <div class="kv"><span class="k">Total test</span><span class="v">62</span></div>
+        <div class="kv"><span class="k">Bug ditemukan</span><span class="v">1 medium, 2 info/low</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2 ================= -->
+  <section class="block">
+    <div class="block-head">
+      <h2><span class="idx">02</span>Merchandise Automation — perbaikan false-fail</h2>
+      <span class="chip bad">Bug fix</span>
+    </div>
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <h3><code>functional.checkout.spec.js</code> &amp; <code>functional.orders.spec.js</code> gagal di setiap run</h3>
+          <div class="meta">merchandise/automation — merchandise-dev.modena.com</div>
+        </div>
+        <span class="chip good">Fixed</span>
+      </div>
+      <p class="desc">Sejak <code>/login</code> berubah jadi Microsoft-SSO-only (3 Agustus), fungsi <code>login()</code> di <code>fixtures.js</code> sengaja dibuat langsung <code>throw</code> agar caller lama gagal jelas. Dua spec — checkout dan orders — masih memanggil <code>login()</code> ini secara aktif, jadi tiap run pasti error, bukan cuma "belum bisa jalan".</p>
+      <ul class="evidence">
+        <li>Kedua file diubah ke <code>test.describe.skip(...)</code> dengan alasan tercatat di kode: tidak ada akun test SSO atau auth-bypass route di dev environment ini.</li>
+        <li>9 test lain yang sudah di-skip sebelumnya (<code>functional.auth.spec.js</code>, <code>smoke.spec.js</code>, <code>functional.pdp_cart.spec.js</code>) dikonfirmasi tetap sesuai — cakupan login, cart, dan order-history memang belum ada sampai ada akun test SSO.</li>
+      </ul>
+      <div class="kv-row">
+        <div class="kv"><span class="k">Root cause</span><span class="v">login() throws, dipanggil aktif</span></div>
+        <div class="kv"><span class="k">Keputusan</span><span class="v">Skip, bukan mock</span></div>
+        <div class="kv"><span class="k">Blocker terbuka</span><span class="v">Akun test SSO</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3 ================= -->
+  <section class="block">
+    <div class="block-head">
+      <h2><span class="idx">03</span>MHC Staging (Sync SAP) — rewrite penuh, terverifikasi live</h2>
+      <span class="chip warn">Major finding</span>
+    </div>
+    <div class="card">
+      <div class="card-top">
+        <div>
+          <h3>12 menu "CRUD" ternyata read-only sync viewer</h3>
+          <div class="meta">more1/mhc/staging/staging — more-dev.modena.com</div>
+        </div>
+        <span class="chip good">60/60 passing</span>
+      </div>
+      <p class="desc">Login langsung ke environment dev dan inspect DOM tiap menu (Bank, Warehouse, BP Group, PPh) menunjukkan: 12 file spec "CRUD" (Bank, BP, BP Address, BP Branch, BP Group, GL Account, Legal, Order Type, PPh, PPN, Series, Warehouse) menguji fitur yang tidak pernah ada. Halaman "Sinkronisasi SAP" hanya punya List, Search, Filter builder AND/OR, Sort, dan tombol "Sinkronkan Semua" — tanpa Add/Edit/Delete di manapun.</p>
+      <ul class="evidence">
+        <li>Ditemukan juga 2 bug independen: URL list kurang prefix <code>/mhc/</code> (<code>/sync-sap/bank/list</code> → seharusnya <code>/mhc/sync-sap/bank/list</code>), dan selector login pakai <code>input[type="email"]</code> yang sudah tidak ada di DOM (form pakai placeholder + dropdown Company wajib).</li>
+        <li>Seluruh 12 spec ditulis ulang memakai helper bersama <code>fixtures.js#registerStagingSuite()</code> — 5 test per menu: List, No-Manual-CRUD (guard regresi kalau Add/Edit/Delete suatu saat benar-benar ditambahkan), Search, Filter, Sync.</li>
+        <li>Dijalankan live berulang sampai stabil: 60 dari 60 test lulus di seluruh 12 menu.</li>
+        <li>Template lama (<code>templates/crud-template.spec.js</code> dan <code>template-crud.spec.js</code> yang kosong) diperbarui agar tim tidak menduplikasi asumsi CRUD yang salah di menu staging berikutnya.</li>
+      </ul>
+      <div class="kv-row">
+        <div class="kv"><span class="k">File direvisi</span><span class="v">12 spec + 1 helper baru</span></div>
+        <div class="kv"><span class="k">Test / menu</span><span class="v">5</span></div>
+        <div class="kv"><span class="k">Hasil akhir</span><span class="v good">60 / 60 pass</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINDINGS TABLE ================= -->
+  <section class="block">
+    <div class="block-head">
+      <h2><span class="idx">04</span>Temuan bug &amp; risiko minggu ini</h2>
+    </div>
+    <div class="card findings-table">
+      <table>
+        <thead>
+          <tr><th>Severity</th><th>Aplikasi</th><th>Temuan</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="sev"><span class="chip bad">High</span></td>
+            <td>Merchandise</td>
+            <td class="desc-col"><code>functional.checkout.spec.js</code> &amp; <code>functional.orders.spec.js</code> error di setiap run karena memanggil <code>login()</code> yang sengaja throw — false-fail, bukan gap coverage biasa.</td>
+          </tr>
+          <tr>
+            <td class="sev"><span class="chip warn">Medium</span></td>
+            <td>MHC (More)</td>
+            <td class="desc-col">12 spec "CRUD" menguji Add/Edit/Delete yang tidak eksis di UI; salah premis sejak dibuat, bukan sekadar "belum diisi logic-nya".</td>
+          </tr>
+          <tr>
+            <td class="sev"><span class="chip warn">Medium</span></td>
+            <td>MHC (More)</td>
+            <td class="desc-col">Semua LIST_URL staging kurang prefix <code>/mhc/</code> — hard navigate langsung 404 walau session valid.</td>
+          </tr>
+          <tr>
+            <td class="sev"><span class="chip warn">Medium</span></td>
+            <td>GCCS Grading</td>
+            <td class="desc-col">BUG-QS-01 — teks pertanyaan "question 3" duplikat di Questions Setup dengan flag <code>Checklist Only</code> berbeda (Yes/No).</td>
+          </tr>
+          <tr>
+            <td class="sev"><span class="chip warn">Low</span></td>
+            <td>GCCS Grading</td>
+            <td class="desc-col">RISK-IG-01 — Product Item selector di Item Grading belum diuji dengan katalog besar; tidak ada indikator lazy-load/pagination server-side.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================= FOLLOW UPS ================= -->
+  <section class="block">
+    <div class="block-head">
+      <h2><span class="idx">05</span>Follow-up minggu depan</h2>
+    </div>
+    <div class="followups">
+      <div class="followup">
+        <span class="k">Blocked on</span>
+        <p>Merchandise checkout &amp; order-history tetap skip sampai ada akun test Microsoft SSO atau auth-bypass route di dev environment.</p>
+      </div>
+      <div class="followup">
+        <span class="k">Perlu keputusan</span>
+        <p>BUG-QS-01 (duplikat "question 3" di GCCS Questions Setup) perlu dikonfirmasi ke tim produk: bug atau memang disengaja per-item scope.</p>
+      </div>
+      <div class="followup">
+        <span class="k">Belum dites</span>
+        <p><code>template-crud.spec.js</code> di MHC hanya template kosong (dikomentari) — menu Sinkronisasi SAP baru di masa depan perlu diverifikasi live dulu sebelum dianggap read-only juga.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="sign">
+    <span>Disusun otomatis dari sesi automation testing 11–18 Agu 2026</span>
+    <span>achfas.kharis@modena.com</span>
+  </footer>
+
+</div>

@@ -9,12 +9,7 @@ const ACT = '.MainActivity';
 const EMAIL = process.env.TERSBARU_EMAIL;
 const PASSWORD = process.env.TERSBARU_PASSWORD;
 
-// Coordinates from previous successful UI dump (MEmu 900x1600 resolution)
-const COORDS = {
-  email: { x: 450, y: 699 },
-  password: { x: 450, y: 883 },
-  loginBtn: { x: 450, y: 1049 },
-};
+const COORDS = {};
 
 function adb(cmd) {
   return execSync(`${ADB} -s ${DEVICE} ${cmd}`, { encoding: 'utf8', timeout: 30000 }).trim();
@@ -46,16 +41,6 @@ function typeText(text) {
   adb(`shell input text "${escaped}"`);
 }
 
-function screenshot(name) {
-  try {
-    adb(`shell screencap -p /sdcard/${name}.png`);
-    adb(`pull /sdcard/${name}.png ./${name}.png`);
-    console.log(`📸 ${name}.png`);
-  } catch (e) {
-    console.log(`⚠️ Screenshot failed: ${e.message}`);
-  }
-}
-
 function dumpUI(retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
@@ -72,11 +57,6 @@ function dumpUI(retries = 3) {
     }
   }
   return '';
-}
-
-function parseContentDescs(xmlStr) {
-  const matches = [...xmlStr.matchAll(/content-desc="([^"]+)"/g)];
-  return [...new Set(matches.map(m => m[1]).filter(Boolean))];
 }
 
 function parseElements(xmlStr) {
@@ -101,7 +81,6 @@ console.log('  ✅ App launched');
 
 console.log('⏳ Waiting for app to load (15s)...');
 sleep(15000);
-screenshot('01-login-page');
 
 console.log('\n🔍 Parsing coordinates from login page...');
 let xml = dumpUI();
@@ -124,6 +103,11 @@ const loginRegex = /content-desc="Login"[^>]*bounds="\[(\d+),(\d+)\]\[(\d+),(\d+
 const lm = loginRegex.exec(xml);
 if (lm) {
   COORDS.loginBtn = { x: Math.floor((+lm[1] + +lm[3]) / 2), y: Math.floor((+lm[2] + +lm[4]) / 2) };
+}
+
+if (!COORDS.email || !COORDS.password || !COORDS.loginBtn) {
+  console.log('  ❌ Could not parse login coordinates dynamically. Exiting...');
+  process.exit(1);
 }
 
 console.log('\n🔐 Entering credentials...');
@@ -156,8 +140,6 @@ if (xml.includes('content-desc="Login"')) {
   console.log('  ✅ Login succeeded!');
 }
 
-console.log('\n📋 Current Page Elements:');
-const descs = parseContentDescs(xml);
 const clickable = parseElements(xml).filter(e => e.clickable && e.desc);
 
 console.log('\n🚀 Opening Sales App...');
@@ -166,7 +148,6 @@ if (salesApp) {
   console.log(`  📍 Tapping at (${salesApp.x}, ${salesApp.y})`);
   tap(salesApp.x, salesApp.y);
   sleep(5000);
-  screenshot('06-sales-consultant-home');
   
   console.log('\n🔍 Checking Sales Consultant Home...');
   let xml2 = dumpUI();
@@ -178,58 +159,11 @@ if (salesApp) {
     if (btnYes) {
       tap(btnYes.x, btnYes.y);
       sleep(4000);
-      screenshot('07-sales-consultant-main-menu');
       xml2 = dumpUI();
     }
   }
 
-  const clickableMenu = parseElements(xml2).filter(e => e.clickable && e.desc);
-  console.log('\n🔘 Clickable Menu Elements:');
-  for (const el of clickableMenu) {
-    console.log(`  "${el.desc}" at (${el.x}, ${el.y})`);
-  }
-
-  // Step 12: Go to Store tab and search
-  console.log('\n🏪 Opening Store tab...');
-  tap(550, 1240); // Bottom navigation - Store icon
-  sleep(3000);
-  screenshot('08-store-menu');
-
-  console.log('  📍 Tapping search bar...');
-  tap(360, 150); // Search bar center
-  sleep(2000);
-  console.log('  ⌨️ Typing "2725 GABK"...');
-  typeText('2725 GABK');
-  sleep(1000);
-  console.log('  ⌨️ Pressing Enter...');
-  adb('shell input keyevent 66');
-  sleep(4000); // Wait for search results
-  screenshot('09-search-results');
-
-  let xml3 = dumpUI();
-  
-  // Find the first clickable element that might be the store result
-  // If exact name doesn't match, just click the first search result which is usually below the search bar
-  console.log('  📍 Tapping first search result...');
-  tap(360, 300); // Coordinate for the first list item
-  sleep(5000);
-  screenshot('10-store-details');
-  
-  let xml4 = dumpUI();
-  console.log('\n📋 Elements in Store Details:');
-  const descs4 = parseContentDescs(xml4);
-  for (const d of descs4) {
-    console.log(`  🏷️ "${d}"`);
-  }
-
-  const clickableStore = parseElements(xml4).filter(e => e.clickable && e.desc);
-  console.log('\n🔘 Clickable Store Elements:');
-  for (const el of clickableStore) {
-    console.log(`  "${el.desc}" at (${el.x}, ${el.y})`);
-  }
 
 } else {
   console.log('  ❌ Could not find Sales App button.');
 }
-
-console.log('\n✅ Script paused for exploration (Store Details)!');

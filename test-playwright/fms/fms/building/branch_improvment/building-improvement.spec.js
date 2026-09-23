@@ -1,13 +1,14 @@
+import 'dotenv/config';
 import { test, expect } from '@playwright/test';
 import { buildingTestData } from '../building-test-data.js';
 
-const BASE_URL = 'https://portal-dev.modena.com';
+const BASE_URL = process.env.BASE_URL || 'https://portal-dev.modena.com';
 const FORM_URL = `${BASE_URL}/fms/building/branch-improvement/form`;
 
 const USERS = {
   eastManager: {
-    email: process.env.FMS_BUILDING_ADMIN_EMAIL,
-    password: process.env.FMS_BUILDING_ADMIN_PASSWORD,
+    email: process.env.FMS_BUILDING_ADMIN_EMAIL || 'agung.gunawan@modena.com',
+    password: process.env.FMS_BUILDING_ADMIN_PASSWORD || 'P@ssw0rd_agung.gunawan',
     name: 'East Manager'
   }
 };

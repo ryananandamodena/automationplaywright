@@ -6,6 +6,14 @@
   "type": "module",
   "scripts": {
     "test": "playwright test --reporter=html",
+    "test:unit": "node --test unit-tests/*.test.js",
+    "test:api": "playwright test api-tests/",
+    "test:sopo": "playwright test more1/so-po-tutorial/specs/ --headed",
+    "test:more": "playwright test more1/",
+    "test:fms": "playwright test fms/",
+    "test:gccs": "playwright test --config=gccs/playwright.config.gccs.js",
+    "test:prive": "playwright test prive/",
+    "test:all": "npm run test:unit && npm run test:api && npm test",
     "test:ui": "playwright test --ui",
     "test:sales-form": "playwright test fms/fms/vehicle/sales/sales-form-mcp.spec.js",
     "test:sales-form:headed": "playwright test fms/fms/vehicle/sales/sales-form-mcp.spec.js --headed",
@@ -21,7 +29,8 @@
     "allure:serve": "allure serve allure-results",
     "test:allure:report": "npm run test:allure && npm run allure:generate && npm run allure:open",
     "codegen": "playwright codegen",
-    "show-report": "playwright show-report"
+    "show-report": "playwright show-report",
+    "dashboard": "node dashboard/server.js"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +45,7 @@
   },
   "dependencies": {
     "dotenv": "^17.4.2",
+    "express": "^4.22.2",
     "nodemailer": "^8.0.7",
     "puppeteer-core": "^24.40.0",
     "webdriverio": "^9.27.0",

@@ -87,6 +87,14 @@ const KNOWN_PRODUCT_CODE = KNOWN_COMBOS[0].product_code;
 const KNOWN_SERIAL = KNOWN_COMBOS[0].serial_number;
 
 export const WORKORDER_GRADING_CASES = {
+  postmanPayload: {
+    phone_number: '081200001004',
+    product_code: 'BH2725GABK.IDALB0A',
+    serial_number: '234123d232331R3',
+    wh_code: 'WB-MDSPR',
+    request_date: '2026-09-08',
+    app_name: 'WMS',
+  },
   valid: () => {
     const combo = KNOWN_COMBOS[Number(uniqueSuffix()) % KNOWN_COMBOS.length];
     return {

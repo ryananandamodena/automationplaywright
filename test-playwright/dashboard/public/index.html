@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<title>Playwright Test Dashboard</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Playwright Test Dashboard</h1>
+    <p class="subtitle">Jalankan test QA langsung dari browser — tanpa terminal.</p>
+  </header>
+
+  <main>
+    <section class="panel" id="run-panel">
+      <h2>Jalankan Test</h2>
+
+      <label>Project</label>
+      <select id="project-select"></select>
+
+      <label>Test file (kosongkan untuk run semua)</label>
+      <div id="spec-list" class="spec-list"></div>
+
+      <button id="run-btn">▶ Run</button>
+
+      <div id="queue-note" class="note hidden"></div>
+    </section>
+
+    <section class="panel" id="log-panel">
+      <h2>Log Live</h2>
+      <div id="status-badge" class="badge idle">idle</div>
+      <pre id="log-output"></pre>
+      <div id="report-link" class="hidden"></div>
+    </section>
+
+    <section class="panel" id="history-panel">
+      <h2>Riwayat Run</h2>
+      <table id="history-table">
+        <thead>
+          <tr><th>Waktu</th><th>Project</th><th>Test</th><th>Status</th><th>Ringkasan</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -7,6 +7,7 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   testDir: './',
+  testIgnore: ['**/gccs/**', '**/unit-tests/**'],
   globalSetup: path.join(__dirname, 'global-setup.js'),
 
   // ⚡ PARALLEL EXECUTION - Run tests faster!

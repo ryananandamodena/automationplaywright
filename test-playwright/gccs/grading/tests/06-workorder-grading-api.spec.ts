@@ -150,4 +150,19 @@ test.describe('API - POST /api/v1/transaction/workorder/grading', () => {
     const body = await res.json();
     expect(body.isOk).toBe(true);
   });
+
+  test('TC-WOG-020 Postman payload creates a work order', async ({ request }) => {
+    const res = await postWorkorderGrading(request, WORKORDER_GRADING_CASES.postmanPayload);
+    expect(res.status()).toBe(200);
+
+    const body = await res.json();
+    expect(body).toMatchObject({
+      isOk: true,
+      message: 'RON created',
+      row: {
+        ronNo: expect.any(String),
+        workOrderId: expect.any(Number),
+      },
+    });
+  });
 });

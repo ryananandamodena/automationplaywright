@@ -45,7 +45,7 @@ export class BasePage {
   }
 
   async expectToastSuccess() {
-    await expect(this.page.locator('.p-toast-message-success, .p-toast-message')).toBeVisible({ timeout: 8000 });
+    await expect(this.page.locator('.p-toast-message-success, .p-toast-message').first()).toBeVisible({ timeout: 8000 });
   }
 
   async totalRowsText() {
@@ -67,5 +67,13 @@ export class BasePage {
         await expect(this.rowByText(term).first()).toBeVisible();
       }
     }
+  }
+
+  async exportExcel() {
+    const downloadPromise = this.page.waitForEvent('download');
+    // Menyesuaikan selector untuk tombol export. Ubah jika selector berbeda di UI Anda.
+    const exportBtn = this.page.locator('button').filter({ hasText: /export|excel/i }).first();
+    await exportBtn.click();
+    return await downloadPromise;
   }
 }

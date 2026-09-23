@@ -11,6 +11,8 @@ export const APPS = {
     name: 'MHC (Modena Healthcare Center)',
     urls: [
       { name: 'home', url: 'https://more-dev.modena.com' },
+      { name: 'sales-order', url: 'https://more-dev.modena.com/mhc/sales-order' },
+      { name: 'purchase-order', url: 'https://more-dev.modena.com/mhc/purchase-order' },
     ],
   },
   gccs: {
