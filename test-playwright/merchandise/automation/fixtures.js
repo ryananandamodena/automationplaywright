@@ -25,21 +25,71 @@ export const DEMO_CUSTOMER = {
   password: 'customer123',
 };
 
+export const MS_USER = {
+  email: 'ryan.ananda@modena.com',
+  password: '011215Aisy@h',
+};
+
 export const PRODUCTS = {
   hoodie: { id: '1', name: 'HOODIE HITAM', price: 110000, category: 'Apparel', sizes: ['One Size'] },
   tee: { id: '2', name: 'KAOS MODENA', price: 100000, category: 'Apparel', sizes: ['One Size'] },
   mug: { id: '6', name: 'MUG TUMBLER HITAM', price: 47000, category: 'Accessories', sizes: ['350ml'] },
 };
 
-// No longer reachable: /login is Microsoft-SSO-only (no #email/#password
-// fields), so this throws immediately rather than hanging on a 10s timeout.
-// Kept so any leftover caller fails loudly and points here instead of at a
-// mysterious selector timeout.
-export async function login() {
-  throw new Error(
-    '/login is Microsoft-SSO-only as of 2026-08-03 (no #email/#password form) — ' +
-    'email/password login can no longer be automated this way. See fixtures.js.'
-  );
+export async function loginMicrosoft(page, { email, password } = MS_USER) {
+  await page.goto(`${BASE_URL}/login`);
+  await page.waitForLoadState('networkidle');
+
+  const msButton = page.getByRole('button', { name: /Sign in with Microsoft/i });
+  await msButton.click();
+
+  // Handle Microsoft Login interaction
+  await page.waitForURL(/login\.microsoftonline\.com|live\.com|modena/i, { timeout: 15000 });
+
+  // 1. Email input
+  const emailInput = page.locator('input[type="email"], input[name="loginfmt"]');
+  await emailInput.waitFor({ state: 'visible', timeout: 10000 });
+  await emailInput.fill(email);
+
+  const nextButton = page.locator('input[type="submit"], #idSIButton9, button:has-text("Next")');
+  await nextButton.click();
+
+  // 2. Password input
+  const passwordInput = page.locator('input[type="password"], input[name="passwd"]');
+  await passwordInput.waitFor({ state: 'visible', timeout: 10000 });
+  await passwordInput.fill(password);
+
+  const signInButton = page.locator('input[type="submit"], #idSIButton9, button:has-text("Sign in")');
+  await signInButton.click();
+
+  // 3. Check for Microsoft Authenticator 2FA / MFA Number Prompt
+  try {
+    const mfaPrompt = page.locator('text=Open your Authenticator app');
+    if (await mfaPrompt.isVisible({ timeout: 5000 })) {
+      const numberElement = page.locator('div[id*="displaySign"], div[class*="displaySign"], span[id*="displaySign"], main div:has-text("Open your Authenticator app")').last();
+      const promptText = await page.locator('main').innerText();
+      console.log(`\n========================================\n[MICROSOFT MFA DETECTED]\nSilakan approve permintaan di Microsoft Authenticator pada HP Anda.\n${promptText.split('\n').filter(l => l.trim()).slice(0, 4).join('\n')}\n========================================\n`);
+    }
+  } catch (e) {
+    // No MFA prompt or already trusted
+  }
+
+  // 4. Handle "Stay signed in?" prompt if it appears
+  try {
+    const staySignedInBtn = page.locator('#idSIButton9, input[value="Yes"], input[value="No"], button:has-text("Yes")');
+    if (await staySignedInBtn.isVisible({ timeout: 60000 })) {
+      await staySignedInBtn.click();
+    }
+  } catch (e) {
+    // Prompt is optional depending on session state
+  }
+
+  // 5. Wait for redirect back to Storefront application
+  await page.waitForURL(new RegExp(BASE_URL), { timeout: 60000 });
+}
+
+export async function login(page, user = MS_USER) {
+  return loginMicrosoft(page, user);
 }
 
 export async function addProductToCart(page, { id, size, qty = 1 }) {

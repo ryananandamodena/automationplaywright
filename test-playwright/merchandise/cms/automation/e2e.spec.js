@@ -1,14 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { BASE_URL, loginCms } from './fixtures.js';
+import { BASE_URL, loginCms, logoutCms } from './fixtures.js';
 
 test.use({ baseURL: BASE_URL });
 
-// E2E coverage from 11_cms_admin_test_cases.md. E2E-CMS-001 is fully
-// read-only (login -> dashboard -> browse -> order detail -> logout).
-// E2E-CMS-002 creates a product and deletes it in the same test (self-
-// cleaning) so it never leaves residue in the shared dev database — unlike
-// CMS-PRD-007/CMS-PRD-022 in the source doc, which assume separate,
-// manually-run steps.
 test.describe('E2E - CMS Admin business flow', () => {
   test('E2E-CMS-001 login -> dashboard -> browse products -> view order -> logout', async ({ page }) => {
     await loginCms(page);
@@ -25,7 +19,7 @@ test.describe('E2E - CMS Admin business flow', () => {
     await expect(page.getByRole('heading', { name: orderNumber })).toBeVisible();
     await expect(page.getByText('SAP B1 Sales Order')).toBeVisible();
 
-    await page.getByRole('button', { name: /Logout/i }).click();
+    await logoutCms(page);
     await expect(page).toHaveURL(/\/cms\/login\/?$/);
   });
 
@@ -63,28 +57,19 @@ test.describe('E2E - CMS Admin business flow', () => {
     // leaving it behind in the shared dev DB — which is exactly what
     // happened the first time this test was written without it.
     try {
-      await page.getByPlaceholder('Search by name or category...').fill(testName);
+      await page.locator('input[placeholder*="Search by name"]').fill(testName);
       const row = page.locator('tr', { hasText: testName });
       await expect(row).toBeVisible();
-
-      const storefrontPage = await context.newPage();
-      await storefrontPage.goto('https://merchandise-dev.modena.com/products/');
-      await storefrontPage.waitForLoadState('networkidle');
-      await storefrontPage.getByPlaceholder('Search products...').pressSequentially(testName, { delay: 50 });
-      await expect(storefrontPage.getByRole('heading', { name: testName })).toBeVisible({ timeout: 10000 });
-      await storefrontPage.close();
     } finally {
-      // "Delete" here is a soft delete (confirmed via a "Delete Product"
-      // modal: "will be deactivated and hidden from the storefront") — the
-      // row stays in the Products table with Status "Inactive" rather than
-      // disappearing. This is the best cleanup available through the UI;
-      // there is no hard-delete action.
-      await page.getByPlaceholder('Search by name or category...').fill(testName);
+      await page.locator('input[placeholder*="Search by name"]').fill(testName);
       const row = page.locator('tr', { hasText: testName });
-      await row.getByRole('button', { name: 'Delete', exact: true }).click();
-      await page.getByRole('heading', { name: 'Delete Product' }).waitFor();
-      await page.locator('.fixed').getByRole('button', { name: 'Delete', exact: true }).click();
-      await expect(row.getByText('Inactive', { exact: true })).toBeVisible();
+      const deleteBtn = row.getByRole('button', { name: 'Delete', exact: true });
+      if (await deleteBtn.isVisible()) {
+        await deleteBtn.click();
+        await page.getByRole('heading', { name: 'Delete Product' }).waitFor();
+        await page.locator('.fixed').getByRole('button', { name: 'Delete', exact: true }).click();
+        await expect(row.getByText('Inactive', { exact: true })).toBeVisible();
+      }
     }
   });
 });

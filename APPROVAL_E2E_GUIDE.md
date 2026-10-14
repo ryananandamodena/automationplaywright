@@ -13,17 +13,17 @@ Script untuk testing complete approval flow dengan multiple users:
 const USERS = {
   admin: {
     email: 'ryan.ananda@modena.com',
-    password: 'P@ssw0rd_ryan.ananda',
+   password: process.env.ADMIN_PASSWORD,
     role: 'Admin/Creator'
   },
   approver1: {
     email: 'novyan.ramdhan@modena.com',
-    password: 'P@ssw0rd_novyan.ramdhan',
+   password: process.env.APPROVER1_PASSWORD,
     role: 'Approver 1'
   },
   approver2: {
     email: 'daniel.aritonga@modena.com',
-    password: 'P@ssw0rd_daniel.aritonga',
+   password: process.env.APPROVER2_PASSWORD,
     role: 'Approver 2'
   }
 };

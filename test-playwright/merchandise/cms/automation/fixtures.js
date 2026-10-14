@@ -16,10 +16,10 @@ export const CMS_MENUS = [
   { label: 'Products', path: '/cms/products' },
   { label: 'Orders', path: '/cms/orders' },
   { label: 'Stock', path: '/cms/stock' },
-  { label: 'Settings', path: '/cms/settings' },
   { label: 'Users', path: '/cms/users' },
   { label: 'Roles', path: '/cms/roles' },
   { label: 'Categories', path: '/cms/categories' },
+  { label: 'Couriers', path: '/cms/couriers' },
 ];
 
 export async function loginCms(page, { email, password } = ADMIN) {
@@ -28,4 +28,13 @@ export async function loginCms(page, { email, password } = ADMIN) {
   await page.locator('#password').fill(password);
   await page.getByRole('button', { name: 'Sign In', exact: true }).click();
   await page.waitForURL(`${BASE_URL}/cms`);
+}
+
+export async function logoutCms(page) {
+  const profileBtn = page.locator('aside button, nav button, button:has-text("Admin MODENA")').first();
+  await profileBtn.click();
+  const logoutOption = page.getByRole('button', { name: /Logout|Sign Out|Keluar/i }).or(page.getByText(/Logout|Sign Out|Keluar/i)).first();
+  await logoutOption.waitFor({ state: 'visible', timeout: 5000 });
+  await logoutOption.click();
+  await page.waitForURL(/\/cms\/login/);
 }

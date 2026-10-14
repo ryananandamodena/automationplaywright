@@ -34,3 +34,9 @@ Thumbs.db
 __pycache__/
 **/__pycache__/
 *.pyc
+allure-results/
+**/allure-results/
+*.log
+
+playwright-report*/
+**/playwright-report*/

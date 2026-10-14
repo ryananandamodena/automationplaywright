@@ -18,11 +18,11 @@ File `.github/workflows/e2e-tests.yml` sudah dikonfigurasi dengan benar.
 | Secret Name | Value |
 |-------------|-------|
 | `ADMIN_EMAIL` | ryan.ananda@modena.com |
-| `ADMIN_PASSWORD` | P@ssw0rd_ryan.ananda |
+| `ADMIN_PASSWORD` | `<your-admin-password>` |
 | `APPROVER1_EMAIL` | novyan.ramdhan@modena.com |
-| `APPROVER1_PASSWORD` | P@ssw0rd_novyan.ramdhan |
+| `APPROVER1_PASSWORD` | `<your-approver1-password>` |
 | `APPROVER2_EMAIL` | daniel.aritonga@modena.com |
-| `APPROVER2_PASSWORD` | P@ssw0rd_daniel.aritonga |
+| `APPROVER2_PASSWORD` | `<your-approver2-password>` |
 | `BASE_URL` | https://portal-dev.modena.com |
 
 ### Step 2: Push ke GitHub

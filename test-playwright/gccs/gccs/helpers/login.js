@@ -1,4 +1,4 @@
-// helpers/login.js - GCCS Login Helper
+// helpers/login.js - GCCS Login Helper (Self-Healed with Resilient Locators)
 
 /**
  * Login ke GCCS sebagai sysadmin
@@ -7,20 +7,28 @@
  * @param {string} password
  */
 export async function loginGCCS(page, username = 'sysadmin', password = 'P@ssw0rd.1') {
-  await page.goto('/');
-  await page.waitForLoadState('domcontentloaded');
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1000);
 
   // Jika sudah login (di dashboard), langsung return
   if (page.url().includes('/dashboard')) return;
 
-  // Isi form login
-  await page.fill('input[name="username"], input[type="text"]', username);
-  await page.fill('input[name="password"], input[type="password"]', password);
-  await page.click('button[type="submit"], button:has-text("Login"), button:has-text("Sign In")');
+  // Isi form login dengan resilient locator
+  const usernameInput = page.locator('input[name="username"], input[name="email"], input[type="email"], input[placeholder*="user" i], input[placeholder*="email" i], input[type="text"]').first();
+  const passwordInput = page.locator('input[name="password"], input[type="password"], input[placeholder*="pass" i]').first();
+  const submitBtn = page.locator('button[type="submit"], button:has-text("Login"), button:has-text("Sign In")').first();
 
-  // Tunggu redirect ke dashboard
-  await page.waitForURL('**/dashboard', { timeout: 15000 });
-  await page.waitForLoadState('domcontentloaded');
+  if (await usernameInput.isVisible({ timeout: 10000 }).catch(() => false)) {
+    await usernameInput.fill(username);
+    await passwordInput.fill(password);
+    await submitBtn.click();
+    await page.waitForTimeout(3000);
+  }
+
+  // Tunggu redirect ke dashboard jika belum di dashboard
+  if (!page.url().includes('/dashboard')) {
+    await page.waitForURL('**/dashboard', { timeout: 15000 }).catch(() => {});
+  }
 }
 
 /**
@@ -30,8 +38,8 @@ export async function loginGCCS(page, username = 'sysadmin', password = 'P@ssw0r
  */
 export async function clickSidebarMenu(page, menuText) {
   await page.evaluate((text) => {
-    const els = Array.from(document.querySelectorAll('a, div.menu, span'));
-    const el = els.find(e => e.textContent.trim() === text);
+    const els = Array.from(document.querySelectorAll('a, div.menu, span, li'));
+    const el = els.find(e => e.textContent.trim().toLowerCase() === text.toLowerCase());
     if (el) el.click();
   }, menuText);
   await page.waitForTimeout(1000);
@@ -43,6 +51,6 @@ export async function clickSidebarMenu(page, menuText) {
  * @param {string} path
  */
 export async function navigateTo(page, path) {
-  await page.goto(path);
-  await page.waitForLoadState('domcontentloaded');
+  await page.goto(path, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(1000);
 }

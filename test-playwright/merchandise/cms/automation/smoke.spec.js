@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { BASE_URL, ADMIN, CMS_MENUS, loginCms } from './fixtures.js';
+import { BASE_URL, ADMIN, CMS_MENUS, loginCms, logoutCms } from './fixtures.js';
 
 test.use({ baseURL: BASE_URL });
 
@@ -14,9 +14,6 @@ test.describe('Smoke Suite - CMS Admin', () => {
 
   test('CMS-SMK-002 dashboard renders KPI cards and recent orders', async ({ page }) => {
     await loginCms(page);
-    // "Total Sales" also appears as a lowercase chart caption ("total sales")
-    // — Playwright's default text match is case-insensitive substring, so
-    // scope to the KPI card link to avoid the strict-mode ambiguity.
     await expect(page.getByRole('link', { name: /Total Sales/ })).toBeVisible();
     await expect(page.getByText('Orders Processed')).toBeVisible();
     await expect(page.getByText('Orders Waiting Approval')).toBeVisible();
@@ -28,8 +25,6 @@ test.describe('Smoke Suite - CMS Admin', () => {
     test(`CMS-SMK-003 sidebar menu "${menu.label}" opens without error`, async ({ page }) => {
       await loginCms(page);
       await page.goto(menu.path);
-      // No app-level error boundary / 404 text, and the CMS sidebar itself
-      // still renders (proves the page didn't crash the whole shell).
       await expect(page.getByText('MODENA', { exact: false }).first()).toBeVisible();
       await expect(page.getByText(/error|not found|something went wrong/i)).toHaveCount(0);
     });
@@ -37,7 +32,7 @@ test.describe('Smoke Suite - CMS Admin', () => {
 
   test('CMS-SMK-004 logout ends the session', async ({ page }) => {
     await loginCms(page);
-    await page.getByRole('button', { name: /Logout/i }).click();
+    await logoutCms(page);
     await expect(page).toHaveURL(/\/cms\/login\/?$/);
   });
 });
