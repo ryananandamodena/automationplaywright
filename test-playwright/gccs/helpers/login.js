@@ -14,7 +14,7 @@ export async function loginGCCS(page, username = 'sysadmin', password = 'P@ssw0r
   if (page.url().includes('/dashboard')) return;
 
   // Isi form login dengan resilient locator
-  const usernameInput = page.locator('input[name="username"], input[name="email"], input[type="email"], input[placeholder*="user" i], input[placeholder*="email" i], input[type="text"]').first();
+  const usernameInput = page.locator('#userName, input[name="userName"], input[name="username"], input[name="email"], input[type="email"], input[placeholder*="user" i], input[placeholder*="email" i], input[type="text"]').first();
   const passwordInput = page.locator('input[name="password"], input[type="password"], input[placeholder*="pass" i]').first();
   const submitBtn = page.locator('button[type="submit"], button:has-text("Login"), button:has-text("Sign In")').first();
 

@@ -495,5 +495,74 @@ test-playwright/
             ├── 04-wo-monitoring.spec.js← Test WO Monitoring
             ├── 05-inventory.spec.js   ← Test Inventory
             ├── 06-direct-sales.spec.js← Test Direct Sales
-            └── 07-reports.spec.js     ← Test Reports
+            ├── 07-reports.spec.js     ← Test Reports
+            ├── 08-negative-tests.spec.js← Test Negative Cases
+            └── 09-inventory-transfer-request.spec.js ← Test Inventory Transfer Request & Part Acceptance (ASC & DSC)
 ```
+
+---
+
+## BAGIAN 8: DOKUMENTASI ROLE FLOW TRANSFER PART (ASC & DSC)
+
+### A. Perbandingan Role & Hak Akses
+
+| Fitur / Parameter | ASC (Authorized Service Center) | DSC (Direct Service Center) |
+|---|---|---|
+| **Contoh Akun Test** | `AD_JVK_01`, `AD_N&N_01`, `AD_CMN_02` | `SK_002` |
+| **Password** | `P@ssw0rd.1` | `P@ssw0rd.1` |
+| **Role Pengguna** | **Admin ASC** | **Stock Keeper** |
+| **Akses Menu Utama** | Dashboard, Repair Center, Inventory | Dashboard, Call Center, Repair Center, Inventory, Direct Sales |
+| **Opsi Create Request** | 2 Opsi: `Work Order` & `E-Catalog` | 3 Opsi: `My Inventory`, `Work Order`, `E-Catalog` |
+| **Tombol Khusus di Header**| `Create Request`, `Filter`, `Sync` | `Create Request`, `Filter`, `Sync`, plus **`Branch Request`** |
+| **Halaman Khusus** | - | `/inventory/transfer/transfer-request/branch-request` |
+| **Kolom Khusus di Tabel** | Standar (No, From WH, To WH, WO, RON, dll.) | Tambahan: `IT Branch To Tech`, `ITR To PMT/Branch`, `IT From PMT/Branch` |
+
+---
+
+### B. Lifecycle Status Transfer Request Part (End-to-End)
+
+1. **Inisiasi (Create Request)**
+   * Pemohon memilih teknisi, nomor Work Order, gudang tujuan (`WH-ASCSP`), dan memilih sparepart yang dibutuhkan.
+   * Saat disubmit, request tersimpan dan langsung masuk ke status antrean:
+     * **`Waiting To Approve (Warehouse Branch)` (Status ID: 31)**
+2. **Persetujuan & Pemenuhan oleh Stock Keeper Cabang Asal**
+   * Stock Keeper membuka detail request dan memeriksa ketersediaan sparepart melalui tombol **`Current BIN`**.
+   * Jika stok di cabang cukup: request diproses lanjut ke **`Waiting To Accept (Warehouse Branch)` (Status ID: 41)**.
+   * Jika stok tidak cukup di cabang asal: Stock Keeper menekan tombol **`Delegate`** atau **`Broadcast`** -> Status berpindah menjadi:
+     * **`Processed in Other WH` (Status ID: 8)** (jika didelegasikan ke cabang lain)
+     * **`Processed in PMT` (Status ID: 7)** (jika diteruskan ke PMT / Pusat).
+   * Jika tidak disetujui: Stock Keeper menekan tombol **`Reject`** -> Status menjadi **`Reject By Stock Keeper` (Status ID: 93)**.
+3. **Pengemasan & Pengiriman (Dispatch)**
+   * Pada status `Waiting To Accept (41)`, Stock Keeper mencetak dokumen serah terima dengan tombol **`Generate Form Layout IT`**.
+   * Memasukkan nomor resi pengiriman dan kurir lewat tombol **`Update Resi`** dan memantau perjalanan dengan **`Live Tracking`**.
+4. **Penerimaan Akhir (Part Acceptance - Complete)**
+   * Pihak penerima membuka menu **`Inventory > Transfer > Transfer Part Acceptance`** (`/inventory/transfer/part-acceptance`).
+   * Mengklik icon Action checklist pada baris transaksi request.
+   * Modal **`Detail Part Acceptance`** terbuka menampilkan ringkasan item sparepart.
+   * Menekan tombol **`Accept`** (mengeksekusi endpoint `/api/v1/transaction/transfer/request/acceptance/accept`).
+   * **Status Akhir**: Berubah menjadi **`Accepted` (Status Complete)** dan stok secara fisik serta sistem masuk ke inventori tujuan.
+
+---
+
+### C. Daftar Automated Test Case (16 Tests - 100% Passed)
+
+#### Suite ASC (`TC-TR-ASC`)
+* **TC-TR-001**: Akses halaman Transfer Request dengan akun ASC (`Create Request`, `Filter`, `Sync` visible, tanpa `Branch Request`).
+* **TC-TR-002**: Verifikasi kolom tabel dan filter data Transfer Request ASC.
+* **TC-TR-003**: Klik `Create Request` memvalidasi modal hanya menampilkan 2 pilihan (`Work Order` & `E-Catalog`).
+* **TC-TR-004**: Akses form Create Request tipe `Work Order`.
+* **TC-TR-005**: Modal `List Technicians` dapat dibuka dan teknisi dapat dipilih.
+* **TC-TR-006**: Modal `Technician Work Orders` terbuka saat field WO Number diklik.
+* **TC-TR-007**: Akses form Create Request tipe `E-Catalog`.
+* **TC-TR-008**: Validasi tombol submit `Create Request` berstatus disabled sebelum item ditambahkan.
+* **TC-TR-009**: Halaman `Transfer Part Acceptance` dapat diakses oleh ASC dan memvalidasi struktur tabelnya.
+
+#### Suite DSC (`TC-TR-DSC`)
+* **TC-TR-DSC-001**: Akses halaman Transfer Request dengan akun DSC & validasi tombol khusus `Branch Request`.
+* **TC-TR-DSC-002**: Verifikasi kolom tabel dan filter khusus DSC (`IT Branch To Tech`, `ITR To PMT/Branch`, `IT From PMT/Branch`).
+* **TC-TR-DSC-003**: Klik `Create Request` menampilkan 3 pilihan: `My Inventory`, `Work Order`, `E-Catalog`.
+* **TC-TR-DSC-004**: Akses form Create Request tipe `My Inventory`.
+* **TC-TR-DSC-005**: Navigasi ke halaman `Branch Request List` (`/inventory/transfer/transfer-request/branch-request`).
+* **TC-TR-DSC-006**: Akses halaman `Transfer Part Acceptance` pada DSC dan validasi daftar transaksi.
+* **TC-TR-DSC-007**: Validasi modal `Detail Part Acceptance` terbuka saat klik Action dan memverifikasi tombol `Accept` & `Cancel`.
+

@@ -1,0 +1,178 @@
+[
+  {
+    "tag": "BUTTON",
+    "name": "",
+    "id": "navbarToggle",
+    "type": "button",
+    "value": "",
+    "className": "navbar-toggler",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "",
+    "id": "",
+    "type": "text",
+    "placeholder": "",
+    "value": "Admin",
+    "className": "btn btn-secondary",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "",
+    "id": "",
+    "type": "text",
+    "placeholder": "",
+    "value": "Kategori: 8BBC04CF-79DA-491D-9490-A1F589353638",
+    "className": "btn btn-secondary",
+    "text": ""
+  },
+  {
+    "tag": "TEXTAREA",
+    "name": "apDesc",
+    "id": "apDesc",
+    "type": "textarea",
+    "placeholder": "Tuliskan catatan khusus terkait pengajuan tagihan ini...",
+    "value": "",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "BUTTON",
+    "name": "",
+    "id": "btn-add-row",
+    "type": "button",
+    "value": "",
+    "className": "btn btn-secondary",
+    "text": "Tambah Baris Faktur"
+  },
+  {
+    "tag": "INPUT",
+    "name": "invoices[0][invNo]",
+    "id": "",
+    "type": "text",
+    "placeholder": "Contoh: INV-2026/001",
+    "value": "",
+    "className": "input-inv-no",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "invoices[0][invDate]",
+    "id": "",
+    "type": "date",
+    "placeholder": "",
+    "value": "2026-11-02",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "invoices[0][poNo]",
+    "id": "",
+    "type": "text",
+    "placeholder": "Nomor PO (Opsional)",
+    "value": "",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "invoices[0][amount]",
+    "id": "",
+    "type": "text",
+    "placeholder": "0",
+    "value": "",
+    "className": "input-amount",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "invoices[0][file]",
+    "id": "",
+    "type": "file",
+    "placeholder": "",
+    "value": "",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "BUTTON",
+    "name": "",
+    "id": "",
+    "type": "button",
+    "value": "",
+    "className": "btn-remove-row",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "documents[8D10ADCA-8A43-4D9C-949F-D281C077AB86]",
+    "id": "",
+    "type": "checkbox",
+    "placeholder": "",
+    "value": "1",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "documents[0E798F44-BB31-4BB5-818B-0C78179295FE]",
+    "id": "",
+    "type": "checkbox",
+    "placeholder": "",
+    "value": "1",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "documents[2735EC0A-D2B5-4F48-9A1C-BDBEFAB380E6]",
+    "id": "",
+    "type": "checkbox",
+    "placeholder": "",
+    "value": "1",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "documents[C6C28C63-919C-488F-B731-E99DA953B7FF]",
+    "id": "",
+    "type": "checkbox",
+    "placeholder": "",
+    "value": "1",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "documents[CD5E38D1-D638-4FA1-83D7-24808980C8BE]",
+    "id": "",
+    "type": "checkbox",
+    "placeholder": "",
+    "value": "1",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "name": "documents[D980E4DC-620C-4391-BEDA-8B208862A4DB]",
+    "id": "",
+    "type": "checkbox",
+    "placeholder": "",
+    "value": "1",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "BUTTON",
+    "name": "",
+    "id": "btn-submit-penagihan",
+    "type": "submit",
+    "value": "",
+    "className": "btn btn-primary",
+    "text": "Simpan & Kirim Penagihan"
+  }
+]

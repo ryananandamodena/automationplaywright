@@ -9,7 +9,7 @@ const VALID_PASS = 'P@ssw0rd.1';
 // allows React to finish rendering (approach that worked in the original passing TC-AUTH-001 run)
 async function goToLogin(page) {
   await page.addInitScript(() => {
-    try { localStorage.clear(); sessionStorage.clear(); } catch {}
+    try { localStorage.clear(); sessionStorage.clear(); } catch { }
   });
   await page.goto(BASE_URL);
   await page.waitForLoadState('domcontentloaded');
@@ -34,7 +34,7 @@ test.describe('TC-AUTH: Authentication', () => {
     await goToLogin(page);
     await page.fill('input[type="text"]', VALID_USER);
     await page.fill('input[type="password"]', 'wrongpassword123');
-    await page.click('button[type="submit"]').catch(() => {});
+    await page.click('button[type="submit"]').catch(() => { });
     await page.waitForTimeout(4000);
     expect(page.url()).not.toContain('/dashboard');
   });
@@ -43,7 +43,7 @@ test.describe('TC-AUTH: Authentication', () => {
   test('TC-AUTH-003: Login gagal dengan username kosong', async ({ page }) => {
     await goToLogin(page);
     await page.fill('input[type="password"]', VALID_PASS);
-    await page.click('button[type="submit"]').catch(() => {});
+    await page.click('button[type="submit"]').catch(() => { });
     await page.waitForTimeout(1500);
     expect(page.url()).not.toContain('/dashboard');
   });
@@ -51,14 +51,14 @@ test.describe('TC-AUTH: Authentication', () => {
   // TC-AUTH-004: Login gagal dengan semua field kosong
   test('TC-AUTH-004: Login gagal dengan semua field kosong', async ({ page }) => {
     await goToLogin(page);
-    await page.click('button[type="submit"]').catch(() => {});
+    await page.click('button[type="submit"]').catch(() => { });
     await page.waitForTimeout(1500);
     expect(page.url()).not.toContain('/dashboard');
   });
 
   // TC-AUTH-005: Akses protected route tanpa login → GCCS redirect ke login
   test('TC-AUTH-005: Akses halaman protected tanpa login - GCCS melindungi routes', async ({ page }) => {
-    await page.addInitScript(() => { try { localStorage.clear(); } catch {} });
+    await page.addInitScript(() => { try { localStorage.clear(); } catch { } });
     await page.goto(`${BASE_URL}/call-center/call-entry`);
     await page.waitForLoadState('domcontentloaded');
     await page.waitForTimeout(1500);

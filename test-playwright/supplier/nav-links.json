@@ -1,0 +1,42 @@
+[
+  {
+    "text": "MODENA SUPPLIER PORTAL",
+    "href": "https://supplier.modena.com/pemberitahuan",
+    "className": "navbar-brand"
+  },
+  {
+    "text": "Pemberitahuan",
+    "href": "https://supplier.modena.com/pemberitahuan",
+    "className": "active"
+  },
+  {
+    "text": "Daftar Penagihan",
+    "href": "https://supplier.modena.com/invoice",
+    "className": ""
+  },
+  {
+    "text": "Input Penagihan Baru",
+    "href": "https://supplier.modena.com/invoice/create",
+    "className": ""
+  },
+  {
+    "text": "Logbook Faktur",
+    "href": "https://supplier.modena.com/logbook",
+    "className": ""
+  },
+  {
+    "text": "Keluar",
+    "href": "https://supplier.modena.com/logout",
+    "className": "btn-logout"
+  },
+  {
+    "text": "Daftar Penagihan",
+    "href": "https://supplier.modena.com/invoice",
+    "className": "btn btn-primary"
+  },
+  {
+    "text": "Lanjut ke Daftar Penagihan",
+    "href": "https://supplier.modena.com/invoice",
+    "className": "btn btn-primary"
+  }
+]

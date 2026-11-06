@@ -1,0 +1,132 @@
+{
+  "auth": [
+    {
+      "id": "AUTH-DATA-01",
+      "description": "Kredensial Valid Utama (Sukses Login)",
+      "username": "adm1",
+      "password": "1357",
+      "expectedStatus": "success",
+      "expectedRedirect": "/pemberitahuan"
+    },
+    {
+      "id": "AUTH-DATA-02",
+      "description": "Kredensial Invalid (Password Salah)",
+      "username": "adm1",
+      "password": "PasswordSalah_999",
+      "expectedStatus": "failed",
+      "expectedRedirect": "/login"
+    },
+    {
+      "id": "AUTH-DATA-03",
+      "description": "Kredensial Invalid (Username Tidak Terdaftar)",
+      "username": "vendor_tidak_terdaftar",
+      "password": "1357",
+      "expectedStatus": "failed",
+      "expectedRedirect": "/login"
+    }
+  ],
+  "invoiceCreation": [
+    {
+      "id": "INV-CREATE-01",
+      "tipe": "Tagihan Tunggal Standard (Single Invoice Row)",
+      "keterangan": "Penagihan pengadaan sparepart reguler Batch 1",
+      "items": [
+        {
+          "invNo": "INV-MDN-REG-001",
+          "invDate": "2026-11-02",
+          "poNo": "PO-MDN-2026-001",
+          "amount": "1500000"
+        }
+      ],
+      "documents": [
+        "Faktur / Kuitansi Asli",
+        "Copy PO"
+      ]
+    },
+    {
+      "id": "INV-CREATE-02",
+      "tipe": "Tagihan Jamak / Proyek (Multi-Row Invoices)",
+      "keterangan": "Penagihan proyek instalasi teknis unit Modena tahap 1 dan 2",
+      "items": [
+        {
+          "invNo": "INV-MDN-PRJ-002A",
+          "invDate": "2026-11-02",
+          "poNo": "PO-MDN-PRJ-002",
+          "amount": "3250000"
+        },
+        {
+          "invNo": "INV-MDN-PRJ-002B",
+          "invDate": "2026-11-02",
+          "poNo": "PO-MDN-PRJ-002",
+          "amount": "4750000"
+        }
+      ],
+      "documents": [
+        "Faktur / Kuitansi Asli",
+        "Faktur Pajak Asli Dan Copy",
+        "Copy PO",
+        "Berita Acara Serah Terima"
+      ]
+    },
+    {
+      "id": "INV-CREATE-03",
+      "tipe": "Tagihan Jasa Promosi & Billboard (Commercial Display)",
+      "keterangan": "Penagihan sewa billboard & display booth Modena Q4",
+      "items": [
+        {
+          "invNo": "INV-MDN-ADV-003",
+          "invDate": "2026-11-02",
+          "poNo": "PO-MDN-MKT-003",
+          "amount": "12500000"
+        }
+      ],
+      "documents": [
+        "Faktur / Kuitansi Asli",
+        "Faktur Pajak Asli Dan Copy",
+        "Berita Acara Serah Terima",
+        "Foto Booth / Billboard"
+      ]
+    }
+  ],
+  "invoiceFilter": [
+    {
+      "id": "INV-FILTER-01",
+      "description": "Filter berdasarkan tahun penagihan",
+      "keyword": "2026",
+      "expectedMinResults": 1
+    },
+    {
+      "id": "INV-FILTER-02",
+      "description": "Filter berdasarkan status penagihan Draft",
+      "keyword": "Draft",
+      "expectedMinResults": 1
+    },
+    {
+      "id": "INV-FILTER-03",
+      "description": "Filter berdasarkan nomor serah terima spesifik",
+      "keyword": "2026.000417",
+      "expectedMinResults": 1
+    }
+  ],
+  "logbookFilter": [
+    {
+      "id": "LOG-FILTER-01",
+      "description": "Pencarian logbook dengan keyword prefix invoice",
+      "keyword": "INV",
+      "expectedMinResults": 1
+    },
+    {
+      "id": "LOG-FILTER-02",
+      "description": "Pencarian logbook dengan nomor tanda terima tahun 2026",
+      "keyword": "2026",
+      "expectedMinResults": 1
+    },
+    {
+      "id": "LOG-FILTER-03",
+      "description": "Pencarian logbook dengan keyword nomor serah terima 2025",
+      "keyword": "2025",
+      "expectedMinResults": 1
+    }
+  ]
+}
+

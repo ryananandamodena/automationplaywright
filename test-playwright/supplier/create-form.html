@@ -1,0 +1,147 @@
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h2>Form Penyerahan Penagihan Faktur Supplier</h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Pastikan nomor faktur dan dokumen pendukung sesuai dengan pesanan PO Modena.</p>
+        </div>
+        <div>
+            <a href="/invoice" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Kembali
+            </a>
+        </div>
+    </div>
+
+    <form method="POST" action="/invoice/store" enctype="multipart/form-data" id="form-penagihan">
+        <div class="card-body">
+            
+            <!-- Info Supplier & Keterangan -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <div>
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Nama Supplier / Vendor</label>
+                    <input type="text" class="btn btn-secondary" style="width: 100%; text-align: left; cursor: default; background: rgb(241, 245, 249); color: var(--text-main);" value="Admin" readonly="">
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">ID Card ERP: 1005.1113</div>
+                </div>
+
+                <div>
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Kategori Berkas Penagihan</label>
+                    <input type="text" class="btn btn-secondary" style="width: 100%; text-align: left; cursor: default; background: rgb(241, 245, 249); color: var(--text-main);" value="Kategori: 8BBC04CF-79DA-491D-9490-A1F589353638" readonly="">
+                </div>
+
+                <div style="grid-column: 1 / -1;">
+                    <label for="apDesc" style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Keterangan / Catatan Tambahan (Opsional)</label>
+                    <textarea name="apDesc" id="apDesc" rows="2" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-family: inherit; font-size: 0.9rem;" placeholder="Tuliskan catatan khusus terkait pengajuan tagihan ini..."></textarea>
+                </div>
+            </div>
+
+            <!-- Dynamic Invoice Items Table -->
+            <div style="margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <h3 style="font-size: 1rem; font-weight: 600;">Daftar Faktur / Invoice yang Ditagihkan</h3>
+                    <button type="button" class="btn btn-secondary" id="btn-add-row" style="font-size: 0.8rem; padding: 6px 12px;">
+                        <i class="bi bi-plus-circle"></i> Tambah Baris Faktur
+                    </button>
+                </div>
+
+                <div class="mobile-scroll-hint">
+                    <i class="bi bi-arrows-expand"></i> Geser tabel ke samping untuk melihat &amp; mengisi seluruh kolom faktur
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table" id="table-invoices" style="min-width: 820px;">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Nomor Invoice *</th>
+                                <th style="width: 18%;">Tgl. Invoice *</th>
+                                <th style="width: 20%;">Nomor PO (Modena)</th>
+                                <th style="width: 22%;">Nominal (Rp) *</th>
+                                <th style="width: 20%;">File Lampiran (PDF/Gambar)</th>
+                                <th style="width: 5%;"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoice-rows-container">
+                            <!-- Row template -->
+                            <tr class="invoice-row">
+                                <td>
+                                    <input type="text" name="invoices[0][invNo]" class="input-inv-no" style="width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px;" placeholder="Contoh: INV-2026/001" required="">
+                                    <div class="dup-warning" style="display: none; color: var(--danger); font-size: 0.75rem; margin-top: 3px;">
+                                        <i class="bi bi-exclamation-circle"></i> No. Invoice sudah terdaftar!
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="date" name="invoices[0][invDate]" style="width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px;" value="2026-11-02" required="">
+                                </td>
+                                <td>
+                                    <input type="text" name="invoices[0][poNo]" style="width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px;" placeholder="Nomor PO (Opsional)">
+                                </td>
+                                <td>
+                                    <input type="text" name="invoices[0][amount]" class="input-amount" style="width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; text-align: right;" placeholder="0" required="">
+                                </td>
+                                <td>
+                                    <input type="file" name="invoices[0][file]" accept=".pdf,.jpg,.jpeg,.png" style="font-size: 0.8rem; width: 100%;">
+                                </td>
+                                <td style="text-align: center;">
+                                    <button type="button" class="btn-remove-row" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.1rem;" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="background: #f8fafc; font-weight: 700;">
+                                <td colspan="3" style="text-align: right; padding: 14px;">TOTAL KESELURUHAN (GRAND TOTAL):</td>
+                                <td style="text-align: right; padding: 14px; font-size: 1.05rem; color: var(--accent);">
+                                    <span id="grand-total-label">Rp 0</span>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Checklist Kelengkapan Dokumen Wajib -->
+            <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 2rem;">
+                <h3 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text-main);">
+                    <i class="bi bi-clipboard-check"></i> Checklist Kelengkapan Dokumen yang Wajib Disertakan
+                </h3>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Centang dokumen fisik yang Anda sertakan dalam penyerahan berkas tagihan ini:</p>
+
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem;">
+                                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; cursor: pointer;">
+                                <input type="checkbox" name="documents[8D10ADCA-8A43-4D9C-949F-D281C077AB86]" value="1" style="width: 16px; height: 16px;">
+                                <span>Faktur / Kuitansi Asli</span>
+                            </label>
+                                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; cursor: pointer;">
+                                <input type="checkbox" name="documents[0E798F44-BB31-4BB5-818B-0C78179295FE]" value="1" style="width: 16px; height: 16px;">
+                                <span>Faktur Pajak Asli Dan Copy</span>
+                            </label>
+                                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; cursor: pointer;">
+                                <input type="checkbox" name="documents[2735EC0A-D2B5-4F48-9A1C-BDBEFAB380E6]" value="1" style="width: 16px; height: 16px;">
+                                <span>Copy PO</span>
+                            </label>
+                                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; cursor: pointer;">
+                                <input type="checkbox" name="documents[C6C28C63-919C-488F-B731-E99DA953B7FF]" value="1" style="width: 16px; height: 16px;">
+                                <span>Berita Acara Serah Terima</span>
+                            </label>
+                                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; cursor: pointer;">
+                                <input type="checkbox" name="documents[CD5E38D1-D638-4FA1-83D7-24808980C8BE]" value="1" style="width: 16px; height: 16px;">
+                                <span>Standard Checklist</span>
+                            </label>
+                                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; cursor: pointer;">
+                                <input type="checkbox" name="documents[D980E4DC-620C-4391-BEDA-8B208862A4DB]" value="1" style="width: 16px; height: 16px;">
+                                <span>Foto Booth / Billboard</span>
+                            </label>
+                                            </div>
+                            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions-bottom" style="display: flex; justify-content: flex-end; gap: 12px;">
+                <a href="/invoice" class="btn btn-secondary">Batalkan</a>
+                <button type="submit" class="btn btn-primary" id="btn-submit-penagihan">
+                    <i class="bi bi-send-check"></i> Simpan &amp; Kirim Penagihan
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>

@@ -1,0 +1,68 @@
+[
+  {
+    "tag": "INPUT",
+    "id": "",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "INPUT",
+    "id": "",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "className": "btn btn-primary",
+    "text": "Cari"
+  },
+  {
+    "tag": "TABLE",
+    "id": "",
+    "className": "data-table",
+    "text": "NOMOR INVOICE\tTGL. TERIMA\tNO. SERAH TERIMA\tSTATUS "
+  },
+  {
+    "tag": "THEAD",
+    "id": "",
+    "className": "",
+    "text": "NOMOR INVOICE\tTGL. TERIMA\tNO. SERAH TERIMA\tSTATUS "
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "NOMOR INVOICE"
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "TGL. TERIMA"
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "NO. SERAH TERIMA"
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "STATUS VERIFIKASI"
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "TGL. PEMBAYARAN"
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "TOTAL NILAI"
+  }
+]

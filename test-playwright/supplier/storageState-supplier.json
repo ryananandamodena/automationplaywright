@@ -1,0 +1,12 @@
+[
+  {
+    "name": "PHPSESSID",
+    "value": "7f3157dd374d9815db327177154e371a",
+    "domain": "supplier.modena.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  }
+]

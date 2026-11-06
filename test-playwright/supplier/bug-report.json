@@ -1,0 +1,32 @@
+[
+  {
+    "id": "BUG-SEC-01",
+    "severity": "CRITICAL",
+    "title": "Stored XSS Vulnerability in apDesc/Invoice Field",
+    "detail": "Script tags are stored and rendered raw without HTML entity encoding."
+  },
+  {
+    "id": "BUG-BUS-01",
+    "severity": "HIGH",
+    "title": "Dokumen \"Wajib Disertakan\" Dapat Disubmit Walaupun Kosong / Tidak Dicentang Sama Sekali",
+    "detail": "Label form menyatakan \"Checklist Kelengkapan Dokumen yang Wajib Disertakan\", namun form berhasil disubmit tanpa satu pun dokumen dicentang."
+  },
+  {
+    "id": "BUG-BUS-02",
+    "severity": "HIGH",
+    "title": "Sistem Mengizinkan Nomor Invoice Duplikat di Dalam Satu Pengajuan yang Sama",
+    "detail": "Nomor invoice ganda \"SAME-INV-7527\" pada baris 1 dan baris 2 berhasil tersimpan tanpa validasi pencegahan."
+  },
+  {
+    "id": "BUG-VAL-02",
+    "severity": "LOW",
+    "title": "Tidak Ada Batasan Tanggal Maksimal (Bisa Memilih Tanggal Masa Depan Tahun 2099)",
+    "detail": "Input tanggal invoice tidak memiliki atribut max=\"YYYY-MM-DD\" sehingga vendor dapat salah memasukkan tanggal faktur bertahun-tahun di masa depan."
+  },
+  {
+    "id": "BUG-SEC-03",
+    "severity": "MEDIUM",
+    "title": "File Upload Menerima Format Non-PDF/Non-Gambar (.txt / file tak diizinkan)",
+    "detail": "Label form menyatakan lampiran harus (.pdf, .jpg, .jpeg, .png), namun berkas .txt berhasil diunggah dan disimpan tanpa validasi backend."
+  }
+]

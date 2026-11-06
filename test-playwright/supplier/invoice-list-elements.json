@@ -1,0 +1,212 @@
+[
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-primary",
+    "text": "Ajukan Penagihan Baru"
+  },
+  {
+    "tag": "INPUT",
+    "id": "",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "className": "btn btn-primary",
+    "text": "Cari"
+  },
+  {
+    "tag": "TABLE",
+    "id": "",
+    "className": "data-table",
+    "text": "NO. SERAH TERIMA (RECNO)\tTGL. PENAGIHAN\tTOTAL NOMI"
+  },
+  {
+    "tag": "THEAD",
+    "id": "",
+    "className": "",
+    "text": "NO. SERAH TERIMA (RECNO)\tTGL. PENAGIHAN\tTOTAL NOMI"
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "NO. SERAH TERIMA (RECNO)"
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "TGL. PENAGIHAN"
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "TOTAL NOMINAL"
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "STATUS PENAGIHAN"
+  },
+  {
+    "tag": "TH",
+    "id": "",
+    "className": "",
+    "text": "AKSI"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Update"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Cetak"
+  },
+  {
+    "tag": "INPUT",
+    "id": "",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Delete"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Detail"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Update"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Cetak"
+  },
+  {
+    "tag": "INPUT",
+    "id": "",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Delete"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Detail"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Update"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Cetak"
+  },
+  {
+    "tag": "INPUT",
+    "id": "",
+    "className": "",
+    "text": ""
+  },
+  {
+    "tag": "BUTTON",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Delete"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Detail"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Cetak"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Detail"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Cetak"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Detail"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Cetak"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Detail"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Cetak"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Detail"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Cetak"
+  },
+  {
+    "tag": "A",
+    "id": "",
+    "className": "btn btn-secondary",
+    "text": "Detail"
+  }
+]
